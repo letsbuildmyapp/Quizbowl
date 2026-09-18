@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { initializeFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getDatabase, connectDatabaseEmulator } from 'firebase/database';
-import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,15 +13,16 @@ const firebaseConfig = {
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
 };
 
+export const useEmulators = import.meta.env.VITE_USE_EMULATORS === '1';
+
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const rtdb = getDatabase(app);
-export const functions = getFunctions(app);
+// Long-polling auto-detect keeps school networks with strict proxies working.
+export const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true, ignoreUndefinedProperties: true });
+export const rtdb = firebaseConfig.databaseURL ? getDatabase(app) : null;
 
-if (import.meta.env.VITE_USE_EMULATORS === '1') {
+if (useEmulators) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
-  connectDatabaseEmulator(rtdb, '127.0.0.1', 9000);
-  connectFunctionsEmulator(functions, '127.0.0.1', 5001);
+  if (rtdb) connectDatabaseEmulator(rtdb, '127.0.0.1', 9000);
 }

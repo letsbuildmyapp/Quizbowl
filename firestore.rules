@@ -1,63 +1,397 @@
 rules_version = '2';
 
+// QuizQuest security rules.
+// Roles live in Auth custom claims (set only by Cloud Functions):
+//   role: student | teacher | teacher_pending | parent, plus contentAdmin / platformAdmin flags.
+// Anything that must be authoritative (scores, XP, sessions, claims) is written
+// only by the server. Clients write request documents the server fulfils.
+
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isSignedIn() {
-      return request.auth != null;
+    // ---------- helpers ----------
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function tok() { return request.auth.token; }
+    function role() { return signedIn() && ('role' in tok()) ? tok().role : null; }
+    function notAnonymous() { return signedIn() && tok().firebase.sign_in_provider != 'anonymous'; }
+    function isStudent() { return role() == 'student'; }
+    function myStudentId() { return isStudent() ? tok().studentId : null; }
+    function isTeacher() { return role() == 'teacher'; }
+    function isParent() { return role() == 'parent'; }
+    function isPlatformAdmin() { return signedIn() && tok().get('platformAdmin', false) == true; }
+    function isContentAdmin() { return signedIn() && (tok().get('contentAdmin', false) == true || isPlatformAdmin()); }
+    function isSchoolAdmin(schoolId) { return isTeacher() && tok().get('schoolAdmin', false) == true && tok().schoolId == schoolId; }
+    function isParentOf(studentId) { return isParent() && studentId in tok().get('students', []); }
+    function inMyClass(classroomId) { return isStudent() && tok().classroomId == classroomId; }
+
+    function classroom(cid) { return get(/databases/$(database)/documents/classrooms/$(cid)).data; }
+    function teaches(cid) { return isTeacher() && exists(/databases/$(database)/documents/classrooms/$(cid)) && classroom(cid).teacherUid == uid(); }
+    function student(sid) { return get(/databases/$(database)/documents/students/$(sid)).data; }
+    function teachesStudent(sid) { return isTeacher() && exists(/databases/$(database)/documents/students/$(sid)) && student(sid).teacherUid == uid(); }
+
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function onlyChanges(keys) { return changed().hasOnly(keys); }
+    function unchanged(key) { return !(key in changed()); }
+
+    // A new request document: stamped with the caller and pending.
+    function isNewRequest() {
+      return signedIn()
+        && request.resource.data.uid == uid()
+        && request.resource.data.status == 'pending';
     }
 
-    function isSelf(uid) {
-      return isSignedIn() && request.auth.uid == uid;
+    // ---------- identity ----------
+    match /users/{userId} {
+      allow get: if signedIn() && (userId == uid() || isPlatformAdmin());
+      allow list: if isPlatformAdmin();
+      allow create: if signedIn() && userId == uid()
+        && request.resource.data.keys().hasOnly(['displayName', 'prefs']);
+      allow update: if signedIn() && userId == uid() && onlyChanges(['displayName', 'prefs']);
     }
 
-    function userRole() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
-    }
+    match /schools/{schoolId} {
+      allow read: if (signedIn() && tok().get('schoolId', null) == schoolId && (isTeacher() || role() == 'teacher_pending')) || isPlatformAdmin();
+      allow update: if isSchoolAdmin(schoolId) && onlyChanges(['settings', 'teacherJoinCode', 'name'])
+        && (!('settings' in changed()) || request.resource.data.settings.keys().hasOnly(['consentMode', 'retentionDays', 'timezone', 'allowCrossSchoolChallenges']));
 
-    function isTeacher() {
-      return isSignedIn() && userRole() == 'teacher';
-    }
-
-    // User profile documents
-    match /users/{uid} {
-      allow read: if isSignedIn();
-      allow create: if isSelf(uid);
-      allow update: if isSelf(uid);
-      allow delete: if false;
-    }
-
-    // Shared question bank (readable by any signed-in user, writable by teachers)
-    match /questionBank/{questionId} {
-      allow read: if isSignedIn();
-      allow write: if isTeacher();
-    }
-
-    // Solo practice sessions belong to the user who owns them
-    match /practiceSessions/{sessionId} {
-      allow read, write: if isSignedIn()
-        && request.resource.data.uid == request.auth.uid;
-      allow read: if isSignedIn() && resource.data.uid == request.auth.uid;
-    }
-
-    // Teacher-authored quizzes
-    match /quizzes/{quizId} {
-      allow read: if isSignedIn();
-      allow create: if isTeacher()
-        && request.resource.data.ownerUid == request.auth.uid;
-      allow update, delete: if isSignedIn()
-        && resource.data.ownerUid == request.auth.uid;
-
-      // Student attempts on a quiz
-      match /attempts/{attemptId} {
-        allow read: if isSignedIn() && (
-          resource.data.studentUid == request.auth.uid
-          || get(/databases/$(database)/documents/quizzes/$(quizId)).data.ownerUid == request.auth.uid
-        );
-        allow create: if isSignedIn()
-          && request.resource.data.studentUid == request.auth.uid;
-        allow update, delete: if false;
+      match /teachers/{teacherUid} {
+        allow read: if isSchoolAdmin(schoolId) || isPlatformAdmin() || (signedIn() && teacherUid == uid());
       }
+    }
+
+    match /classrooms/{cid} {
+      allow read: if (isTeacher() && resource.data.teacherUid == uid())
+        || isSchoolAdmin(resource.data.schoolId)
+        || inMyClass(cid)
+        || isPlatformAdmin();
+      allow create: if isTeacher()
+        && request.resource.data.teacherUid == uid()
+        && request.resource.data.schoolId == tok().schoolId
+        && request.resource.data.joinCode is string
+        && request.resource.data.joinCode.size() >= 6 && request.resource.data.joinCode.size() <= 10;
+      allow update: if isTeacher() && resource.data.teacherUid == uid()
+        && unchanged('teacherUid') && unchanged('schoolId');
+      allow delete: if isTeacher() && resource.data.teacherUid == uid();
+    }
+
+    // Read by the student sign-in screen (anonymous) when the code is known. Never listable.
+    match /classCodes/{code} {
+      allow get: if signedIn();
+    }
+
+    match /teams/{teamId} {
+      allow read: if teaches(resource.data.classroomId) || inMyClass(resource.data.classroomId) || isPlatformAdmin();
+      allow create: if teaches(request.resource.data.classroomId);
+      allow update: if teaches(resource.data.classroomId) && unchanged('classroomId');
+      allow delete: if teaches(resource.data.classroomId);
+    }
+
+    match /students/{sid} {
+      allow read: if myStudentId() == sid
+        || (isTeacher() && (resource.data.teacherUid == uid() || teaches(resource.data.classroomId)))
+        || isSchoolAdmin(resource.data.schoolId)
+        || isParentOf(sid)
+        || isPlatformAdmin();
+      allow create: if teaches(request.resource.data.classroomId)
+        && request.resource.data.teacherUid == uid()
+        && request.resource.data.schoolId == tok().schoolId
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0 && request.resource.data.displayName.size() <= 40
+        && request.resource.data.keys().hasOnly(['classroomId', 'schoolId', 'teacherUid', 'displayName', 'avatar', 'teamId', 'active', 'consent', 'createdAt'])
+        && request.resource.data.get('consent', 'school') in ['school', 'pending'];
+      // Teachers manage profile fields; students manage their own preferences.
+      allow update: if (teaches(resource.data.classroomId)
+          && onlyChanges(['displayName', 'avatar', 'teamId', 'active', 'nicknameRequest'])
+          && (!('displayName' in changed()) || (request.resource.data.displayName is string && request.resource.data.displayName.size() > 0 && request.resource.data.displayName.size() <= 40)))
+        || (myStudentId() == sid
+          && onlyChanges(['settings', 'leaderboardOptOut', 'nicknameRequest', 'avatar', 'reviewDeckCount'])
+          && (!('nicknameRequest' in changed()) || request.resource.data.nicknameRequest == null
+              || (request.resource.data.nicknameRequest.status == 'pending'
+                  && request.resource.data.nicknameRequest.name is string
+                  && request.resource.data.nicknameRequest.name.size() <= 24)));
+
+      match /private/{docId} {
+        allow read, write: if docId == 'credentials' && teachesStudent(sid)
+          && (request.method == 'get' || request.method == 'delete' || request.resource.data.keys().hasOnly(['pin']) && request.resource.data.pin.matches('^[0-9]{4}$'));
+      }
+
+      match /reviewDeck/{questionId} {
+        allow read: if myStudentId() == sid || teachesStudent(sid);
+        allow create, update: if myStudentId() == sid && request.resource.data.size() <= 20;
+        allow delete: if myStudentId() == sid;
+      }
+    }
+
+    match /parentInvites/{code} {
+      allow read: if isTeacher() && resource.data.teacherUid == uid();
+      allow create: if teachesStudent(request.resource.data.studentId)
+        && request.resource.data.teacherUid == uid()
+        && request.resource.data.usedBy == null;
+      allow delete: if isTeacher() && resource.data.teacherUid == uid();
+    }
+
+    match /guardianLinks/{linkId} {
+      allow read: if (isParent() && resource.data.parentUid == uid())
+        || teaches(resource.data.classroomId)
+        || isPlatformAdmin();
+    }
+
+    match /consents/{sid} {
+      allow read: if isParentOf(sid) || teachesStudent(sid) || isPlatformAdmin();
+    }
+
+    // ---------- request documents (server fulfils) ----------
+    match /studentLogins/{loginUid} {
+      allow get: if signedIn() && loginUid == uid();
+      // Retry after an error by rewriting the same request.
+      allow create, update: if isNewRequest() && loginUid == uid()
+        && (resource == null || resource.data.status == 'error')
+        && request.resource.data.keys().hasOnly(['code', 'studentId', 'pin', 'uid', 'status', 'createdAt'])
+        && request.resource.data.pin is string && request.resource.data.pin.size() <= 8;
+    }
+
+    match /teacherRequests/{reqUid} {
+      allow get: if signedIn() && reqUid == uid();
+      allow create, update: if isNewRequest() && notAnonymous() && reqUid == uid()
+        && (resource == null || resource.data.status == 'error')
+        && request.resource.data.keys().hasOnly(['displayName', 'schoolName', 'schoolJoinCode', 'uid', 'status', 'createdAt']);
+    }
+
+    match /parentRequests/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && notAnonymous()
+        && request.resource.data.type in ['link', 'consent']
+        && request.resource.data.keys().hasOnly(['type', 'code', 'studentId', 'grant', 'uid', 'status', 'createdAt']);
+    }
+
+    match /sessionRequests/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && (isStudent() || isTeacher())
+        && request.resource.data.keys().hasOnly(['mode', 'options', 'uid', 'status', 'createdAt'])
+        && (isStudent() || request.resource.data.mode == 'live_battle');
+    }
+
+    match /adminActions/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && notAnonymous() && request.resource.data.action is string;
+    }
+
+    match /contentImports/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && isContentAdmin();
+    }
+
+    match /privacyRequests/{id} {
+      allow read: if (signedIn() && resource.data.uid == uid())
+        || isPlatformAdmin()
+        || isSchoolAdmin(resource.data.get('schoolId', null));
+      allow create: if isNewRequest()
+        && request.resource.data.type in ['access', 'export', 'correction', 'deletion']
+        && ((isParent() && request.resource.data.requesterRole == 'parent' && isParentOf(request.resource.data.studentId))
+          || (isTeacher() && request.resource.data.requesterRole == 'teacher')
+          || (isPlatformAdmin() && request.resource.data.requesterRole == 'teacher'));
+    }
+
+    match /answerReviews/{id} {
+      allow read: if (isTeacher() && (resource.data.teacherUid == uid() || teaches(resource.data.classroomId))) || isPlatformAdmin();
+      allow update: if teaches(resource.data.classroomId)
+        && resource.data.status == 'pending'
+        && onlyChanges(['decision', 'decidedBy', 'decidedAt'])
+        && request.resource.data.decision in ['accept', 'reject']
+        && request.resource.data.decidedBy == uid();
+    }
+
+    // ---------- game ----------
+    match /sessions/{sessionId} {
+      allow read: if (isStudent() && myStudentId() in resource.data.participantIds)
+        || (isTeacher() && (resource.data.teacherUid == uid() || teaches(resource.data.classroomId)))
+        || isPlatformAdmin();
+
+      function sess() { return get(/databases/$(database)/documents/sessions/$(sessionId)).data; }
+
+      match /commands/{commandId} {
+        allow get: if signedIn() && resource.data.uid == uid();
+        allow create: if signedIn()
+          && request.resource.data.keys().hasOnly(['type', 'payload', 'at', 'uid', 'actorId', 'role'])
+          && request.resource.data.at == request.time
+          && request.resource.data.uid == uid()
+          && request.resource.data.role == role()
+          && request.resource.data.type in ['start', 'sync', 'reveal', 'buzz', 'answer', 'skip', 'advance', 'pause', 'resume', 'review', 'terminate']
+          && (request.resource.data.payload == null || request.resource.data.payload.size() <= 6)
+          && ((isStudent() && request.resource.data.actorId == myStudentId() && myStudentId() in sess().participantIds)
+            || (isTeacher() && request.resource.data.actorId == uid() && sess().teacherUid == uid()));
+      }
+
+      match /events/{eventId} {
+        allow read: if (isTeacher() && sess().teacherUid == uid())
+          || (isStudent() && myStudentId() in sess().participantIds)
+          || isPlatformAdmin();
+      }
+    }
+
+    match /sessionSummaries/{id} {
+      // Summary ids are {sessionId}_{studentId}; students may wait on their own before it exists.
+      allow get: if isStudent() && id.matches('^[A-Za-z0-9]+_' + myStudentId() + '$');
+      allow read: if (isStudent() && resource.data.studentId == myStudentId())
+        || teaches(resource.data.classroomId)
+        || isSchoolAdmin(resource.data.schoolId)
+        || isParentOf(resource.data.studentId)
+        || isPlatformAdmin();
+    }
+
+    // ---------- teacher tools ----------
+    match /assignments/{aid} {
+      allow read: if teaches(resource.data.classroomId) || inMyClass(resource.data.classroomId) || isPlatformAdmin();
+      allow create: if teaches(request.resource.data.classroomId) && request.resource.data.teacherUid == uid();
+      allow update: if teaches(resource.data.classroomId) && unchanged('classroomId') && unchanged('teacherUid');
+      allow delete: if teaches(resource.data.classroomId);
+
+      match /progress/{sid} {
+        allow read: if myStudentId() == sid
+          || teaches(get(/databases/$(database)/documents/assignments/$(aid)).data.classroomId)
+          || isPlatformAdmin();
+      }
+    }
+
+    match /teamQuests/{qid} {
+      allow read: if teaches(resource.data.classroomId) || inMyClass(resource.data.classroomId) || isPlatformAdmin();
+      allow create: if teaches(request.resource.data.classroomId)
+        && request.resource.data.get('progress', 0) == 0
+        && request.resource.data.get('contributions', {}) == {}
+        && request.resource.data.target is number && request.resource.data.target > 0;
+      allow update: if teaches(resource.data.classroomId)
+        && unchanged('classroomId') && unchanged('progress') && unchanged('contributions') && unchanged('completedAt');
+      allow delete: if teaches(resource.data.classroomId);
+    }
+
+    // Board ids are {classroomId}_{weekKey}; checks use the id so a board that
+    // doesn't exist yet reads as empty instead of failing.
+    function boardClass(id) { return id.split('_')[0]; }
+
+    match /leaderboards/{id} {
+      allow read: if teaches(boardClass(id))
+        || (inMyClass(boardClass(id)) && classroom(boardClass(id)).settings.leaderboard == 'class')
+        || isPlatformAdmin();
+    }
+
+    match /teamboards/{id} {
+      allow read: if teaches(boardClass(id))
+        || (inMyClass(boardClass(id)) && classroom(boardClass(id)).settings.leaderboard in ['class', 'teams'])
+        || isPlatformAdmin();
+    }
+
+    match /challenges/{chid} {
+      allow read: if (isTeacher() && tok().schoolId in resource.data.schoolIds)
+        || (isStudent() && tok().classroomId in resource.data.classroomIds)
+        || isPlatformAdmin();
+      allow create: if isTeacher()
+        && request.resource.data.hostSchoolId == tok().schoolId
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.schoolIds == [tok().schoolId]
+        && request.resource.data.classroomIds.size() == 1
+        && teaches(request.resource.data.classroomIds[0])
+        && request.resource.data.standings.size() <= 1;
+      allow update: if isTeacher() && resource.data.createdBy == uid()
+        && onlyChanges(['name', 'startsAt', 'endsAt', 'categories', 'metric']);
+      allow delete: if isTeacher() && resource.data.createdBy == uid();
+    }
+
+    match /notifications/{nid} {
+      allow read: if signedIn() && (resource.data.toUid == uid() || (isStudent() && resource.data.toStudentId == myStudentId()));
+      allow update: if signedIn() && (resource.data.toUid == uid() || (isStudent() && resource.data.toStudentId == myStudentId()))
+        && onlyChanges(['read']);
+    }
+
+    match /feedback/{id} {
+      allow create: if notAnonymous() && request.resource.data.uid == uid()
+        && request.resource.data.message is string && request.resource.data.message.size() <= 4000;
+      allow read: if isPlatformAdmin();
+    }
+
+    // Public "request a pilot" form: strict shape, no reads.
+    match /pilotRequests/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'role', 'school', 'email', 'students', 'message', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 120
+        && request.resource.data.email is string && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') && request.resource.data.email.size() <= 200
+        && request.resource.data.school is string && request.resource.data.school.size() <= 200
+        && request.resource.data.message is string && request.resource.data.message.size() <= 3000;
+      allow read: if isPlatformAdmin();
+      allow update: if isPlatformAdmin() && onlyChanges(['contacted']);
+    }
+
+    match /analyticsEvents/{id} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['type', 'createdAt'])
+        && request.resource.data.type in ['report_view', 'denied', 'rematch_click'];
+    }
+
+    // ---------- content ----------
+    match /contentFlags/{id} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['questionId', 'reason', 'note', 'uid', 'role', 'status', 'createdAt'])
+        && request.resource.data.uid == uid()
+        && request.resource.data.role == role()
+        && request.resource.data.status == 'open'
+        && request.resource.data.get('note', '').size() <= 1000;
+      allow read: if isContentAdmin();
+      allow update: if isContentAdmin() && onlyChanges(['status', 'resolution', 'resolvedBy', 'resolvedAt']);
+    }
+
+    match /questionSets/{setId} {
+      allow read, write: if isContentAdmin();
+    }
+
+    match /questions/{qid} {
+      function validTransition(from, to) {
+        return from == to
+          || (from == 'draft' && to == 'review')
+          || (from == 'review' && to in ['approved', 'draft'])
+          || (from == 'approved' && to in ['published', 'review', 'draft'])
+          || (from == 'published' && to == 'retired')
+          || (from == 'retired' && to == 'draft');
+      }
+      function publishable(d) {
+        return d.get('setId', null) is string && d.get('license', null) is string && d.get('sourceOwner', null) is string
+          && d.license.size() > 0 && d.sourceOwner.size() > 0;
+      }
+      allow read: if isContentAdmin();
+      allow create: if isContentAdmin() && request.resource.data.status == 'draft';
+      allow update: if isContentAdmin()
+        && validTransition(resource.data.status, request.resource.data.status)
+        && (request.resource.data.status != 'published' || resource.data.status == 'published' || publishable(request.resource.data))
+        && unchanged('revertSeq');
+      allow delete: if isContentAdmin() && resource.data.status in ['draft', 'retired'];
+
+      match /history/{hid} {
+        allow read: if isContentAdmin();
+      }
+    }
+
+    match /contentStats/{doc} {
+      allow read: if signedIn() && (isTeacher() || isContentAdmin());
+    }
+
+    // ---------- operations ----------
+    match /config/{doc} {
+      allow read: if isPlatformAdmin();
+      allow write: if isPlatformAdmin() && doc == 'opponents'
+        && request.resource.data.keys().hasOnly(['reactionFloorMs'])
+        && request.resource.data.reactionFloorMs['0'] >= 300 && request.resource.data.reactionFloorMs['1'] >= 300
+        && request.resource.data.reactionFloorMs['2'] >= 300 && request.resource.data.reactionFloorMs['3'] >= 300;
+    }
+
+    match /metrics/{week} {
+      allow read: if isPlatformAdmin();
+    }
+
+    match /auditEvents/{id} {
+      allow read: if isPlatformAdmin() || isSchoolAdmin(resource.data.schoolId);
+    }
+
+    // Everything else (sessionSecrets, loginThrottle, mail, metrics/*/active, ...) is server-only.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

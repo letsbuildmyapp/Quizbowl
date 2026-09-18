@@ -1,0 +1,5088 @@
+{
+  "set": {
+    "id": "quizquest-dev-set-v1",
+    "name": "QuizQuest Starter Set (synthetic)",
+    "sourceOwner": "QuizQuest",
+    "license": "original-synthetic-dev",
+    "rightsNote": "Original synthetic content written for development and pilot testing.",
+    "usageWindowEnd": null
+  },
+  "tossups": [
+    {
+      "id": "tu-sci-01",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Human Body",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This organ has its own natural pacemaker, a small cluster of cells called the sinoatrial node.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Valves called the tricuspid and the mitral keep blood flowing in one direction through this organ.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This organ has four chambers: two atria on top and two ventricles below them.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this muscular organ in your chest that pumps blood through your body.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "heart",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "lungs"
+      ],
+      "approvedDistractors": [
+        "Lungs",
+        "Brain",
+        "Liver"
+      ],
+      "explanation": "The heart is a muscle that squeezes about 100,000 times a day to push blood around your body. Its built-in electrical signal starts each beat on its own.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-02",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Human Body",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This bone meets the hip bone in a ball-and-socket joint at its upper end.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The kneecap sits in front of the lower end of this bone, where it meets the tibia.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This bone is the longest and strongest bone in the human skeleton.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this bone found in your upper leg, between your hip and your knee.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "femur",
+      "acceptedAnswers": [
+        "thigh bone",
+        "thighbone"
+      ],
+      "rejectedAnswers": [
+        "tibia",
+        "fibula"
+      ],
+      "approvedDistractors": [
+        "Tibia",
+        "Humerus",
+        "Fibula"
+      ],
+      "explanation": "The femur, or thigh bone, is the longest bone in your body. It is so strong it can hold up many times your body weight.",
+      "pronunciationNotes": "femur (FEE-mur)"
+    },
+    {
+      "id": "tu-sci-03",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Human Body",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Tiny finger-like bumps called villi line this organ and greatly increase its surface area.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The three sections of this organ are called the duodenum, the jejunum, and the ileum.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Most nutrients from digested food pass into the blood through the walls of this organ.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this long, coiled tube that food enters right after it leaves the stomach.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "small intestine",
+      "acceptedAnswers": [
+        "small bowel"
+      ],
+      "rejectedAnswers": [
+        "large intestine",
+        "colon"
+      ],
+      "approvedDistractors": [
+        "Large intestine",
+        "Stomach",
+        "Esophagus"
+      ],
+      "explanation": "The small intestine is where most of your food's nutrients get absorbed. Stretched out, it would be about 20 feet long!",
+      "pronunciationNotes": "jejunum (jih-JOO-num), ileum (ILL-ee-um)"
+    },
+    {
+      "id": "tu-sci-04",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Animals",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This animal has three hearts, and its blood is blue because it contains copper.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "It can squeeze through tiny gaps because the only hard part of its body is its beak.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "When threatened, this clever mollusk may squirt a cloud of ink and change its skin color.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this soft-bodied sea creature that has eight arms.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "octopus",
+      "acceptedAnswers": [
+        "octopuses"
+      ],
+      "rejectedAnswers": [
+        "squid"
+      ],
+      "approvedDistractors": [
+        "Squid",
+        "Jellyfish",
+        "Starfish"
+      ],
+      "explanation": "An octopus has eight arms, three hearts, and blue blood. It is one of the smartest animals in the ocean and can even solve simple puzzles.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-05",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Animals",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Members of this class of animals often breathe partly through their thin, moist skin.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Caecilians, legless burrowers that look a lot like worms, belong to this class of vertebrates.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Most members of this group lay jelly-covered eggs in water and go through metamorphosis as they grow.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this class of cold-blooded animals that includes frogs, toads, and salamanders.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "amphibians",
+      "acceptedAnswers": [
+        "amphibian",
+        "Amphibia"
+      ],
+      "rejectedAnswers": [
+        "reptiles"
+      ],
+      "approvedDistractors": [
+        "Reptiles",
+        "Fish",
+        "Mammals"
+      ],
+      "explanation": "Amphibians usually start life in water and move onto land as adults. The name means \"double life\" in Greek.",
+      "pronunciationNotes": "caecilians (sih-SIL-ee-unz)"
+    },
+    {
+      "id": "tu-sci-06",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Animals",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Unlike most big cats, this animal cannot fully pull in its claws, which grip the ground like cleats.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Black \"tear marks\" running from its eyes to its mouth may help reduce glare from the sun.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This spotted African cat can go from standing still to about 60 miles per hour in around three seconds.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this big cat, the fastest land animal on Earth.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "cheetah",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "leopard",
+        "jaguar"
+      ],
+      "approvedDistractors": [
+        "Leopard",
+        "Jaguar",
+        "Lion"
+      ],
+      "explanation": "The cheetah is the fastest land animal, reaching about 70 miles per hour in short sprints. Its long tail helps it steer during high-speed turns.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-07",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Plants",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The Calvin cycle, which builds sugar molecules, is the second main stage of this process.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This process takes place mostly inside chloroplasts, using a green pigment called chlorophyll.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "During this process, plants take in carbon dioxide and water and give off oxygen.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this process that plants use to make their own food from sunlight.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "photosynthesis",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "respiration"
+      ],
+      "approvedDistractors": [
+        "Respiration",
+        "Pollination",
+        "Germination"
+      ],
+      "explanation": "Photosynthesis lets plants turn sunlight, water, and carbon dioxide into sugar. The oxygen we breathe is a leftover from this process.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-08",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Plants",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Tracheids and vessel elements are the two main kinds of cells that make up this plant tissue.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The rings you can count in a tree trunk are mostly layers of this tissue added each year.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Along with phloem, this tissue makes up the vascular system of plants.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this plant tissue that carries water up from the roots to the leaves.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "xylem",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "phloem"
+      ],
+      "approvedDistractors": [
+        "Phloem",
+        "Cambium",
+        "Stomata"
+      ],
+      "explanation": "Xylem is like a set of tiny straws that carries water up through a plant. Wood is mostly old xylem, which is why tree rings show how old a tree is.",
+      "pronunciationNotes": "xylem (ZY-lum)"
+    },
+    {
+      "id": "tu-sci-09",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Matter & Energy",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The kinetic, or sliding, type of this force is usually weaker than its static type.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Engineers reduce this force in machines by using ball bearings and oils called lubricants.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Rubbing your hands together on a cold day warms them up because of this force.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this force that resists motion when two surfaces rub against each other.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "friction",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "gravity"
+      ],
+      "approvedDistractors": [
+        "Gravity",
+        "Magnetism",
+        "Inertia"
+      ],
+      "explanation": "Friction is the force that slows things down when surfaces rub together, and it turns motion into heat. Without it, you could not even walk without slipping!",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-10",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Matter & Energy",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Joseph Priestley and Carl Scheele each discovered this element separately in the 1770s.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Three atoms of this element join together to form ozone, which protects Earth from ultraviolet light.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This element has atomic number 8 and makes up about 21 percent of the air.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this gas that people and animals need to breathe to stay alive.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "oxygen",
+      "acceptedAnswers": [
+        "O2",
+        "O"
+      ],
+      "rejectedAnswers": [
+        "nitrogen",
+        "carbon dioxide"
+      ],
+      "approvedDistractors": [
+        "Nitrogen",
+        "Hydrogen",
+        "Carbon dioxide"
+      ],
+      "explanation": "Oxygen is the gas our bodies use to get energy from food. Even though we need it, most of the air is actually nitrogen, not oxygen.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-sci-11",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Earth Science",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Obsidian, a glassy black material once shaped into sharp tools, is an example of this kind of rock.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Pumice, a stone so full of air bubbles that it can float on water, is this type of rock.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.7
+        },
+        {
+          "text": "Granite and basalt are two very common examples of this type of rock.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.5
+        },
+        {
+          "text": "This type of rock forms when melted rock, called magma or lava, cools and hardens.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.3
+        },
+        {
+          "text": "For 10 points, name this rock type whose name comes from the Latin word for \"fire.\"",
+          "clueIndex": 4,
+          "difficultyWeight": 0.1
+        }
+      ],
+      "powerClueIndex": 2,
+      "canonicalAnswer": "igneous rock",
+      "acceptedAnswers": [
+        "igneous",
+        "igneous rocks"
+      ],
+      "rejectedAnswers": [
+        "sedimentary rock",
+        "metamorphic rock"
+      ],
+      "approvedDistractors": [
+        "Sedimentary rock",
+        "Metamorphic rock",
+        "Limestone"
+      ],
+      "explanation": "Igneous rocks form when hot melted rock cools down. Lava that cools very fast can become smooth, glassy obsidian.",
+      "pronunciationNotes": "igneous (IG-nee-us)"
+    },
+    {
+      "id": "tu-sci-12",
+      "type": "tossup",
+      "category": "Science",
+      "subcategory": "Earth Science",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Scientists called seismologists study these events using instruments that record ground motion.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The spot on the surface directly above where one of these events starts is called its epicenter.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The Richter scale and the moment magnitude scale measure the strength of these events.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name these sudden shakings of the ground, often caused by shifting tectonic plates.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "earthquake",
+      "acceptedAnswers": [
+        "earthquakes",
+        "quake",
+        "quakes"
+      ],
+      "rejectedAnswers": [
+        "volcano",
+        "tsunami"
+      ],
+      "approvedDistractors": [
+        "Volcano",
+        "Tsunami",
+        "Tornado"
+      ],
+      "explanation": "Earthquakes happen when giant slabs of Earth's crust, called plates, suddenly slip past each other. Thousands of small ones happen every day, but most are too weak to feel.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-01",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Solar System",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "NASA's MESSENGER spacecraft orbited this planet and found water ice inside shadowed craters near its poles.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "A year on this planet lasts only about 88 Earth days, the shortest of any planet.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Even though it is closest to the Sun, this planet is not the hottest; Venus is hotter.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this smallest planet, the one closest to the Sun.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Mercury",
+      "acceptedAnswers": [
+        "planet Mercury"
+      ],
+      "rejectedAnswers": [
+        "Venus"
+      ],
+      "approvedDistractors": [
+        "Venus",
+        "Mars",
+        "Pluto"
+      ],
+      "explanation": "Mercury is the smallest planet and zips around the Sun faster than any other. It has almost no air to hold in heat, so its nights get extremely cold.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-02",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Solar System",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This planet's moon Io is the most volcanically active world in the solar system.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In 1610, Galileo discovered this planet's four largest moons using an early telescope.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "A giant storm on this planet called the Great Red Spot is wider than the whole Earth.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this largest planet in our solar system.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Jupiter",
+      "acceptedAnswers": [
+        "planet Jupiter"
+      ],
+      "rejectedAnswers": [
+        "Saturn"
+      ],
+      "approvedDistractors": [
+        "Saturn",
+        "Neptune",
+        "Uranus"
+      ],
+      "explanation": "Jupiter is so big that more than 1,000 Earths could fit inside it. Its Great Red Spot is a storm that has been swirling for hundreds of years.",
+      "pronunciationNotes": "Io (EYE-oh)"
+    },
+    {
+      "id": "tu-spc-03",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Solar System",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This planet's moon Enceladus shoots geysers of icy water out into space.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This planet is so light for its size that it would float in a giant bathtub of water.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Its largest moon, Titan, has a thick atmosphere and lakes of liquid methane.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this sixth planet from the Sun, famous for its bright, wide rings.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Saturn",
+      "acceptedAnswers": [
+        "planet Saturn"
+      ],
+      "rejectedAnswers": [
+        "Jupiter"
+      ],
+      "approvedDistractors": [
+        "Jupiter",
+        "Uranus",
+        "Neptune"
+      ],
+      "explanation": "Saturn's rings are made of billions of chunks of ice and rock. The planet is mostly gas, which makes it less dense than water.",
+      "pronunciationNotes": "Enceladus (en-SEL-uh-dus)"
+    },
+    {
+      "id": "tu-spc-04",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Stars & Galaxies",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "At the center of this galaxy sits a supermassive black hole called Sagittarius A*.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Our solar system lies in a small spiral arm of this barred spiral galaxy called the Orion Arm.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In a few billion years, this galaxy is expected to merge with the Andromeda Galaxy.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name the galaxy that is home to our Sun and planet Earth.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Milky Way",
+      "acceptedAnswers": [
+        "Milky Way Galaxy",
+        "the Galaxy"
+      ],
+      "rejectedAnswers": [
+        "Andromeda Galaxy"
+      ],
+      "approvedDistractors": [
+        "Andromeda Galaxy",
+        "Whirlpool Galaxy",
+        "Triangulum Galaxy"
+      ],
+      "explanation": "The Milky Way is our home galaxy and holds hundreds of billions of stars. On a dark night, you can see it as a faint, milky band across the sky.",
+      "pronunciationNotes": "Sagittarius (saj-ih-TAIR-ee-us)"
+    },
+    {
+      "id": "tu-spc-05",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Stars & Galaxies",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "In 2019, astronomers shared the first-ever picture of one of these objects, located in the galaxy M87.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The boundary around one of these objects, past which nothing can return, is called the event horizon.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Many of these objects form when very massive stars collapse at the end of their lives.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name these regions of space whose gravity is so strong that not even light can escape.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "black hole",
+      "acceptedAnswers": [
+        "black holes"
+      ],
+      "rejectedAnswers": [
+        "neutron star"
+      ],
+      "approvedDistractors": [
+        "Neutron star",
+        "White dwarf",
+        "Quasar"
+      ],
+      "explanation": "A black hole packs a huge amount of matter into a tiny space, so its gravity traps even light. That is why it looks black.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-06",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Stars & Galaxies",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This star is really a multiple star system whose brightest member is a yellow supergiant.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "It sits at the end of the handle of the Little Dipper.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Because it lies almost directly above Earth's North Pole, this star barely seems to move all night.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this star that travelers have used for centuries to find the direction north.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Polaris",
+      "acceptedAnswers": [
+        "North Star",
+        "Pole Star",
+        "Northern Star"
+      ],
+      "rejectedAnswers": [
+        "Sirius"
+      ],
+      "approvedDistractors": [
+        "Sirius",
+        "Betelgeuse",
+        "Vega"
+      ],
+      "explanation": "Polaris, the North Star, stays nearly still while other stars circle around it. If you face it, you are facing north.",
+      "pronunciationNotes": "Polaris (poh-LAIR-iss)"
+    },
+    {
+      "id": "tu-spc-07",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Space Exploration",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This former Navy pilot commanded Gemini 8, which made the first docking of two spacecraft in orbit.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He was the commander of the Apollo 11 mission in July 1969.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Stepping down from the lunar module, he called it \"one small step\" for man and \"one giant leap\" for mankind.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this astronaut, the first person to walk on the Moon.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Neil Armstrong",
+      "acceptedAnswers": [
+        "Armstrong"
+      ],
+      "rejectedAnswers": [
+        "Buzz Aldrin"
+      ],
+      "approvedDistractors": [
+        "Buzz Aldrin",
+        "Michael Collins",
+        "John Glenn"
+      ],
+      "explanation": "Neil Armstrong stepped onto the Moon on July 20, 1969. His footprints are probably still there, because the Moon has no wind to blow them away.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-08",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Space Exploration",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "During a 1993 servicing mission, astronauts fixed a flaw in this instrument's main mirror.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Its \"Deep Field\" photos showed thousands of galaxies in a tiny patch of sky that looked empty.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Launched by the Space Shuttle Discovery in 1990, it orbits above the blurry air of Earth's atmosphere.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this famous space telescope whose successor is the James Webb Space Telescope.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Hubble Space Telescope",
+      "acceptedAnswers": [
+        "Hubble",
+        "HST",
+        "Hubble Telescope"
+      ],
+      "rejectedAnswers": [
+        "James Webb Space Telescope"
+      ],
+      "approvedDistractors": [
+        "James Webb Space Telescope",
+        "Kepler Space Telescope",
+        "Spitzer Space Telescope"
+      ],
+      "explanation": "The Hubble Space Telescope orbits above Earth's air, which lets it take much sharper pictures than telescopes on the ground. It has helped scientists figure out how old the universe is.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-09",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Space Exploration",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Its first long-term crew, called Expedition 1, arrived in November 2000.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Russia's Zvezda module and the American Destiny laboratory are parts of this orbiting structure.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This laboratory circles Earth about 16 times a day, and astronauts from many nations live aboard it.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this football-field-sized home for astronauts, built in orbit by many countries.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "International Space Station",
+      "acceptedAnswers": [
+        "ISS",
+        "space station"
+      ],
+      "rejectedAnswers": [
+        "Mir",
+        "Skylab"
+      ],
+      "approvedDistractors": [
+        "Skylab",
+        "Mir",
+        "Tiangong"
+      ],
+      "explanation": "The International Space Station has had people living on it every day since 2000. Its crew sees about 16 sunrises and sunsets every day!",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-spc-10",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Space Exploration",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The name of this object is a Russian word often translated as \"fellow traveler\" or \"companion.\"",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Its launch surprised the United States and helped lead to the creation of NASA in 1958.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This shiny metal ball with four long antennas sent out beeping radio signals as it circled Earth.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Soviet spacecraft, launched in 1957 as the first artificial satellite.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Sputnik",
+      "acceptedAnswers": [
+        "Sputnik 1"
+      ],
+      "rejectedAnswers": [
+        "Explorer 1"
+      ],
+      "approvedDistractors": [
+        "Explorer 1",
+        "Vostok 1",
+        "Luna 1"
+      ],
+      "explanation": "Sputnik was the first human-made object to orbit Earth. It was about the size of a beach ball, and its launch kicked off the Space Race.",
+      "pronunciationNotes": "Sputnik (SPUT-nik or SPOOT-nik)"
+    },
+    {
+      "id": "tu-spc-11",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Moon",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Many scientists think this body formed after a Mars-sized object called Theia crashed into the young Earth.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Because it is tidally locked, this body always keeps the same side facing Earth.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Dark, flat plains on this body are called maria, from the Latin word for \"seas.\"",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name the only natural satellite that orbits planet Earth.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "the Moon",
+      "acceptedAnswers": [
+        "Moon",
+        "Luna"
+      ],
+      "rejectedAnswers": [],
+      "approvedDistractors": [
+        "Phobos",
+        "Europa",
+        "Titan"
+      ],
+      "explanation": "Earth has just one natural moon, and it always shows us the same face. Its dark patches are old lava plains, not real seas.",
+      "pronunciationNotes": "maria (MAR-ee-uh)"
+    },
+    {
+      "id": "tu-spc-12",
+      "type": "tossup",
+      "category": "Space",
+      "subcategory": "Moon",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "During the total stage of this event, a coppery red color comes from sunlight bent through Earth's atmosphere.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The darkest part of Earth's shadow, called the umbra, covers the Moon during the total version of this event.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This event can only happen at a full moon, when Earth lines up between the Sun and the Moon.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this event in which Earth's shadow darkens the Moon.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "lunar eclipse",
+      "acceptedAnswers": [
+        "eclipse of the Moon",
+        "total lunar eclipse",
+        "blood moon"
+      ],
+      "rejectedAnswers": [
+        "solar eclipse"
+      ],
+      "approvedDistractors": [
+        "Solar eclipse",
+        "New moon",
+        "Meteor shower"
+      ],
+      "explanation": "In a lunar eclipse, Earth blocks sunlight from reaching the Moon. It is safe to watch with your bare eyes, unlike a solar eclipse.",
+      "pronunciationNotes": "umbra (UM-bruh)"
+    },
+    {
+      "id": "tu-geo-01",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "State Capitals",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The western end of the Pony Express route was in this city, which is also home to Sutter's Fort.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This city grew quickly during the Gold Rush after gold was found at nearby Sutter's Mill in 1848.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "It sits where the American River joins a larger river that shares this city's name.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this capital city of the state of California.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Sacramento",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Los Angeles",
+        "San Francisco"
+      ],
+      "approvedDistractors": [
+        "Los Angeles",
+        "San Francisco",
+        "San Diego"
+      ],
+      "explanation": "Sacramento is California's capital, even though Los Angeles is much bigger. It boomed during the Gold Rush as miners passed through on the way to the gold fields.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-02",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "State Capitals",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "On summer evenings, over a million bats fly out from under this city's Congress Avenue Bridge.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This city is named after Stephen, the man known as the \"Father of Texas.\"",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The main campus of the University of Texas is in this city along the Colorado River.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this capital city of the state of Texas.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Austin",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Houston",
+        "Dallas"
+      ],
+      "approvedDistractors": [
+        "Houston",
+        "Dallas",
+        "San Antonio"
+      ],
+      "explanation": "Austin is the capital of Texas and is named for Stephen F. Austin. Its bridge is home to one of the biggest city bat colonies in North America.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-03",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "State Capitals",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Iolani Palace, once the home of Hawaii's kings and queens, stands in this city.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Waikiki Beach and the Pearl Harbor naval base are both found in or near this city.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This city is located on the island of Oahu, the third-largest Hawaiian island.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this capital and largest city of the state of Hawaii.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Honolulu",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Hilo"
+      ],
+      "approvedDistractors": [
+        "Hilo",
+        "Kahului",
+        "Juneau"
+      ],
+      "explanation": "Honolulu is Hawaii's capital, on the island of Oahu. Iolani Palace there was built for Hawaiian royalty before Hawaii became a state.",
+      "pronunciationNotes": "Iolani (ee-oh-LAH-nee), Oahu (oh-AH-hoo)"
+    },
+    {
+      "id": "tu-geo-04",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Rivers & Mountains",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Lake Itasca in northern Minnesota is the starting point of this river.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Mark Twain worked as a steamboat pilot on this river and wrote about it in many of his books.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This river flows past St. Louis and Memphis and reaches the sea below New Orleans.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this major U.S. river whose name comes from an Ojibwe phrase meaning \"great river.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Mississippi River",
+      "acceptedAnswers": [
+        "Mississippi"
+      ],
+      "rejectedAnswers": [
+        "Missouri River"
+      ],
+      "approvedDistractors": [
+        "Missouri River",
+        "Ohio River",
+        "Colorado River"
+      ],
+      "explanation": "The Mississippi River flows about 2,300 miles from Minnesota to the ocean. At its start, it is narrow enough to walk across on stepping stones!",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-05",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Rivers & Mountains",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Near the top of this mountain, climbers can find limestone with fossils of ancient sea creatures.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Its peak lies on the border between Nepal and the Tibet region of China.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Tenzing Norgay and Edmund Hillary were the first people known to reach its summit, in 1953.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Himalayan peak, the tallest mountain above sea level on Earth.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Mount Everest",
+      "acceptedAnswers": [
+        "Everest",
+        "Sagarmatha",
+        "Chomolungma"
+      ],
+      "rejectedAnswers": [
+        "K2"
+      ],
+      "approvedDistractors": [
+        "K2",
+        "Kilimanjaro",
+        "Denali"
+      ],
+      "explanation": "Mount Everest is about 29,000 feet tall, the highest point above sea level on Earth. The sea fossils near its top show that its rock was once under an ancient ocean.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-06",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Rivers & Mountains",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "No bridges cross this river anywhere along its main channel.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The pink river dolphin, also called the boto, swims in the waters of this river.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This river carries more water to the ocean than any other river on Earth.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this South American river that flows through a giant rainforest in Brazil.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Amazon River",
+      "acceptedAnswers": [
+        "Amazon"
+      ],
+      "rejectedAnswers": [
+        "Nile River"
+      ],
+      "approvedDistractors": [
+        "Nile River",
+        "Orinoco River",
+        "Congo River"
+      ],
+      "explanation": "The Amazon River carries more water than the next several biggest rivers combined. It winds through the largest rainforest in the world.",
+      "pronunciationNotes": "boto (BOH-toh)"
+    },
+    {
+      "id": "tu-geo-07",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Rivers & Mountains",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Aconcagua, the highest mountain outside of Asia, rises in this range in Argentina.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The Inca built their mountaintop city of Machu Picchu high in this mountain range.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This is the longest mountain range on any continent, stretching more than 4,000 miles.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this mountain range that runs along the western side of South America.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Andes",
+      "acceptedAnswers": [
+        "Andes Mountains",
+        "Andean Mountains"
+      ],
+      "rejectedAnswers": [
+        "Rocky Mountains"
+      ],
+      "approvedDistractors": [
+        "Rocky Mountains",
+        "Himalayas",
+        "Alps"
+      ],
+      "explanation": "The Andes run through seven countries in South America. Llamas and alpacas have lived in these mountains with people for thousands of years.",
+      "pronunciationNotes": "Aconcagua (ah-kon-KAH-gwah), Machu Picchu (MAH-choo PEEK-choo)"
+    },
+    {
+      "id": "tu-geo-08",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Countries of the World",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This country's capital, Canberra, was built as a compromise because Sydney and Melbourne both wanted the title.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The Great Barrier Reef stretches along the northeast coast of this country.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Kangaroos, koalas, and wombats are native animals of this country.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this country that covers an entire continent by itself.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Australia",
+      "acceptedAnswers": [
+        "Commonwealth of Australia"
+      ],
+      "rejectedAnswers": [
+        "New Zealand"
+      ],
+      "approvedDistractors": [
+        "New Zealand",
+        "South Africa",
+        "Papua New Guinea"
+      ],
+      "explanation": "Australia is both a country and a continent. Many of its animals, like kangaroos and koalas, live naturally nowhere else on Earth.",
+      "pronunciationNotes": "Canberra (KAN-bur-uh)"
+    },
+    {
+      "id": "tu-geo-09",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Countries of the World",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This country's four main islands are Hokkaido, Honshu, Shikoku, and Kyushu.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Mount Fuji, a snow-capped volcano, is the tallest mountain in this country.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Its capital, Tokyo, is one of the biggest cities in the world.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Asian island nation known as the \"Land of the Rising Sun.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Japan",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "China"
+      ],
+      "approvedDistractors": [
+        "China",
+        "South Korea",
+        "Philippines"
+      ],
+      "explanation": "Japan is a nation made of thousands of islands in the Pacific Ocean. Its name in Japanese, Nihon, means \"origin of the sun.\"",
+      "pronunciationNotes": "Hokkaido (hoh-KY-doh), Kyushu (KYOO-shoo)"
+    },
+    {
+      "id": "tu-geo-10",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Countries of the World",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "In 1960, this country moved its capital to a newly built city shaped a bit like an airplane.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Portuguese, not Spanish, is the main language spoken in this country.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This country hosts a famous yearly Carnival celebration in the city of Rio de Janeiro.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this largest country in South America, which covers nearly half the continent.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Brazil",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Argentina"
+      ],
+      "approvedDistractors": [
+        "Argentina",
+        "Portugal",
+        "Colombia"
+      ],
+      "explanation": "Brazil is the largest country in South America and was once a colony of Portugal, which is why people there speak Portuguese. Its capital, Brasilia, was built from scratch in just a few years.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-11",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Continents & Oceans",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Russia's Vostok research station on this continent once recorded about minus 128 degrees Fahrenheit.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "A 1959 treaty signed by many nations set this continent aside for peaceful science.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Emperor penguins huddle together to stay warm through the dark winter on this continent.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this icy continent that surrounds the South Pole.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Antarctica",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Arctic"
+      ],
+      "approvedDistractors": [
+        "Arctic",
+        "Greenland",
+        "Australia"
+      ],
+      "explanation": "Antarctica is the coldest, windiest, and driest continent. Nobody lives there permanently, but scientists from many countries work at research stations.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-geo-12",
+      "type": "tossup",
+      "category": "Geography",
+      "subcategory": "Continents & Oceans",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "A huge horseshoe of volcanoes and earthquake zones called the \"Ring of Fire\" circles this ocean.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Explorer Ferdinand Magellan named this ocean with a word meaning \"peaceful\" because its waters seemed calm.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The Mariana Trench, the deepest known place in any ocean, lies at the bottom of this ocean.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this largest and deepest ocean on Earth.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Pacific Ocean",
+      "acceptedAnswers": [
+        "Pacific"
+      ],
+      "rejectedAnswers": [
+        "Atlantic Ocean"
+      ],
+      "approvedDistractors": [
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Arctic Ocean"
+      ],
+      "explanation": "The Pacific is the biggest ocean, covering about a third of Earth's surface. All of the land on Earth could fit inside it with room to spare.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-01",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "American Revolution",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This document lists more than two dozen complaints against King George III.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Thomas Jefferson wrote most of its first draft in a rented room in Philadelphia.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "John Hancock signed this document with a famously large signature.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this 1776 document announcing that the thirteen colonies were free from Great Britain.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Declaration of Independence",
+      "acceptedAnswers": [
+        "the Declaration"
+      ],
+      "rejectedAnswers": [
+        "Constitution"
+      ],
+      "approvedDistractors": [
+        "U.S. Constitution",
+        "Bill of Rights",
+        "Articles of Confederation"
+      ],
+      "explanation": "The Declaration of Independence was adopted on July 4, 1776, which is why Americans celebrate that day. John Hancock signed it so big that \"John Hancock\" became slang for a signature.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-02",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "American Revolution",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This silversmith made a famous engraving of the Boston Massacre that was shared across the colonies.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The poet Henry Wadsworth Longfellow wrote a famous poem about this man's midnight ride.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In April 1775, he rode toward Lexington to warn that British troops were on the move.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Boston patriot remembered for the lantern signal \"one if by land, and two if by sea.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Paul Revere",
+      "acceptedAnswers": [
+        "Revere"
+      ],
+      "rejectedAnswers": [
+        "William Dawes",
+        "Samuel Adams"
+      ],
+      "approvedDistractors": [
+        "Samuel Adams",
+        "John Hancock",
+        "William Dawes"
+      ],
+      "explanation": "Paul Revere rode through the night to warn patriots that British soldiers were coming. Other riders, like William Dawes, rode that night too, but Longfellow's poem made Revere the famous one.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-03",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "American Revolution",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Friedrich von Steuben drilled soldiers at this site, turning them into a better-trained army.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Many soldiers here lacked shoes and blankets, and sickness spread through their log huts.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The Continental Army spent the hard winter of 1777 to 1778 at this camp in Pennsylvania.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this camp where George Washington's army made it through a famously cold, hungry winter.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Valley Forge",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Yorktown",
+        "Saratoga"
+      ],
+      "approvedDistractors": [
+        "Yorktown",
+        "Saratoga",
+        "Bunker Hill"
+      ],
+      "explanation": "At Valley Forge, American soldiers survived a hard winter and came out as a stronger, better-trained army. Baron von Steuben taught them to march and work together.",
+      "pronunciationNotes": "von Steuben (fon STOO-ben)"
+    },
+    {
+      "id": "tu-his-04",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "U.S. Presidents",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Before politics, this man worked as a shopkeeper and postmaster in New Salem, Illinois.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In 1863, he gave a short speech at Gettysburg that began \"Four score and seven years ago.\"",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He issued the Emancipation Proclamation in 1863, during the Civil War.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this 16th president, whose face appears on the penny.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Abraham Lincoln",
+      "acceptedAnswers": [
+        "Lincoln",
+        "Abe Lincoln"
+      ],
+      "rejectedAnswers": [
+        "Ulysses S. Grant"
+      ],
+      "approvedDistractors": [
+        "George Washington",
+        "Ulysses S. Grant",
+        "Andrew Johnson"
+      ],
+      "explanation": "Abraham Lincoln led the country during the Civil War and worked to end slavery. At about 6 feet 4 inches, he was also the tallest U.S. president.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-05",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "U.S. Presidents",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This man designed his hilltop home, Monticello, and founded the University of Virginia.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "As president, he sent Lewis and Clark to explore the lands of the West.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In 1803, he arranged the Louisiana Purchase from France, which about doubled the size of the country.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this third U.S. president, the main author of the Declaration of Independence.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Thomas Jefferson",
+      "acceptedAnswers": [
+        "Jefferson"
+      ],
+      "rejectedAnswers": [
+        "John Adams",
+        "James Madison"
+      ],
+      "approvedDistractors": [
+        "John Adams",
+        "James Madison",
+        "Benjamin Franklin"
+      ],
+      "explanation": "Thomas Jefferson wrote the Declaration of Independence and later became the third president. His home, Monticello, is shown on the back of the nickel.",
+      "pronunciationNotes": "Monticello (mon-tih-CHEL-oh)"
+    },
+    {
+      "id": "tu-his-06",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "U.S. Presidents",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This president won the Nobel Peace Prize for helping end the Russo-Japanese War.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He led a volunteer cavalry group nicknamed the Rough Riders.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "A popular stuffed toy bear was named after this nature-loving president's nickname.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this 26th president who protected millions of acres of land as national forests and parks.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Theodore Roosevelt",
+      "acceptedAnswers": [
+        "Teddy Roosevelt",
+        "TR",
+        "T. R."
+      ],
+      "rejectedAnswers": [
+        "Franklin D. Roosevelt",
+        "Franklin Roosevelt",
+        "FDR"
+      ],
+      "approvedDistractors": [
+        "Franklin D. Roosevelt",
+        "William Howard Taft",
+        "Woodrow Wilson"
+      ],
+      "explanation": "Theodore \"Teddy\" Roosevelt loved the outdoors and protected about 230 million acres of land. The teddy bear is named after him.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-07",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Inventors & Explorers",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Before building aircraft, these siblings ran a bicycle shop in Dayton, Ohio.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "They tested gliders on sand dunes near Kitty Hawk, North Carolina, because of the steady winds there.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Their airplane, the Flyer, stayed up for 12 seconds on its first flight in December 1903.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name these brothers, Orville and Wilbur, who made the first powered airplane flight.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Wright brothers",
+      "acceptedAnswers": [
+        "Orville and Wilbur Wright",
+        "Wilbur and Orville Wright",
+        "the Wrights"
+      ],
+      "rejectedAnswers": [
+        "Montgolfier brothers"
+      ],
+      "approvedDistractors": [
+        "Montgolfier brothers",
+        "Charles Lindbergh",
+        "Glenn Curtiss"
+      ],
+      "explanation": "The Wright brothers made the first powered, controlled airplane flight in 1903. That first flight was shorter than the wingspan of a modern jumbo jet!",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-08",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Inventors & Explorers",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This inventor's laboratory in New Jersey earned him the nickname \"The Wizard of Menlo Park.\"",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In 1877, he invented the phonograph, a machine that could record sound and play it back.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He received more than 1,000 U.S. patents during his long career.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this inventor famous for making a practical, long-lasting electric light bulb.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Thomas Edison",
+      "acceptedAnswers": [
+        "Edison",
+        "Thomas Alva Edison"
+      ],
+      "rejectedAnswers": [
+        "Nikola Tesla"
+      ],
+      "approvedDistractors": [
+        "Alexander Graham Bell",
+        "Nikola Tesla",
+        "Benjamin Franklin"
+      ],
+      "explanation": "Thomas Edison and his team tested thousands of materials to make a light bulb that would glow for a long time. The phonograph was his favorite invention.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-his-09",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Inventors & Explorers",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This Lemhi Shoshone woman carried her baby son, Jean Baptiste, on a famous journey west.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "She helped the explorers get horses when they met her brother, who had become a Shoshone chief.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "She served as an interpreter and guide for the Corps of Discovery from 1805 to 1806.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this woman who helped Lewis and Clark and appears on a U.S. golden dollar coin.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Sacagawea",
+      "acceptedAnswers": [
+        "Sacajawea",
+        "Sakakawea"
+      ],
+      "rejectedAnswers": [
+        "Pocahontas"
+      ],
+      "approvedDistractors": [
+        "Pocahontas",
+        "Harriet Tubman",
+        "Susan B. Anthony"
+      ],
+      "explanation": "Sacagawea helped the Lewis and Clark expedition talk with Native nations and find its way west. Seeing a woman with a baby also showed other tribes the group came in peace.",
+      "pronunciationNotes": "Sacagawea (sak-uh-juh-WEE-uh)"
+    },
+    {
+      "id": "tu-his-10",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Ancient Egypt",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This structure was built for the pharaoh Khufu about 4,500 years ago.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "For almost 4,000 years, it was the tallest structure ever built by people.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "It is the only one of the Seven Wonders of the Ancient World that still stands today.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this giant stone tomb near Cairo, which stands close to the Great Sphinx.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Great Pyramid of Giza",
+      "acceptedAnswers": [
+        "Great Pyramid",
+        "Pyramid of Khufu",
+        "Pyramid of Cheops"
+      ],
+      "rejectedAnswers": [
+        "Great Sphinx"
+      ],
+      "approvedDistractors": [
+        "Great Sphinx",
+        "Parthenon",
+        "Colosseum"
+      ],
+      "explanation": "The Great Pyramid was built from more than two million stone blocks. It is the oldest of the Seven Wonders of the Ancient World and the only one left.",
+      "pronunciationNotes": "Khufu (KOO-foo)"
+    },
+    {
+      "id": "tu-his-11",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Ancient Egypt",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "French soldiers found this slab in 1799 near a town in the Nile Delta.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The French scholar Jean-François Champollion used it to figure out how to read hieroglyphs in the 1820s.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "It shows the same message written in hieroglyphs, in Demotic script, and in ancient Greek.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this stone, now in the British Museum, that unlocked the secret of Egyptian hieroglyphs.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Rosetta Stone",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Dead Sea Scrolls"
+      ],
+      "approvedDistractors": [
+        "Dead Sea Scrolls",
+        "Book of the Dead",
+        "Code of Hammurabi"
+      ],
+      "explanation": "Because the Rosetta Stone repeated one message in Greek, which scholars could read, it helped them decode hieroglyphs. Today a \"Rosetta Stone\" means any key that unlocks a mystery.",
+      "pronunciationNotes": "Champollion (shahm-pohl-YOHN)"
+    },
+    {
+      "id": "tu-his-12",
+      "type": "tossup",
+      "category": "History",
+      "subcategory": "Ancient Greece & Rome",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The statesman Pericles led this city during its golden age in the 400s BC.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In this city's assembly, citizens voted directly on laws, making it an early democracy.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The Parthenon, a temple to this city's protector goddess, sits on its Acropolis.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this ancient Greek city-state that is now the capital of Greece.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Athens",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Sparta"
+      ],
+      "approvedDistractors": [
+        "Sparta",
+        "Rome",
+        "Corinth"
+      ],
+      "explanation": "Ancient Athens is famous for creating one of the first democracies, where citizens voted on laws themselves. It was named for the goddess Athena.",
+      "pronunciationNotes": "Pericles (PAIR-ih-kleez)"
+    },
+    {
+      "id": "tu-lit-01",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Fairy Tales",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "In the Brothers Grimm version of this story, a magic tree growing by her mother's grave helps this heroine.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Charles Perrault's 1697 version of this tale added a pumpkin coach and a fairy godmother.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This heroine must leave a royal ball before the clock strikes midnight.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this fairy-tale girl who leaves behind a glass slipper.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Cinderella",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Snow White"
+      ],
+      "approvedDistractors": [
+        "Snow White",
+        "Sleeping Beauty",
+        "Rapunzel"
+      ],
+      "explanation": "Cinderella is one of the most retold stories in the world, with hundreds of versions from different cultures. Charles Perrault's French version gave us the glass slipper.",
+      "pronunciationNotes": "Perrault (peh-ROH)"
+    },
+    {
+      "id": "tu-lit-02",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Fairy Tales",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This character's story begins when a miller brags that his daughter can spin straw into gold.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This little man first takes a necklace and then a ring as payment for doing impossible work overnight.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The queen must guess this helper's name, and she learns it when a messenger hears him singing by a fire.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Grimm fairy-tale character whose name is a famous tongue twister.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Rumpelstiltskin",
+      "acceptedAnswers": [
+        "Rumplestiltskin"
+      ],
+      "rejectedAnswers": [
+        "Tom Thumb"
+      ],
+      "approvedDistractors": [
+        "Tom Thumb",
+        "Pinocchio",
+        "The Frog Prince"
+      ],
+      "explanation": "Rumpelstiltskin spins straw into gold but demands a huge price. The heroine wins by learning his secret name.",
+      "pronunciationNotes": "Rumpelstiltskin (RUM-pul-STILT-skin)"
+    },
+    {
+      "id": "tu-lit-03",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Fairy Tales",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This author, a shoemaker's son from Odense, first hoped to become an actor and singer.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He wrote about a one-legged toy soldier who loves a paper ballerina.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His stories include \"The Ugly Duckling\" and \"The Emperor's New Clothes.\"",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Danish author of \"The Little Mermaid.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Hans Christian Andersen",
+      "acceptedAnswers": [
+        "Andersen",
+        "H. C. Andersen"
+      ],
+      "rejectedAnswers": [
+        "Brothers Grimm"
+      ],
+      "approvedDistractors": [
+        "Brothers Grimm",
+        "Charles Perrault",
+        "Aesop"
+      ],
+      "explanation": "Hans Christian Andersen wrote over 150 fairy tales, many of them brand-new stories rather than old folktales. \"The Ugly Duckling\" is thought to be partly about his own life.",
+      "pronunciationNotes": "Odense (OH-then-seh)"
+    },
+    {
+      "id": "tu-lit-04",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Classic Novels",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "A girl named Fern saves and raises a runt piglet at the start of this novel.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This book's author, E. B. White, also wrote Stuart Little and The Trumpet of the Swan.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In this book, a clever spider spells out words like \"Some Pig\" to save her friend.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this classic farm story about a pig named Wilbur and his spider friend.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Charlotte's Web",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Stuart Little"
+      ],
+      "approvedDistractors": [
+        "Stuart Little",
+        "The Trumpet of the Swan",
+        "Babe"
+      ],
+      "explanation": "In Charlotte's Web, a spider named Charlotte writes words in her web to save Wilbur the pig. It is a story about friendship and loyalty.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-05",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Classic Novels",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Its author first made up this story for the three young Liddell sisters during a boat trip in 1862.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In this book, the heroine meets a grinning Cheshire Cat and goes to a Mad Tea-Party.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Written by Lewis Carroll, it begins when a girl follows a White Rabbit down a hole.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this 1865 book about a girl who visits a strange land ruled by the Queen of Hearts.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Alice's Adventures in Wonderland",
+      "acceptedAnswers": [
+        "Alice in Wonderland"
+      ],
+      "rejectedAnswers": [
+        "Through the Looking-Glass"
+      ],
+      "approvedDistractors": [
+        "Through the Looking-Glass",
+        "The Wonderful Wizard of Oz",
+        "Peter Pan"
+      ],
+      "explanation": "Alice's Adventures in Wonderland is full of nonsense, riddles, and wordplay. Lewis Carroll was the pen name of a math teacher named Charles Dodgson.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-06",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Classic Novels",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The author of this 1900 book, L. Frank Baum, went on to write thirteen sequels to it.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "In the original book, the heroine's magic shoes are silver, not ruby red as in the famous movie.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "A Kansas girl follows a yellow brick road with a Scarecrow, a Tin Woodman, and a Cowardly Lion.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this book about Dorothy and her little dog, Toto.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "The Wonderful Wizard of Oz",
+      "acceptedAnswers": [
+        "The Wizard of Oz",
+        "Wizard of Oz"
+      ],
+      "rejectedAnswers": [
+        "Alice's Adventures in Wonderland"
+      ],
+      "approvedDistractors": [
+        "Alice's Adventures in Wonderland",
+        "Peter Pan",
+        "The Lion, the Witch and the Wardrobe"
+      ],
+      "explanation": "The Wonderful Wizard of Oz was so popular that L. Frank Baum wrote 13 more Oz books. The ruby slippers were invented for the 1939 movie because they looked great in color.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-07",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Classic Novels",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This author's pen name was a riverboat call meaning the water was two fathoms, or twelve feet, deep.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He was born in Florida, Missouri, and grew up in the river town of Hannibal.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He wrote about a boy who tricks his friends into whitewashing a fence for him.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this author of The Adventures of Tom Sawyer and Adventures of Huckleberry Finn.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Mark Twain",
+      "acceptedAnswers": [
+        "Samuel Clemens",
+        "Samuel Langhorne Clemens",
+        "Twain"
+      ],
+      "rejectedAnswers": [
+        "Jack London"
+      ],
+      "approvedDistractors": [
+        "Charles Dickens",
+        "Jack London",
+        "Louisa May Alcott"
+      ],
+      "explanation": "Mark Twain was the pen name of Samuel Clemens, who once piloted steamboats on the Mississippi River. \"Mark twain\" was what boatmen shouted when the water was safely deep.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-08",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Literary Terms",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "A writer uses this device when saying \"the old house groaned\" during a storm.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Saying that the sun \"smiled down\" on a field is an example of this device.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This figure of speech gives human qualities or actions to animals, objects, or ideas.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this literary device whose name contains the word \"person.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "personification",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "simile",
+        "metaphor"
+      ],
+      "approvedDistractors": [
+        "Simile",
+        "Metaphor",
+        "Hyperbole"
+      ],
+      "explanation": "Personification makes objects or ideas act like people, like a \"whispering\" wind. It helps readers picture a scene and feel its mood.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-09",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Poetry",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Traditional poems in this form often include a word that hints at a season, called a kigo.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The Japanese poet Matsuo Basho is famous for writing this kind of poem, including one about a frog and a pond.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In English, this very short poem usually has just three lines.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this poem form whose lines have five, seven, and then five syllables.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "haiku",
+      "acceptedAnswers": [
+        "haikus",
+        "hokku"
+      ],
+      "rejectedAnswers": [
+        "tanka"
+      ],
+      "approvedDistractors": [
+        "Limerick",
+        "Sonnet",
+        "Cinquain"
+      ],
+      "explanation": "A haiku is a tiny poem from Japan that often captures a single moment in nature. Its three lines usually have 5, 7, and 5 syllables.",
+      "pronunciationNotes": "haiku (HY-koo), Basho (BAH-shoh), kigo (KEE-goh)"
+    },
+    {
+      "id": "tu-lit-10",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Poetry",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The artist and writer Edward Lear made this form popular with his 1846 A Book of Nonsense.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The third and fourth lines of this kind of poem are shorter than the other three.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "These poems follow an AABBA rhyme scheme and usually have a bouncy rhythm.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this kind of funny five-line poem that often begins \"There once was a...\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "limerick",
+      "acceptedAnswers": [
+        "limericks"
+      ],
+      "rejectedAnswers": [
+        "haiku"
+      ],
+      "approvedDistractors": [
+        "Haiku",
+        "Sonnet",
+        "Ballad"
+      ],
+      "explanation": "A limerick is a silly five-line poem with an AABBA rhyme pattern. The form may be named after the city of Limerick in Ireland.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-11",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Poetry",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This poet recited \"The Gift Outright\" at John F. Kennedy's inauguration in 1961.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He won four Pulitzer Prizes for poetry, more than any other poet.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He wrote a poem about stopping by woods on a snowy evening.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this New England poet who wrote \"The Road Not Taken.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Robert Frost",
+      "acceptedAnswers": [
+        "Frost"
+      ],
+      "rejectedAnswers": [
+        "Walt Whitman"
+      ],
+      "approvedDistractors": [
+        "Emily Dickinson",
+        "Walt Whitman",
+        "Langston Hughes"
+      ],
+      "explanation": "Robert Frost wrote about farms, woods, and country life in New England. He is the only poet to win four Pulitzer Prizes for poetry.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-lit-12",
+      "type": "tossup",
+      "category": "Literature",
+      "subcategory": "Literary Terms",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Tongue twisters like \"six slippery snails slid slowly\" depend heavily on this sound device.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Many cartoon character names, such as Donald Duck and Porky Pig, use this device.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This device repeats the same beginning consonant sound in words that are close together.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this device heard in the tongue twister \"Peter Piper picked a peck of pickled peppers.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "alliteration",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "onomatopoeia",
+        "rhyme"
+      ],
+      "approvedDistractors": [
+        "Onomatopoeia",
+        "Rhyme",
+        "Simile"
+      ],
+      "explanation": "Alliteration is when nearby words start with the same sound, like \"big brown bear.\" Writers use it to make words catchy and fun to say.",
+      "pronunciationNotes": null
+    },
+    {
+      "id": "tu-myt-01",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Gods",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The eagle and the oak tree were sacred to this god, whose oldest oracle was at Dodona.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "As a baby, this god was hidden in a cave on Crete so his father, Cronus, could not swallow him.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This god ruled from Mount Olympus and hurled thunderbolts when he was angry.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this king of the Greek gods.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Zeus",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Jupiter",
+        "Poseidon"
+      ],
+      "approvedDistractors": [
+        "Poseidon",
+        "Hades",
+        "Apollo"
+      ],
+      "explanation": "Zeus was the king of the Greek gods and ruled the sky from Mount Olympus. The Romans called him Jupiter.",
+      "pronunciationNotes": "Zeus (ZOOSS), Cronus (KROH-nus)"
+    },
+    {
+      "id": "tu-myt-02",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Gods",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This goddess sprang fully grown and wearing armor from her father's head.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "She won a contest with Poseidon by giving a Greek city the gift of an olive tree.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "The owl is the sacred bird of this goddess of wisdom.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Greek goddess of wisdom, for whom the Parthenon was built.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Athena",
+      "acceptedAnswers": [
+        "Pallas Athena",
+        "Athene"
+      ],
+      "rejectedAnswers": [
+        "Minerva",
+        "Artemis"
+      ],
+      "approvedDistractors": [
+        "Artemis",
+        "Hera",
+        "Aphrodite"
+      ],
+      "explanation": "Athena was the goddess of wisdom and clever planning. The city of Athens was named after her when the people chose her olive tree as the best gift.",
+      "pronunciationNotes": "Athena (uh-THEE-nuh)"
+    },
+    {
+      "id": "tu-myt-03",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Gods",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "In some myths, this god created the very first horse.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He was the father of the one-eyed Cyclops named Polyphemus.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This god carried a three-pronged trident and could shake the earth.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Greek god of the sea.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Poseidon",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Neptune"
+      ],
+      "approvedDistractors": [
+        "Zeus",
+        "Hades",
+        "Triton"
+      ],
+      "explanation": "Poseidon ruled the oceans and could stir up storms with his trident. The Romans called him Neptune.",
+      "pronunciationNotes": "Poseidon (poh-SY-dun), Polyphemus (pol-ih-FEE-mus)"
+    },
+    {
+      "id": "tu-myt-04",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Gods",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "On the very day he was born, this god sneaked away and stole fifty cattle from Apollo.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He made the first lyre out of a tortoise shell and later gave it to Apollo.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This messenger of the gods wore winged sandals and a winged hat.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this speedy Greek god whom the Romans called Mercury.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Hermes",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Mercury",
+        "Apollo"
+      ],
+      "approvedDistractors": [
+        "Apollo",
+        "Ares",
+        "Hephaestus"
+      ],
+      "explanation": "Hermes was the fast-moving messenger of the Greek gods and a clever trickster. The Roman version of him, Mercury, gave his name to the fastest planet.",
+      "pronunciationNotes": "Hermes (HUR-meez)"
+    },
+    {
+      "id": "tu-myt-05",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Heroes",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "While still a baby, this hero amazed everyone by fighting off two snakes in his crib.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "One of his tasks was cleaning the huge Augean stables in one day by changing the course of two rivers.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He wore the skin of the Nemean lion and carried a huge wooden club.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this super-strong son of Zeus who completed twelve famous labors.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Heracles",
+      "acceptedAnswers": [
+        "Hercules",
+        "Herakles"
+      ],
+      "rejectedAnswers": [
+        "Perseus"
+      ],
+      "approvedDistractors": [
+        "Perseus",
+        "Achilles",
+        "Theseus"
+      ],
+      "explanation": "Heracles, called Hercules by the Romans, was the strongest of the Greek heroes. He had to finish twelve nearly impossible tasks called the Twelve Labors.",
+      "pronunciationNotes": "Heracles (HAIR-uh-kleez), Augean (aw-JEE-un)"
+    },
+    {
+      "id": "tu-myt-06",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Heroes",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "As a baby, this hero and his mother, Danaë, were set adrift at sea in a wooden chest.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Athena gave him a polished shield, and Hermes lent him winged sandals for his quest.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He looked only at a reflection to defeat Medusa, whose gaze could turn people to stone.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Greek hero who later rescued Princess Andromeda from a sea monster.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Perseus",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Theseus"
+      ],
+      "approvedDistractors": [
+        "Theseus",
+        "Jason",
+        "Heracles"
+      ],
+      "explanation": "Perseus used a mirror-like shield so he never had to look straight at Medusa. The constellation Perseus is named after him.",
+      "pronunciationNotes": "Perseus (PUR-see-us), Danaë (DAN-ay-ee)"
+    },
+    {
+      "id": "tu-myt-07",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Greek Heroes",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This hero once pretended to be foolish by plowing a field and sowing it with salt to avoid going to war.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He escaped from the Cyclops's cave by hiding under the bellies of sheep.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His ten-year journey home from the Trojan War is told in an epic poem by Homer.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this clever king of Ithaca who came up with the idea of the Trojan Horse.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Odysseus",
+      "acceptedAnswers": [
+        "Ulysses"
+      ],
+      "rejectedAnswers": [
+        "Achilles"
+      ],
+      "approvedDistractors": [
+        "Achilles",
+        "Agamemnon",
+        "Hector"
+      ],
+      "explanation": "Odysseus was famous for being clever rather than just strong. Homer's poem about his long trip home is called the Odyssey.",
+      "pronunciationNotes": "Odysseus (oh-DISS-ee-us), Ithaca (ITH-uh-kuh)"
+    },
+    {
+      "id": "tu-myt-08",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Norse Myths",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Two goats named Tanngrisnir and Tanngnjóstr pull this god's chariot across the sky.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He wears a magic belt called Megingjörd that doubles his already great strength.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This god's hammer, Mjölnir, always comes back to his hand after he throws it.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Norse god of thunder, for whom Thursday is named.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Thor",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Odin"
+      ],
+      "approvedDistractors": [
+        "Odin",
+        "Loki",
+        "Zeus"
+      ],
+      "explanation": "Thor was the Norse god of thunder and the protector of gods and people. Thursday comes from \"Thor's day.\"",
+      "pronunciationNotes": "Mjölnir (MYOLL-neer)"
+    },
+    {
+      "id": "tu-myt-09",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Norse Myths",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Two ravens named Huginn and Muninn fly around the world each day and bring this god news.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This god rides a swift gray horse with eight legs named Sleipnir.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He gave up one of his eyes to drink from Mimir's well of wisdom.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this one-eyed ruler of the Norse gods and father of Thor.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Odin",
+      "acceptedAnswers": [
+        "Woden",
+        "Wotan"
+      ],
+      "rejectedAnswers": [
+        "Thor"
+      ],
+      "approvedDistractors": [
+        "Thor",
+        "Loki",
+        "Freyr"
+      ],
+      "explanation": "Odin was the wise king of the Norse gods who would trade almost anything for knowledge. Wednesday is named after him, from \"Woden's day.\"",
+      "pronunciationNotes": "Huginn (HOO-gin), Muninn (MOO-nin), Sleipnir (SLAYP-neer)"
+    },
+    {
+      "id": "tu-myt-10",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Norse Myths",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "As a prank, this god cut off all the golden hair of Sif, the wife of Thor.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "To make up for his prank, he had dwarves craft treasures, including Thor's hammer.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This shape-shifting trickster often causes trouble for the other gods of Asgard.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this mischievous Norse god of tricks and mischief.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Loki",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Odin"
+      ],
+      "approvedDistractors": [
+        "Odin",
+        "Balder",
+        "Heimdall"
+      ],
+      "explanation": "Loki was a shape-changing trickster whose pranks caused problems but sometimes led to great treasures. Thor's hammer was made because of one of his tricks.",
+      "pronunciationNotes": "Loki (LOH-kee)"
+    },
+    {
+      "id": "tu-myt-11",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Egyptian Myths",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "In the Hall of Truth, this god weighed a person's heart against the feather of Ma'at.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Ancient Egyptians believed this god watched over the making of mummies.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This god is shown with the head of a black jackal.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Egyptian god of mummification and guide of souls in the afterlife.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Anubis",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Osiris"
+      ],
+      "approvedDistractors": [
+        "Osiris",
+        "Horus",
+        "Thoth"
+      ],
+      "explanation": "Anubis was the jackal-headed god who protected the dead and guided them to the afterlife. Egyptians pictured him weighing each heart on a scale.",
+      "pronunciationNotes": "Anubis (uh-NOO-bis), Ma'at (muh-AHT)"
+    },
+    {
+      "id": "tu-myt-12",
+      "type": "tossup",
+      "category": "Mythology",
+      "subcategory": "Egyptian Myths",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This god's injured left eye was healed and became a symbol of protection and good health.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He was the son of the goddess Isis and the god Osiris.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Egyptian pharaohs were believed to be living forms of this sky god on Earth.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Egyptian god shown with the head of a falcon.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Horus",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "Anubis"
+      ],
+      "approvedDistractors": [
+        "Anubis",
+        "Thoth",
+        "Set"
+      ],
+      "explanation": "Horus was the falcon-headed sky god, and each pharaoh was thought to be Horus on Earth. The \"Eye of Horus\" was a lucky charm for protection.",
+      "pronunciationNotes": "Horus (HOR-us)"
+    },
+    {
+      "id": "tu-art-01",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Famous Painters",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This painter sold very few paintings during his life, and his brother Theo supported him.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He painted a series of pictures of sunflowers in bright yellow vases.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His painting The Starry Night shows a swirling night sky over a quiet village.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Dutch painter famous for his thick, swirling brushstrokes.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Vincent van Gogh",
+      "acceptedAnswers": [
+        "van Gogh"
+      ],
+      "rejectedAnswers": [
+        "Paul Gauguin"
+      ],
+      "approvedDistractors": [
+        "Claude Monet",
+        "Pablo Picasso",
+        "Paul Gauguin"
+      ],
+      "explanation": "Vincent van Gogh made about 900 paintings in just ten years. Today his works are some of the most famous and valuable in the world.",
+      "pronunciationNotes": "van Gogh (van GOH)"
+    },
+    {
+      "id": "tu-art-02",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Famous Painters",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This artist filled notebooks with mirror writing that ran from right to left.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He sketched designs for flying machines hundreds of years before airplanes existed.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His drawing Vitruvian Man shows a person with outstretched arms inside a circle and a square.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Italian Renaissance artist who painted the Mona Lisa.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Leonardo da Vinci",
+      "acceptedAnswers": [
+        "Leonardo",
+        "da Vinci"
+      ],
+      "rejectedAnswers": [
+        "Michelangelo"
+      ],
+      "approvedDistractors": [
+        "Michelangelo",
+        "Raphael",
+        "Donatello"
+      ],
+      "explanation": "Leonardo da Vinci was a painter, inventor, and scientist all in one. His Mona Lisa is probably the most famous painting in the world.",
+      "pronunciationNotes": "da Vinci (duh VIN-chee)"
+    },
+    {
+      "id": "tu-art-03",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Famous Painters",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This artist painted the same haystacks and the same cathedral many times to show changing light.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "His painting Impression, Sunrise gave its name to a whole art movement.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "In his garden at Giverny, he painted his famous water lilies again and again.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this French painter, a leader of the Impressionist movement.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Claude Monet",
+      "acceptedAnswers": [
+        "Monet"
+      ],
+      "rejectedAnswers": [
+        "Édouard Manet",
+        "Manet"
+      ],
+      "approvedDistractors": [
+        "Édouard Manet",
+        "Pierre-Auguste Renoir",
+        "Edgar Degas"
+      ],
+      "explanation": "Claude Monet loved painting how light and color change through the day. He even built a pond with a Japanese-style bridge just so he could paint it.",
+      "pronunciationNotes": "Monet (moh-NAY), Giverny (zhee-vair-NEE)"
+    },
+    {
+      "id": "tu-art-04",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Composers",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This composer wrote only one opera, which is called Fidelio.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He kept writing music even after he became almost completely deaf.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His Fifth Symphony begins with a famous four-note pattern: da-da-da-DUM.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this German composer whose Ninth Symphony includes the \"Ode to Joy.\"",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Ludwig van Beethoven",
+      "acceptedAnswers": [
+        "Beethoven"
+      ],
+      "rejectedAnswers": [
+        "Mozart"
+      ],
+      "approvedDistractors": [
+        "Wolfgang Amadeus Mozart",
+        "Johann Sebastian Bach",
+        "Johannes Brahms"
+      ],
+      "explanation": "Ludwig van Beethoven wrote some of his greatest music after he lost his hearing. He could \"hear\" the music in his head.",
+      "pronunciationNotes": "Beethoven (BAY-toh-ven)"
+    },
+    {
+      "id": "tu-art-05",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Composers",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "His opera The Magic Flute features a cheerful bird-catcher named Papageno.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "As a child, this composer toured Europe with his sister Nannerl, playing for kings and queens.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He was born in Salzburg, Austria, in 1756 and was writing music by age five.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this Austrian musical child prodigy whose middle name was Amadeus.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Wolfgang Amadeus Mozart",
+      "acceptedAnswers": [
+        "Mozart"
+      ],
+      "rejectedAnswers": [
+        "Beethoven"
+      ],
+      "approvedDistractors": [
+        "Ludwig van Beethoven",
+        "Joseph Haydn",
+        "Johann Sebastian Bach"
+      ],
+      "explanation": "Mozart was a musical genius who wrote over 600 pieces in his short life. He started composing when he was only five years old.",
+      "pronunciationNotes": "Mozart (MOHT-sart), Papageno (pah-pah-GAY-noh)"
+    },
+    {
+      "id": "tu-art-06",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Composers",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This Russian composer's 1812 Overture is often performed with real cannon blasts and fireworks.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "He wrote the music for the ballets Swan Lake and The Sleeping Beauty.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "His holiday ballet about a girl named Clara includes the Dance of the Sugar Plum Fairy.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this composer of the ballet The Nutcracker.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Pyotr Ilyich Tchaikovsky",
+      "acceptedAnswers": [
+        "Tchaikovsky",
+        "Peter Tchaikovsky"
+      ],
+      "rejectedAnswers": [
+        "Igor Stravinsky"
+      ],
+      "approvedDistractors": [
+        "Igor Stravinsky",
+        "Sergei Prokofiev",
+        "Nikolai Rimsky-Korsakov"
+      ],
+      "explanation": "Tchaikovsky wrote three of the most famous ballets ever. The Nutcracker is performed every winter all over the world.",
+      "pronunciationNotes": "Tchaikovsky (chy-KOFF-skee)"
+    },
+    {
+      "id": "tu-art-07",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Musical Instruments",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Bartolomeo Cristofori invented this instrument in Italy around the year 1700.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Its full name comes from Italian words meaning \"soft-loud,\" because it can play quietly or loudly.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "When you press one of its 88 keys, a felt-covered hammer strikes a string inside.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this keyboard instrument with black and white keys.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "piano",
+      "acceptedAnswers": [
+        "pianoforte",
+        "grand piano"
+      ],
+      "rejectedAnswers": [
+        "harpsichord"
+      ],
+      "approvedDistractors": [
+        "Harpsichord",
+        "Organ",
+        "Xylophone"
+      ],
+      "explanation": "The piano was called the \"pianoforte\" because, unlike the harpsichord, it could play both soft and loud. A standard piano has 88 keys.",
+      "pronunciationNotes": "Cristofori (kris-TOH-foh-ree)"
+    },
+    {
+      "id": "tu-art-08",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Musical Instruments",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "Antonio Stradivari built famous examples of this instrument in Cremona, Italy.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "Its four strings are usually tuned to the notes G, D, A, and E.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Orchestras usually split players of this instrument into \"first\" and \"second\" sections.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this small, high-pitched bowed string instrument held under the chin.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "violin",
+      "acceptedAnswers": [
+        "fiddle"
+      ],
+      "rejectedAnswers": [
+        "viola"
+      ],
+      "approvedDistractors": [
+        "Viola",
+        "Cello",
+        "Guitar"
+      ],
+      "explanation": "The violin is the smallest and highest-sounding member of the string family. When people play folk music on it, they often call it a fiddle.",
+      "pronunciationNotes": "Stradivari (strad-ih-VAR-ee)"
+    },
+    {
+      "id": "tu-art-09",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Musical Instruments",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "The sousaphone, which wraps around a marching player's body, is a version of this instrument.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "This instrument usually has three to five valves and was patented in Berlin in 1835.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "It is the largest and lowest-sounding member of the brass family.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this big brass instrument that often plays deep \"oom-pah\" notes.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "tuba",
+      "acceptedAnswers": [],
+      "rejectedAnswers": [
+        "trombone"
+      ],
+      "approvedDistractors": [
+        "Trombone",
+        "French horn",
+        "Baritone horn"
+      ],
+      "explanation": "The tuba is the biggest brass instrument, and its long, coiled tubing makes very deep sounds. Stretched out, a tuba's tubing can be about 18 feet long.",
+      "pronunciationNotes": "sousaphone (SOO-zuh-fohn)"
+    },
+    {
+      "id": "tu-art-10",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Architecture",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This structure was built for the 1889 World's Fair, marking 100 years since the French Revolution began.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "At first, many artists called it ugly and signed a letter protesting its construction.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "Made of wrought iron, it was the tallest structure in the world for about 40 years.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this famous iron tower in Paris, France.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Eiffel Tower",
+      "acceptedAnswers": [
+        "Tour Eiffel"
+      ],
+      "rejectedAnswers": [
+        "Leaning Tower of Pisa"
+      ],
+      "approvedDistractors": [
+        "Statue of Liberty",
+        "Leaning Tower of Pisa",
+        "Big Ben"
+      ],
+      "explanation": "The Eiffel Tower was supposed to stand for only 20 years, but it became the symbol of Paris. It gets repainted by hand about every seven years.",
+      "pronunciationNotes": "Eiffel (EYE-ful)"
+    },
+    {
+      "id": "tu-art-11",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Architecture",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This building's white marble is decorated with inlaid gemstones in a technique called pietra dura.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "The Mughal emperor Shah Jahan built it in memory of his beloved wife, Mumtaz Mahal.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "This domed building stands on the bank of the Yamuna River in Agra.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this famous white marble tomb in India.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Taj Mahal",
+      "acceptedAnswers": [
+        "the Taj"
+      ],
+      "rejectedAnswers": [
+        "Red Fort"
+      ],
+      "approvedDistractors": [
+        "Angkor Wat",
+        "Red Fort",
+        "Petra"
+      ],
+      "explanation": "The Taj Mahal took about 20 years to build and is made of white marble that seems to change color with the light. It was built as a symbol of love.",
+      "pronunciationNotes": "Taj Mahal (TAHZH muh-HAHL), pietra dura (pee-AY-truh DOO-ruh)"
+    },
+    {
+      "id": "tu-art-12",
+      "type": "tossup",
+      "category": "Fine Arts",
+      "subcategory": "Architecture",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "",
+      "clues": [
+        {
+          "text": "This architect called his style \"organic architecture,\" meaning buildings should fit in with nature.",
+          "clueIndex": 0,
+          "difficultyWeight": 0.9
+        },
+        {
+          "text": "His Prairie School houses had low roofs and long, flat, horizontal lines.",
+          "clueIndex": 1,
+          "difficultyWeight": 0.65
+        },
+        {
+          "text": "He designed the spiral-shaped Guggenheim Museum in New York City.",
+          "clueIndex": 2,
+          "difficultyWeight": 0.4
+        },
+        {
+          "text": "For 10 points, name this American architect of Fallingwater, a house built over a waterfall.",
+          "clueIndex": 3,
+          "difficultyWeight": 0.15
+        }
+      ],
+      "powerClueIndex": 1,
+      "canonicalAnswer": "Frank Lloyd Wright",
+      "acceptedAnswers": [
+        "Wright"
+      ],
+      "rejectedAnswers": [
+        "Louis Sullivan"
+      ],
+      "approvedDistractors": [
+        "I. M. Pei",
+        "Louis Sullivan",
+        "Frank Gehry"
+      ],
+      "explanation": "Frank Lloyd Wright believed buildings should look like they grew out of the land around them. His house Fallingwater actually has a waterfall running beneath it.",
+      "pronunciationNotes": null
+    }
+  ],
+  "bonuses": [
+    {
+      "id": "bo-sci-01",
+      "type": "bonus",
+      "category": "Science",
+      "subcategory": "Earth Science",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, answer these questions about the water cycle.",
+      "parts": [
+        {
+          "text": "What process turns liquid water in oceans and lakes into water vapor when the sun heats it?",
+          "canonicalAnswer": "evaporation",
+          "acceptedAnswers": [
+            "evaporate"
+          ],
+          "rejectedAnswers": [
+            "condensation"
+          ],
+          "approvedDistractors": [
+            "Condensation",
+            "Precipitation",
+            "Transpiration"
+          ],
+          "explanation": "Evaporation happens when heat turns liquid water into an invisible gas called water vapor."
+        },
+        {
+          "text": "What process turns water vapor high in the sky into tiny droplets that form clouds?",
+          "canonicalAnswer": "condensation",
+          "acceptedAnswers": [
+            "condense"
+          ],
+          "rejectedAnswers": [
+            "evaporation"
+          ],
+          "approvedDistractors": [
+            "Evaporation",
+            "Sublimation",
+            "Freezing"
+          ],
+          "explanation": "Condensation is the same thing that makes droplets form on the outside of a cold glass."
+        },
+        {
+          "text": "What word names the release of water vapor into the air from the leaves of plants?",
+          "canonicalAnswer": "transpiration",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "respiration"
+          ],
+          "approvedDistractors": [
+            "Photosynthesis",
+            "Condensation",
+            "Precipitation"
+          ],
+          "explanation": "Transpiration lets plants pull water up from their roots and send it out through tiny holes in their leaves."
+        }
+      ]
+    },
+    {
+      "id": "bo-sci-02",
+      "type": "bonus",
+      "category": "Science",
+      "subcategory": "Human Body",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about blood.",
+      "parts": [
+        {
+          "text": "What blood cells carry oxygen around the body using a protein called hemoglobin?",
+          "canonicalAnswer": "red blood cells",
+          "acceptedAnswers": [
+            "red cells",
+            "erythrocytes",
+            "red blood cell"
+          ],
+          "rejectedAnswers": [
+            "white blood cells"
+          ],
+          "approvedDistractors": [
+            "White blood cells",
+            "Platelets",
+            "Plasma"
+          ],
+          "explanation": "Red blood cells get their color from hemoglobin, which grabs oxygen in the lungs."
+        },
+        {
+          "text": "What tiny cell pieces in the blood clump together to help stop bleeding when you get a cut?",
+          "canonicalAnswer": "platelets",
+          "acceptedAnswers": [
+            "thrombocytes",
+            "platelet"
+          ],
+          "rejectedAnswers": [
+            "white blood cells"
+          ],
+          "approvedDistractors": [
+            "Red blood cells",
+            "White blood cells",
+            "Plasma"
+          ],
+          "explanation": "Platelets stick together to form a plug, which becomes a scab as the cut heals."
+        },
+        {
+          "text": "What soft tissue inside many of your bones makes new blood cells?",
+          "canonicalAnswer": "bone marrow",
+          "acceptedAnswers": [
+            "marrow",
+            "red marrow",
+            "red bone marrow"
+          ],
+          "rejectedAnswers": [
+            "cartilage"
+          ],
+          "approvedDistractors": [
+            "Cartilage",
+            "Ligaments",
+            "Tendons"
+          ],
+          "explanation": "Bone marrow makes millions of new blood cells every second."
+        }
+      ]
+    },
+    {
+      "id": "bo-sci-03",
+      "type": "bonus",
+      "category": "Science",
+      "subcategory": "Animals",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about how animals survive.",
+      "parts": [
+        {
+          "text": "What word describes animals, such as owls and bats, that are active mostly at night?",
+          "canonicalAnswer": "nocturnal",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "diurnal"
+          ],
+          "approvedDistractors": [
+            "Diurnal",
+            "Migratory",
+            "Dormant"
+          ],
+          "explanation": "Nocturnal animals often have big eyes or sharp hearing to find their way in the dark."
+        },
+        {
+          "text": "What deep, sleep-like state lets animals such as groundhogs survive the winter with very little food?",
+          "canonicalAnswer": "hibernation",
+          "acceptedAnswers": [
+            "hibernate",
+            "hibernating"
+          ],
+          "rejectedAnswers": [
+            "migration"
+          ],
+          "approvedDistractors": [
+            "Migration",
+            "Camouflage",
+            "Estivation"
+          ],
+          "explanation": "During hibernation an animal's heartbeat and breathing slow way down to save energy."
+        },
+        {
+          "text": "What word names the ability of animals like chameleons and flounders to blend in with their surroundings?",
+          "canonicalAnswer": "camouflage",
+          "acceptedAnswers": [
+            "crypsis"
+          ],
+          "rejectedAnswers": [
+            "mimicry"
+          ],
+          "approvedDistractors": [
+            "Mimicry",
+            "Migration",
+            "Echolocation"
+          ],
+          "explanation": "Camouflage helps animals hide from predators or sneak up on prey by matching the colors around them."
+        }
+      ]
+    },
+    {
+      "id": "bo-spc-01",
+      "type": "bonus",
+      "category": "Space",
+      "subcategory": "Moon",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, answer these questions about the Moon.",
+      "parts": [
+        {
+          "text": "What is the name of the Moon phase when the whole side facing Earth is lit up?",
+          "canonicalAnswer": "full moon",
+          "acceptedAnswers": [
+            "full"
+          ],
+          "rejectedAnswers": [
+            "new moon"
+          ],
+          "approvedDistractors": [
+            "New moon",
+            "First quarter",
+            "Crescent moon"
+          ],
+          "explanation": "A full moon happens when the Sun lights up the entire side of the Moon that faces us."
+        },
+        {
+          "text": "What are the bowl-shaped holes on the Moon made by crashing space rocks called?",
+          "canonicalAnswer": "craters",
+          "acceptedAnswers": [
+            "crater",
+            "impact craters"
+          ],
+          "rejectedAnswers": [
+            "maria"
+          ],
+          "approvedDistractors": [
+            "Maria",
+            "Volcanoes",
+            "Canyons"
+          ],
+          "explanation": "The Moon has no air or weather to erase its craters, so they last for billions of years."
+        },
+        {
+          "text": "What NASA program landed twelve astronauts on the Moon between 1969 and 1972?",
+          "canonicalAnswer": "Apollo",
+          "acceptedAnswers": [
+            "Apollo program",
+            "Project Apollo"
+          ],
+          "rejectedAnswers": [
+            "Gemini"
+          ],
+          "approvedDistractors": [
+            "Gemini",
+            "Mercury",
+            "Artemis"
+          ],
+          "explanation": "The Apollo program made six Moon landings, and twelve astronauts walked on its surface."
+        }
+      ]
+    },
+    {
+      "id": "bo-spc-02",
+      "type": "bonus",
+      "category": "Space",
+      "subcategory": "Solar System",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about small worlds in our solar system.",
+      "parts": [
+        {
+          "text": "What former ninth planet was reclassified as a dwarf planet in 2006?",
+          "canonicalAnswer": "Pluto",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Ceres"
+          ],
+          "approvedDistractors": [
+            "Ceres",
+            "Eris",
+            "Neptune"
+          ],
+          "explanation": "Pluto was called a planet for 76 years before scientists decided it was a dwarf planet."
+        },
+        {
+          "text": "What NASA spacecraft flew past Pluto in 2015 and sent back the first close-up pictures of it?",
+          "canonicalAnswer": "New Horizons",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Voyager 2"
+          ],
+          "approvedDistractors": [
+            "Voyager 2",
+            "Cassini",
+            "Juno"
+          ],
+          "explanation": "New Horizons discovered a giant heart-shaped plain of ice on Pluto."
+        },
+        {
+          "text": "What icy objects grow glowing tails that point away from the Sun as they get close to it?",
+          "canonicalAnswer": "comets",
+          "acceptedAnswers": [
+            "comet"
+          ],
+          "rejectedAnswers": [
+            "asteroids",
+            "meteors"
+          ],
+          "approvedDistractors": [
+            "Asteroids",
+            "Meteors",
+            "Moons"
+          ],
+          "explanation": "A comet's tail forms when the Sun's heat turns its ice to gas, and the solar wind pushes that gas away from the Sun."
+        }
+      ]
+    },
+    {
+      "id": "bo-spc-03",
+      "type": "bonus",
+      "category": "Space",
+      "subcategory": "Stars & Galaxies",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "For 10 points each, answer these questions about stars and constellations.",
+      "parts": [
+        {
+          "text": "What constellation looks like a hunter with a belt made of three bright stars in a row?",
+          "canonicalAnswer": "Orion",
+          "acceptedAnswers": [
+            "Orion the Hunter"
+          ],
+          "rejectedAnswers": [],
+          "approvedDistractors": [
+            "Ursa Major",
+            "Cassiopeia",
+            "Scorpius"
+          ],
+          "explanation": "Orion's Belt is one of the easiest star patterns to spot in the winter sky."
+        },
+        {
+          "text": "What red supergiant star marks one of Orion's shoulders?",
+          "canonicalAnswer": "Betelgeuse",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Rigel"
+          ],
+          "approvedDistractors": [
+            "Rigel",
+            "Sirius",
+            "Aldebaran"
+          ],
+          "explanation": "Betelgeuse (BET-ul-jooz) is so big that, placed where the Sun is, it would reach past the orbit of Mars."
+        },
+        {
+          "text": "What star, found in the constellation Canis Major, is the brightest star in the night sky?",
+          "canonicalAnswer": "Sirius",
+          "acceptedAnswers": [
+            "Dog Star"
+          ],
+          "rejectedAnswers": [
+            "Polaris"
+          ],
+          "approvedDistractors": [
+            "Vega",
+            "Polaris",
+            "Rigel"
+          ],
+          "explanation": "Sirius is nicknamed the Dog Star because it is in Canis Major, the \"Great Dog.\""
+        }
+      ]
+    },
+    {
+      "id": "bo-geo-01",
+      "type": "bonus",
+      "category": "Geography",
+      "subcategory": "State Capitals",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, name the capital city of these U.S. states.",
+      "parts": [
+        {
+          "text": "What city is the capital of Florida?",
+          "canonicalAnswer": "Tallahassee",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Miami",
+            "Orlando"
+          ],
+          "approvedDistractors": [
+            "Miami",
+            "Orlando",
+            "Tampa"
+          ],
+          "explanation": "Tallahassee was chosen as Florida's capital because it sat halfway between the two biggest towns of the 1820s."
+        },
+        {
+          "text": "What city is the capital of New York?",
+          "canonicalAnswer": "Albany",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "New York City"
+          ],
+          "approvedDistractors": [
+            "New York City",
+            "Buffalo",
+            "Syracuse"
+          ],
+          "explanation": "Albany, not New York City, is the capital of New York State."
+        },
+        {
+          "text": "What city is the capital of Illinois?",
+          "canonicalAnswer": "Springfield",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Chicago"
+          ],
+          "approvedDistractors": [
+            "Chicago",
+            "Peoria",
+            "Rockford"
+          ],
+          "explanation": "Springfield, Illinois, is where Abraham Lincoln lived and worked as a lawyer before he became president."
+        }
+      ]
+    },
+    {
+      "id": "bo-geo-02",
+      "type": "bonus",
+      "category": "Geography",
+      "subcategory": "Continents & Oceans",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about the continents.",
+      "parts": [
+        {
+          "text": "What continent is home to the Sahara, the largest hot desert in the world?",
+          "canonicalAnswer": "Africa",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Asia"
+          ],
+          "approvedDistractors": [
+            "Asia",
+            "Australia",
+            "South America"
+          ],
+          "explanation": "The Sahara covers much of northern Africa and is about as big as the United States."
+        },
+        {
+          "text": "What is the largest continent by both land area and number of people?",
+          "canonicalAnswer": "Asia",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Africa"
+          ],
+          "approvedDistractors": [
+            "Africa",
+            "North America",
+            "Europe"
+          ],
+          "explanation": "Asia is home to more than half of all the people on Earth."
+        },
+        {
+          "text": "What is the smallest continent by land area?",
+          "canonicalAnswer": "Australia",
+          "acceptedAnswers": [
+            "Oceania",
+            "Australia/Oceania"
+          ],
+          "rejectedAnswers": [
+            "Europe"
+          ],
+          "approvedDistractors": [
+            "Europe",
+            "Antarctica",
+            "South America"
+          ],
+          "explanation": "Australia is the smallest continent, and it is also a single country."
+        }
+      ]
+    },
+    {
+      "id": "bo-geo-03",
+      "type": "bonus",
+      "category": "Geography",
+      "subcategory": "Rivers & Mountains",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about rivers of the world.",
+      "parts": [
+        {
+          "text": "What river flows north through Egypt and is often called the longest river in the world?",
+          "canonicalAnswer": "Nile River",
+          "acceptedAnswers": [
+            "Nile"
+          ],
+          "rejectedAnswers": [
+            "Amazon River"
+          ],
+          "approvedDistractors": [
+            "Amazon River",
+            "Congo River",
+            "Niger River"
+          ],
+          "explanation": "The Nile flows north into the Mediterranean Sea, and ancient Egypt grew up along its banks."
+        },
+        {
+          "text": "What river, the longest in Asia, flows past the giant Three Gorges Dam in China?",
+          "canonicalAnswer": "Yangtze River",
+          "acceptedAnswers": [
+            "Yangtze",
+            "Chang Jiang",
+            "Yangzi"
+          ],
+          "rejectedAnswers": [
+            "Yellow River"
+          ],
+          "approvedDistractors": [
+            "Yellow River",
+            "Mekong River",
+            "Ganges River"
+          ],
+          "explanation": "The Yangtze is the third-longest river in the world, and the Three Gorges Dam across it is one of the largest power plants ever built."
+        },
+        {
+          "text": "What European river flows through four capital cities, including Vienna and Budapest?",
+          "canonicalAnswer": "Danube River",
+          "acceptedAnswers": [
+            "Danube"
+          ],
+          "rejectedAnswers": [
+            "Rhine River"
+          ],
+          "approvedDistractors": [
+            "Rhine River",
+            "Seine River",
+            "Volga River"
+          ],
+          "explanation": "The Danube passes through Vienna, Bratislava, Budapest, and Belgrade, more capital cities than any other river."
+        }
+      ]
+    },
+    {
+      "id": "bo-his-01",
+      "type": "bonus",
+      "category": "History",
+      "subcategory": "Ancient Egypt",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, answer these questions about ancient Egypt.",
+      "parts": [
+        {
+          "text": "What title was given to the kings of ancient Egypt?",
+          "canonicalAnswer": "pharaoh",
+          "acceptedAnswers": [
+            "pharaohs"
+          ],
+          "rejectedAnswers": [
+            "emperor"
+          ],
+          "approvedDistractors": [
+            "Emperor",
+            "Sultan",
+            "Caesar"
+          ],
+          "explanation": "Pharaoh comes from an Egyptian phrase meaning \"great house,\" which first meant the royal palace."
+        },
+        {
+          "text": "What were the carefully preserved and wrapped bodies of ancient Egyptians called?",
+          "canonicalAnswer": "mummies",
+          "acceptedAnswers": [
+            "mummy"
+          ],
+          "rejectedAnswers": [],
+          "approvedDistractors": [
+            "Sphinxes",
+            "Obelisks",
+            "Scarabs"
+          ],
+          "explanation": "Egyptians made mummies because they believed the body was needed in the afterlife."
+        },
+        {
+          "text": "What young pharaoh's nearly untouched tomb was discovered by Howard Carter in 1922?",
+          "canonicalAnswer": "Tutankhamun",
+          "acceptedAnswers": [
+            "King Tut",
+            "Tutankhamen",
+            "Tut"
+          ],
+          "rejectedAnswers": [
+            "Ramses II"
+          ],
+          "approvedDistractors": [
+            "Ramses II",
+            "Khufu",
+            "Akhenaten"
+          ],
+          "explanation": "King Tut's tomb was packed with treasures, including a solid gold burial mask."
+        }
+      ]
+    },
+    {
+      "id": "bo-his-02",
+      "type": "bonus",
+      "category": "History",
+      "subcategory": "U.S. Presidents",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about the first U.S. presidents.",
+      "parts": [
+        {
+          "text": "Who was the first president of the United States?",
+          "canonicalAnswer": "George Washington",
+          "acceptedAnswers": [
+            "Washington"
+          ],
+          "rejectedAnswers": [],
+          "approvedDistractors": [
+            "John Adams",
+            "Thomas Jefferson",
+            "Benjamin Franklin"
+          ],
+          "explanation": "George Washington led the army in the Revolution and then served two terms as the first president."
+        },
+        {
+          "text": "Which second president was the first to live in the White House?",
+          "canonicalAnswer": "John Adams",
+          "acceptedAnswers": [
+            "Adams"
+          ],
+          "rejectedAnswers": [
+            "John Quincy Adams"
+          ],
+          "approvedDistractors": [
+            "Thomas Jefferson",
+            "James Madison",
+            "John Quincy Adams"
+          ],
+          "explanation": "John Adams moved into the unfinished White House in November 1800."
+        },
+        {
+          "text": "Which fourth president, called the \"Father of the Constitution,\" was married to Dolley?",
+          "canonicalAnswer": "James Madison",
+          "acceptedAnswers": [
+            "Madison"
+          ],
+          "rejectedAnswers": [
+            "James Monroe"
+          ],
+          "approvedDistractors": [
+            "James Monroe",
+            "Alexander Hamilton",
+            "John Adams"
+          ],
+          "explanation": "James Madison wrote much of the Constitution and the Bill of Rights."
+        }
+      ]
+    },
+    {
+      "id": "bo-his-03",
+      "type": "bonus",
+      "category": "History",
+      "subcategory": "Ancient Greece & Rome",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about ancient Rome.",
+      "parts": [
+        {
+          "text": "What huge stone arena in Rome held public shows and could seat tens of thousands of people?",
+          "canonicalAnswer": "Colosseum",
+          "acceptedAnswers": [
+            "Flavian Amphitheatre",
+            "Coliseum"
+          ],
+          "rejectedAnswers": [
+            "Pantheon"
+          ],
+          "approvedDistractors": [
+            "Parthenon",
+            "Pantheon",
+            "Circus Maximus"
+          ],
+          "explanation": "The Colosseum opened around AD 80 and could hold about 50,000 people."
+        },
+        {
+          "text": "What stone channels did the Romans build to carry fresh water into their cities?",
+          "canonicalAnswer": "aqueducts",
+          "acceptedAnswers": [
+            "aqueduct"
+          ],
+          "rejectedAnswers": [
+            "viaducts"
+          ],
+          "approvedDistractors": [
+            "Canals",
+            "Viaducts",
+            "Sewers"
+          ],
+          "explanation": "Roman aqueducts used a gentle downhill slope so gravity could carry water for many miles."
+        },
+        {
+          "text": "What volcano erupted in AD 79 and buried the Roman town of Pompeii in ash?",
+          "canonicalAnswer": "Mount Vesuvius",
+          "acceptedAnswers": [
+            "Vesuvius"
+          ],
+          "rejectedAnswers": [
+            "Mount Etna"
+          ],
+          "approvedDistractors": [
+            "Mount Etna",
+            "Mount Olympus",
+            "Stromboli"
+          ],
+          "explanation": "The ash from Vesuvius preserved Pompeii so well that archaeologists can still walk its streets today."
+        }
+      ]
+    },
+    {
+      "id": "bo-lit-01",
+      "type": "bonus",
+      "category": "Literature",
+      "subcategory": "Literary Terms",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, name these figures of speech.",
+      "parts": [
+        {
+          "text": "What figure of speech compares two things using the word \"like\" or \"as\"?",
+          "canonicalAnswer": "simile",
+          "acceptedAnswers": [
+            "similes"
+          ],
+          "rejectedAnswers": [
+            "metaphor"
+          ],
+          "approvedDistractors": [
+            "Metaphor",
+            "Personification",
+            "Hyperbole"
+          ],
+          "explanation": "A simile compares with \"like\" or \"as,\" as in \"quiet as a mouse.\""
+        },
+        {
+          "text": "What figure of speech says one thing is another, as in \"the classroom was a zoo\"?",
+          "canonicalAnswer": "metaphor",
+          "acceptedAnswers": [
+            "metaphors"
+          ],
+          "rejectedAnswers": [
+            "simile"
+          ],
+          "approvedDistractors": [
+            "Simile",
+            "Alliteration",
+            "Idiom"
+          ],
+          "explanation": "A metaphor makes a comparison without using \"like\" or \"as.\""
+        },
+        {
+          "text": "What word names a huge exaggeration, like \"I've told you a million times\"?",
+          "canonicalAnswer": "hyperbole",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "metaphor"
+          ],
+          "approvedDistractors": [
+            "Irony",
+            "Understatement",
+            "Metaphor"
+          ],
+          "explanation": "Hyperbole (hy-PUR-buh-lee) stretches the truth on purpose to make a point or be funny."
+        }
+      ]
+    },
+    {
+      "id": "bo-lit-02",
+      "type": "bonus",
+      "category": "Literature",
+      "subcategory": "Fairy Tales",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about tales collected by the Brothers Grimm.",
+      "parts": [
+        {
+          "text": "What girl with extremely long hair is locked away in a tall tower?",
+          "canonicalAnswer": "Rapunzel",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Cinderella"
+          ],
+          "approvedDistractors": [
+            "Cinderella",
+            "Snow White",
+            "Sleeping Beauty"
+          ],
+          "explanation": "Rapunzel lets down her long hair so visitors can climb up the tower."
+        },
+        {
+          "text": "What brother and sister find a house made of bread, cake, and sugar in the forest?",
+          "canonicalAnswer": "Hansel and Gretel",
+          "acceptedAnswers": [
+            "Gretel and Hansel"
+          ],
+          "rejectedAnswers": [
+            "Jack and Jill"
+          ],
+          "approvedDistractors": [
+            "Jack and Jill",
+            "Snow-White and Rose-Red",
+            "Peter and Wendy"
+          ],
+          "explanation": "Hansel drops a trail of bread crumbs to find his way home, but birds eat them."
+        },
+        {
+          "text": "In what present-day country did Jacob and Wilhelm Grimm collect their folk tales?",
+          "canonicalAnswer": "Germany",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Denmark"
+          ],
+          "approvedDistractors": [
+            "Denmark",
+            "France",
+            "Austria"
+          ],
+          "explanation": "The Brothers Grimm were German scholars who gathered stories told by ordinary people."
+        }
+      ]
+    },
+    {
+      "id": "bo-lit-03",
+      "type": "bonus",
+      "category": "Literature",
+      "subcategory": "Classic Novels",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "For 10 points each, name these authors of classic novels.",
+      "parts": [
+        {
+          "text": "Who wrote Little Women, about the four March sisters?",
+          "canonicalAnswer": "Louisa May Alcott",
+          "acceptedAnswers": [
+            "Alcott"
+          ],
+          "rejectedAnswers": [
+            "Laura Ingalls Wilder"
+          ],
+          "approvedDistractors": [
+            "Laura Ingalls Wilder",
+            "Jane Austen",
+            "L. M. Montgomery"
+          ],
+          "explanation": "Louisa May Alcott based Jo March partly on herself and her own sisters."
+        },
+        {
+          "text": "What Canadian author created the red-haired orphan Anne Shirley in Anne of Green Gables?",
+          "canonicalAnswer": "L. M. Montgomery",
+          "acceptedAnswers": [
+            "Lucy Maud Montgomery",
+            "Montgomery"
+          ],
+          "rejectedAnswers": [
+            "Louisa May Alcott"
+          ],
+          "approvedDistractors": [
+            "Louisa May Alcott",
+            "Frances Hodgson Burnett",
+            "Laura Ingalls Wilder"
+          ],
+          "explanation": "L. M. Montgomery set Anne of Green Gables on Prince Edward Island, where she grew up."
+        },
+        {
+          "text": "What author wrote The Secret Garden, in which Mary Lennox finds a hidden, locked garden?",
+          "canonicalAnswer": "Frances Hodgson Burnett",
+          "acceptedAnswers": [
+            "Burnett"
+          ],
+          "rejectedAnswers": [
+            "L. M. Montgomery"
+          ],
+          "approvedDistractors": [
+            "L. M. Montgomery",
+            "Beatrix Potter",
+            "E. Nesbit"
+          ],
+          "explanation": "Frances Hodgson Burnett also wrote A Little Princess."
+        }
+      ]
+    },
+    {
+      "id": "bo-myt-01",
+      "type": "bonus",
+      "category": "Mythology",
+      "subcategory": "Greek Gods",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, give the Roman name for these Greek gods.",
+      "parts": [
+        {
+          "text": "Zeus, the king of the gods.",
+          "canonicalAnswer": "Jupiter",
+          "acceptedAnswers": [
+            "Jove"
+          ],
+          "rejectedAnswers": [
+            "Zeus"
+          ],
+          "approvedDistractors": [
+            "Mars",
+            "Neptune",
+            "Saturn"
+          ],
+          "explanation": "The Romans called their king of the gods Jupiter, and the biggest planet is named for him."
+        },
+        {
+          "text": "Aphrodite, the goddess of love and beauty.",
+          "canonicalAnswer": "Venus",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Juno"
+          ],
+          "approvedDistractors": [
+            "Juno",
+            "Diana",
+            "Minerva"
+          ],
+          "explanation": "Venus, the brightest planet in our sky, is named after the Roman goddess of love."
+        },
+        {
+          "text": "Ares, the god of war.",
+          "canonicalAnswer": "Mars",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Mercury"
+          ],
+          "approvedDistractors": [
+            "Mercury",
+            "Vulcan",
+            "Apollo"
+          ],
+          "explanation": "The red planet Mars was named for the Roman god of war because of its blood-red color."
+        }
+      ]
+    },
+    {
+      "id": "bo-myt-02",
+      "type": "bonus",
+      "category": "Mythology",
+      "subcategory": "Norse Myths",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, answer these questions about places in Norse mythology.",
+      "parts": [
+        {
+          "text": "What is the name of the home of the Norse gods?",
+          "canonicalAnswer": "Asgard",
+          "acceptedAnswers": [
+            "Asgardr"
+          ],
+          "rejectedAnswers": [
+            "Midgard"
+          ],
+          "approvedDistractors": [
+            "Midgard",
+            "Valhalla",
+            "Olympus"
+          ],
+          "explanation": "Asgard was the realm of the Norse gods, ruled by Odin."
+        },
+        {
+          "text": "What is the name of the rainbow bridge that connects the gods' home to the world of humans?",
+          "canonicalAnswer": "Bifrost",
+          "acceptedAnswers": [
+            "Bifröst",
+            "Bilrost"
+          ],
+          "rejectedAnswers": [
+            "Yggdrasil"
+          ],
+          "approvedDistractors": [
+            "Yggdrasil",
+            "Midgard",
+            "Jotunheim"
+          ],
+          "explanation": "The god Heimdall guards Bifrost to keep unwanted visitors out of Asgard."
+        },
+        {
+          "text": "What giant ash tree connects the nine worlds in Norse mythology?",
+          "canonicalAnswer": "Yggdrasil",
+          "acceptedAnswers": [
+            "World Tree"
+          ],
+          "rejectedAnswers": [
+            "Bifrost"
+          ],
+          "approvedDistractors": [
+            "Bifrost",
+            "Mjolnir",
+            "Valhalla"
+          ],
+          "explanation": "Yggdrasil (IG-druh-sil) is the enormous World Tree whose branches and roots link all nine worlds."
+        }
+      ]
+    },
+    {
+      "id": "bo-myt-03",
+      "type": "bonus",
+      "category": "Mythology",
+      "subcategory": "Greek Heroes",
+      "gradeBand": "4-5",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, name these Greek heroes.",
+      "parts": [
+        {
+          "text": "What hero's only weak spot was his heel?",
+          "canonicalAnswer": "Achilles",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Hector"
+          ],
+          "approvedDistractors": [
+            "Hector",
+            "Odysseus",
+            "Ajax"
+          ],
+          "explanation": "That is why a person's one weak spot is called their \"Achilles' heel.\""
+        },
+        {
+          "text": "What hero sailed on the ship Argo in search of the Golden Fleece?",
+          "canonicalAnswer": "Jason",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Perseus"
+          ],
+          "approvedDistractors": [
+            "Perseus",
+            "Theseus",
+            "Achilles"
+          ],
+          "explanation": "Jason's crew of heroes on the Argo were called the Argonauts."
+        },
+        {
+          "text": "What hero found his way out of the Labyrinth by following a ball of thread?",
+          "canonicalAnswer": "Theseus",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Daedalus"
+          ],
+          "approvedDistractors": [
+            "Jason",
+            "Perseus",
+            "Daedalus"
+          ],
+          "explanation": "Theseus (THEE-see-us) got the thread from Princess Ariadne so he would not get lost in the maze."
+        }
+      ]
+    },
+    {
+      "id": "bo-art-01",
+      "type": "bonus",
+      "category": "Fine Arts",
+      "subcategory": "Musical Instruments",
+      "gradeBand": "4-5",
+      "difficulty": 1,
+      "promptLeadin": "For 10 points each, name the instrument family for each of these.",
+      "parts": [
+        {
+          "text": "Drums, cymbals, and xylophones belong to what instrument family?",
+          "canonicalAnswer": "percussion",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "brass"
+          ],
+          "approvedDistractors": [
+            "Brass",
+            "Woodwind",
+            "Strings"
+          ],
+          "explanation": "Percussion instruments make sound when you hit, shake, or scrape them."
+        },
+        {
+          "text": "Trumpets, trombones, and tubas belong to what instrument family?",
+          "canonicalAnswer": "brass",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "woodwind"
+          ],
+          "approvedDistractors": [
+            "Woodwind",
+            "Percussion",
+            "Strings"
+          ],
+          "explanation": "Brass players make sound by buzzing their lips into a cup-shaped mouthpiece."
+        },
+        {
+          "text": "The flute belongs to what instrument family, even though it is usually made of metal?",
+          "canonicalAnswer": "woodwind",
+          "acceptedAnswers": [
+            "woodwinds"
+          ],
+          "rejectedAnswers": [
+            "brass"
+          ],
+          "approvedDistractors": [
+            "Brass",
+            "Percussion",
+            "Strings"
+          ],
+          "explanation": "The flute is a woodwind because the player blows air across a hole instead of buzzing their lips, and early flutes were made of wood."
+        }
+      ]
+    },
+    {
+      "id": "bo-art-02",
+      "type": "bonus",
+      "category": "Fine Arts",
+      "subcategory": "Famous Painters",
+      "gradeBand": "6-8",
+      "difficulty": 2,
+      "promptLeadin": "For 10 points each, name these famous artists.",
+      "parts": [
+        {
+          "text": "What Italian artist painted the ceiling of the Sistine Chapel in Rome?",
+          "canonicalAnswer": "Michelangelo",
+          "acceptedAnswers": [
+            "Michelangelo Buonarroti"
+          ],
+          "rejectedAnswers": [
+            "Raphael"
+          ],
+          "approvedDistractors": [
+            "Raphael",
+            "Leonardo da Vinci",
+            "Botticelli"
+          ],
+          "explanation": "Michelangelo spent about four years painting the huge chapel ceiling while standing on scaffolding."
+        },
+        {
+          "text": "What Spanish artist helped invent Cubism, a style that shows objects from several angles at once?",
+          "canonicalAnswer": "Pablo Picasso",
+          "acceptedAnswers": [
+            "Picasso"
+          ],
+          "rejectedAnswers": [
+            "Salvador Dalí"
+          ],
+          "approvedDistractors": [
+            "Salvador Dalí",
+            "Henri Matisse",
+            "Joan Miró"
+          ],
+          "explanation": "Pablo Picasso created Cubism together with the French painter Georges Braque."
+        },
+        {
+          "text": "What Mexican painter is famous for colorful self-portraits, often with flowers in her hair?",
+          "canonicalAnswer": "Frida Kahlo",
+          "acceptedAnswers": [
+            "Kahlo"
+          ],
+          "rejectedAnswers": [
+            "Diego Rivera"
+          ],
+          "approvedDistractors": [
+            "Georgia O'Keeffe",
+            "Diego Rivera",
+            "Mary Cassatt"
+          ],
+          "explanation": "Frida Kahlo painted more than 50 self-portraits filled with bright colors and Mexican culture."
+        }
+      ]
+    },
+    {
+      "id": "bo-art-03",
+      "type": "bonus",
+      "category": "Fine Arts",
+      "subcategory": "Architecture",
+      "gradeBand": "6-8",
+      "difficulty": 3,
+      "promptLeadin": "For 10 points each, name these famous buildings.",
+      "parts": [
+        {
+          "text": "What Italian bell tower famously leans because it was built on soft ground?",
+          "canonicalAnswer": "Leaning Tower of Pisa",
+          "acceptedAnswers": [
+            "Tower of Pisa"
+          ],
+          "rejectedAnswers": [],
+          "approvedDistractors": [
+            "Eiffel Tower",
+            "Big Ben",
+            "St. Mark's Campanile"
+          ],
+          "explanation": "The Tower of Pisa started leaning while it was still being built."
+        },
+        {
+          "text": "What Australian building has a roof made of white shell shapes that look like sails?",
+          "canonicalAnswer": "Sydney Opera House",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [],
+          "approvedDistractors": [
+            "Sydney Harbour Bridge",
+            "Guggenheim Museum Bilbao",
+            "Lotus Temple"
+          ],
+          "explanation": "The Sydney Opera House was designed by Danish architect Jørn Utzon and opened in 1973."
+        },
+        {
+          "text": "What ancient temple on the Acropolis of Athens was built for the goddess Athena?",
+          "canonicalAnswer": "Parthenon",
+          "acceptedAnswers": [],
+          "rejectedAnswers": [
+            "Pantheon"
+          ],
+          "approvedDistractors": [
+            "Pantheon",
+            "Colosseum",
+            "Temple of Zeus"
+          ],
+          "explanation": "The Parthenon was finished in 432 BC and is a symbol of ancient Greece."
+        }
+      ]
+    }
+  ]
+}

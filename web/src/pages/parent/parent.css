@@ -1,0 +1,77 @@
+/* Family area styles. Tokens come from styles.css. */
+
+.fam-child-card { display: flex; flex-direction: column; gap: 20px; }
+.fam-child-head { display: flex; align-items: center; gap: 16px; }
+.fam-child-name { font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--ink); }
+.fam-child-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 16px; }
+
+.fam-week-card { display: flex; flex-direction: column; gap: 24px; }
+.fam-bignums { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; text-align: center; }
+.fam-bignum { font-family: var(--font-display); font-size: 3rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.fam-bignum-label { font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+.fam-badge-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: var(--teal-soft);
+  border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
+  text-align: center;
+}
+.fam-badge-kicker { font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+.fam-badge-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+
+.fam-topics { display: flex; flex-wrap: wrap; gap: 10px; }
+.fam-topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.fam-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.fam-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 2px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  min-width: 0;
+}
+.fam-day[data-active='true'] { background: var(--purple-soft); border-color: var(--line-strong); }
+.fam-day[data-today='true'] { outline: 2px solid var(--purple); outline-offset: 1px; }
+.fam-day-name { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.fam-day-mark { font-size: 1.25rem; line-height: 1; }
+.fam-day-count { font-size: 0.8125rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.fam-list { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.fam-list li { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+
+.fam-type-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.fam-type {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+}
+.fam-type:has(input:checked) { border-color: var(--purple); background: var(--purple-soft); }
+.fam-type input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--purple); flex: none; }
+.fam-type strong { display: block; margin-bottom: 4px; }
+
+.fam-toggle-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; min-height: 44px; }
+.fam-toggle-row input { width: 24px; height: 24px; accent-color: var(--purple); flex: none; margin-top: 2px; }
