@@ -125,7 +125,9 @@ function containsAnswer(clue, answer) {
 function checkAnswerSet(prefix, answer, distractors, accepted, add, warn) {
   if (!text(answer).trim()) add(`${prefix}canonicalAnswer`, 'Add the canonical answer.');
   const ds = list(distractors);
-  if (ds.length !== 3) warn(`${prefix}approvedDistractors`, `Add exactly 3 distractors for multiple choice (has ${ds.length}).`);
+  // Answers are multiple choice: 3 wrong choices are required to publish.
+  if (ds.length < 3) add(`${prefix}approvedDistractors`, `Add 3 wrong answer choices for multiple choice (has ${ds.length}).`);
+  else if (ds.length > 3) warn(`${prefix}approvedDistractors`, `Only the first 3 wrong answers are shown as choices (has ${ds.length}).`);
   const bad = ds.filter((d) => norm(d) === norm(answer) || list(accepted).some((a) => norm(a) === norm(d)));
   if (bad.length) add(`${prefix}approvedDistractors`, `A distractor matches a correct answer: ${bad.join(', ')}.`);
 }

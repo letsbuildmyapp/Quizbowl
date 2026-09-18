@@ -18,6 +18,13 @@ const ALLOWED = {
 
 const TRACKED = ['type', 'status', 'setId', 'category', 'subcategory', 'gradeBand', 'difficulty', 'promptLeadin', 'clues', 'powerClueIndex', 'canonicalAnswer', 'acceptedAnswers', 'rejectedAnswers', 'approvedDistractors', 'explanation', 'pronunciationNotes', 'parts', 'license', 'sourceOwner', 'usageWindowEnd'];
 
+function choicesProblem(q) {
+  const ok = (d) => (d || []).filter(Boolean).length >= 3;
+  if (q.type === 'tossup' && !ok(q.approvedDistractors)) return 'Add 3 wrong answer choices before publishing (answers are multiple choice).';
+  if (q.type === 'bonus' && !(q.parts || []).every((p) => ok(p.approvedDistractors))) return 'Every bonus part needs 3 wrong answer choices before publishing.';
+  return null;
+}
+
 function rightsProblem(q) {
   if (!q.setId) return 'Pick a question set before publishing.';
   if (!q.license || !q.sourceOwner) return 'Rights metadata (license and source owner) is required to publish.';
@@ -63,7 +70,7 @@ exports.onQuestionWritten = onDocumentWritten('questions/{questionId}', async (e
   // Enforce lifecycle and rights (rules enforce this too; this is defense in depth).
   if (before && before.status !== after.status) {
     const ok = (ALLOWED[before.status] || []).includes(after.status);
-    const problem = after.status === 'published' ? rightsProblem(after) : null;
+    const problem = after.status === 'published' ? rightsProblem(after) || choicesProblem(after) : null;
     if (!ok || problem) {
       await event.data.after.ref.update({
         status: before.status,
@@ -207,4 +214,4 @@ exports.onContentFlag = onDocumentCreated('contentFlags/{id}', async (event) => 
   await audit('content.flagged', { actorRole: f.role || null, target: `questions/${f.questionId}`, details: { reason: f.reason } });
 });
 
-exports._internal = { rebuildStats, rightsProblem, ALLOWED };
+exports._internal = { rebuildStats, rightsProblem, choicesProblem, ALLOWED };

@@ -43,7 +43,7 @@ test('question lifecycle writes history per change and drives contentStats', { t
     canonicalAnswer: answer,
     acceptedAnswers: [],
     rejectedAnswers: [],
-    approvedDistractors: ['quartz'],
+    approvedDistractors: ['quartz', 'granite', 'basalt'],
     explanation: 'It only exists here.',
     pronunciationNotes: null,
     sourceOwner: 'QuizQuest tests',

@@ -266,3 +266,63 @@ export function ClueReview({ outcome, attempts = [], sides, opponentName, myActo
     </ol>
   );
 }
+
+const LETTERS = ['A', 'B', 'C', 'D'];
+
+/**
+ * Multiple choice answers: four big buttons. Keys 1-4 or A-D pick; the pick is
+ * sent once (the server scores it). Used for tossups (after a buzz) and bonus parts.
+ */
+export function ChoicePicker({ choices, onPick, deadline, total, serverNow, busy, prompt = 'Pick your answer', autoFocus = true }) {
+  const [picked, setPicked] = useState(null);
+  const firstRef = useRef(null);
+  useEffect(() => {
+    if (autoFocus) firstRef.current?.focus();
+  }, [autoFocus]);
+  const pick = (i) => {
+    if (picked != null || busy || i < 0 || i >= choices.length) return;
+    setPicked(i);
+    onPick(i);
+  };
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.target?.tagName === 'INPUT' || e.target?.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+      const k = e.key.toUpperCase();
+      const i = /^[1-4]$/.test(k) ? Number(k) - 1 : LETTERS.indexOf(k);
+      if (i >= 0 && i < choices.length) {
+        e.preventDefault();
+        pick(i);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+  return (
+    <div className="choice-picker" role="group" aria-label={prompt}>
+      <span className="label">{prompt}</span>
+      <div className="choice-grid">
+        {choices.map((c, i) => (
+          <button
+            key={`${i}-${c}`}
+            ref={i === 0 ? firstRef : null}
+            type="button"
+            className={`choice-btn ${picked === i ? 'is-picked' : ''}`}
+            onClick={() => pick(i)}
+            disabled={busy || (picked != null && picked !== i)}
+            aria-pressed={picked === i}
+            aria-keyshortcuts={`${i + 1} ${LETTERS[i]}`}
+          >
+            <span className="choice-key" aria-hidden>
+              {LETTERS[i]}
+            </span>
+            <span className="choice-text">{c}</span>
+          </button>
+        ))}
+      </div>
+      {deadline ? <Countdown deadline={deadline} total={total} serverNow={serverNow} label="Answer time" /> : null}
+      <span className="caption" aria-hidden>
+        Press 1 to 4 or A to D
+      </span>
+    </div>
+  );
+}

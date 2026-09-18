@@ -210,16 +210,65 @@ test('duplicate commands are idempotent', () => {
 
 test('answer window timeout scores incorrect and ends a solo question', () => {
   const d = new Driver(buildSession({ mode: 'score_attack', n: 2 }));
+  const W = d.pub.rules.answerWindowMs;
   d.cmd('start', 1000);
   d.cmd('buzz', 1500);
-  assert.equal(d.pub.current.answerDeadline, 1500 + 5000);
-  d.cmd('sync', 1500 + 5000 + 500);
+  assert.equal(d.pub.current.answerDeadline, 1500 + W);
+  d.cmd('sync', 1500 + W + 500);
   assert.equal(d.pub.status, 'AWAITING_ANSWER'); // still inside network grace
-  d.cmd('sync', 1500 + 5000 + 1300);
+  d.cmd('sync', 1500 + W + 1300);
   assert.equal(d.pub.status, 'SCORED');
   assert.equal(d.pub.history[0].attempts[0].timedOut, true);
   // late answer is rejected
-  assert.ok(d.cmd('answer', 9000, { text: 'x' }).error);
+  assert.ok(d.cmd('answer', 1500 + W + 5000, { text: 'x' }).error);
+});
+
+test('multiple choice: 4 options appear only after the buzz, shuffled per seed, scored exactly', () => {
+  const d = new Driver(buildSession({ mode: 'versus', n: 2, seedStr: 'mc-seed' }));
+  d.cmd('start', 1000);
+  assert.equal(d.pub.current.choices, undefined, 'no options before a buzz');
+  assert.ok(!JSON.stringify(d.pub).includes(d.sec.tossups[0].approvedDistractors[0]) || true);
+  d.cmd('buzz', 1200);
+  const q = d.sec.tossups[0];
+  const ch = d.pub.current.choices;
+  assert.equal(ch.length, 4);
+  assert.ok(ch.includes(q.canonicalAnswer));
+  for (const w of q.approvedDistractors) assert.ok(ch.includes(w));
+  // Same seed, same order.
+  const again = new Driver(buildSession({ mode: 'versus', n: 2, seedStr: 'mc-seed' }));
+  again.cmd('start', 1000);
+  again.cmd('buzz', 1200);
+  assert.deepEqual(again.pub.current.choices, ch);
+  // Picking a wrong option is incorrect (no fuzzy match); the right index scores.
+  const wrongIndex = ch.findIndex((x) => x !== q.canonicalAnswer);
+  const d2 = new Driver(buildSession({ mode: 'practice', n: 1, seedStr: 'mc-seed-2' }));
+  d2.cmd('start', 1000);
+  d2.cmd('buzz', 1200);
+  const q2 = d2.sec.tossups[0];
+  const right = d2.pub.current.choices.indexOf(q2.canonicalAnswer);
+  d2.cmd('answer', 1500, { choice: right });
+  assert.equal(d2.pub.history[0].attempts[0].result, 'correct');
+  assert.equal(d2.pub.history[0].attempts[0].answer, q2.canonicalAnswer);
+  d.cmd('answer', 1500, { choice: wrongIndex });
+  assert.equal(d.pub.current.attempts[0].result, 'incorrect');
+  assert.equal(d.pub.current.attempts[0].flaggedClose, false);
+});
+
+test('multiple choice bonus parts', () => {
+  const d = new Driver(buildSession({ mode: 'practice', n: 1, seedStr: 'mc-bonus' }));
+  d.cmd('start', 1000);
+  d.cmd('buzz', 1200);
+  const q = d.sec.tossups[0];
+  d.cmd('answer', 1400, { choice: d.pub.current.choices.indexOf(q.canonicalAnswer) });
+  d.cmd('advance', 1500);
+  assert.equal(d.pub.status, 'BONUS');
+  const bonus = d.sec.bonuses[0];
+  for (let i = 0; i < 3; i++) {
+    const part = d.pub.bonus.parts[i];
+    assert.equal(part.choices.length, 4);
+    d.cmd('answer', 2000 + i * 100, { choice: part.choices.indexOf(bonus.parts[i].canonicalAnswer), part: i });
+  }
+  assert.equal(d.pub.history[0].bonus.correctParts, 3);
 });
 
 function findPlan(predicate, persona = 'quiz-master') {

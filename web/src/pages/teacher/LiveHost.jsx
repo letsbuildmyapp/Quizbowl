@@ -123,6 +123,18 @@ export default function LiveHost() {
               </div>
             ) : null}
             {status === 'AWAITING_ANSWER' ? <Countdown deadline={current.answerDeadline} total={session.rules.answerWindowMs} serverNow={serverNow} /> : null}
+            {status === 'AWAITING_ANSWER' && current.choices ? (
+              <ol className="choice-grid" style={{ listStyle: 'none', padding: 0, margin: 0 }} aria-label="Answer choices">
+                {current.choices.map((c, i) => (
+                  <li key={c} className="choice-btn" style={{ cursor: 'default' }}>
+                    <span className="choice-key" aria-hidden>
+                      {'ABCD'[i]}
+                    </span>
+                    <span className="choice-text">{c}</span>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
             {current.lockedSides?.length ? (
               <p className="muted" style={{ textAlign: 'center' }}>
                 Already answered: {current.lockedSides.map((s) => session.sides[s]?.name).join(', ')}

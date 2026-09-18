@@ -338,11 +338,12 @@
     "powerPoints": 15,
     "negEnabled": false,
     "negPoints": -5,
-    "answerWindowMs": 5000,
+    "answerWindowMs": 8000,
     "bonusesEnabled": true,
     "bonusPartPoints": 10,
     "bonusWindowMs": 10000,
-    "deadWindowMs": 5000
+    "deadWindowMs": 5000,
+    "answerFormat": "choice"
   },
   "avatars": [
     "\ud83e\udd8a",

@@ -95,3 +95,12 @@ What was decided while building QuizQuest from the scoping document and the conc
 1. **Official Westside marks.** The W crest is generated from the theme (letter + colors). If the school has an approved logo, it can replace it after they sign off.
 2. **XP tuning.** The spec's XP numbers are placeholders. Levels come about 20% faster than in v1. Watch the pilot and adjust `xpRules`.
 3. **Warrior Weekly Quest target.** The seed uses 100 correct answers per week for the school. Set it to fit the real team's size.
+
+## Multiple choice answers (2026-09-18)
+
+| # | Decision | Why |
+|---|---|---|
+| 23 | Every answer is multiple choice. Kids still buzz first (the quiz bowl skill); the 4 choices (right answer + 3 approved distractors) appear only after the buzz, shuffled from the match seed. Bonus parts are multiple choice too. | Requested by Alex. Showing choices before the buzz would hand out the answer while clues are still being read. Seeded shuffles keep matches reproducible. |
+| 24 | Picks are sent as an index and scored exactly on the server (no fuzzy matching). Typed answers remain only as a fallback for a question with fewer than 2 distractors, or if a class sets `rules.answerFormat: 'typed'`. | Server-authoritative scoring stays intact; close-answer reviews become rare. |
+| 25 | Publishing now requires 3 wrong answer choices per tossup and per bonus part (server check + editor/import validation). | Every published question must work as multiple choice. |
+| 26 | Default answer window is 8 seconds (was 5). | Kids need time to read four options. |

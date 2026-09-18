@@ -10,7 +10,7 @@ import { useDoc } from '../../hooks/useFirestore.js';
 import { useGameSession } from '../../hooks/useGameSession.js';
 import { useSchoolTheme } from '../../hooks/useSchoolTheme.js';
 import { Button, ButtonLink, Chip, ConfirmModal, Loading, useToast } from '../../components/ui.jsx';
-import { AnswerBox, ClueReview, Countdown, ReportQuestion } from '../../components/game/GameParts.jsx';
+import { AnswerBox, ChoicePicker, ClueReview, Countdown, ReportQuestion } from '../../components/game/GameParts.jsx';
 import { BuzzerArt } from '../../components/bot/index.js';
 import BattleScene from '../../components/battle/BattleScene.jsx';
 import { arenaWorld, foeView } from '../../components/battle/battleModel.js';
@@ -135,6 +135,18 @@ export default function Match() {
     setPendingBuzz({ qIndex: session.qIndex, queuedAnswer: null });
     send('buzz', { seenClueIndex: clueCount - 1 }, { watch: true }).catch(() => setPendingBuzz(null));
   }, [canBuzz, soundOn, session?.qIndex, send, clueCount]);
+
+  // Multiple choice: the pick is sent as an index; the server scores it.
+  const submitChoice = async (choice) => {
+    setChargeKey(attemptKey);
+    if (soundOn) sfx.charge();
+    setBusy(true);
+    try {
+      await send('answer', status === 'BONUS' ? { choice, part: session.bonus.partIndex } : { choice }, { watch: true });
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const submitAnswer = async (text) => {
     setChargeKey(attemptKey);
@@ -319,6 +331,7 @@ export default function Match() {
           mySide={mySide}
           serverNow={serverNow}
           onAnswer={submitAnswer}
+          onChoice={submitChoice}
           busy={busy || charging}
           onSkip={() => send('skip')}
           isController={isController}
@@ -339,7 +352,7 @@ export default function Match() {
     else if (late) caption = 'Just missed it!';
     else if (mySideLocked) caption = 'Keep listening…';
     dock = (
-      <div className="bt-dock-inner">
+      <div className={`bt-dock-inner ${myBuzzConfirmed && current?.choices ? 'has-choices' : ''}`}>
         <section className="bt-box bt-textbox" ref={textRef} aria-label="Battle dialog">
           <div className="bt-cluehead">
             <div className="clue-dots" aria-hidden="true">
@@ -374,16 +387,33 @@ export default function Match() {
               <div className="bt-mini-buzz" aria-hidden="true">
                 <BuzzerArt state={myBuzzConfirmed ? 'accepted' : 'pressed'} skin={skin} theme={theme} teamColor={theme.primaryColor} size={84} />
               </div>
-              <AnswerBox
-                key={`a-${session.qIndex}-${current?.attempts?.length}`}
-                onSubmit={submitAnswer}
-                deadline={myBuzzConfirmed ? current.answerDeadline : null}
-                total={session.rules.answerWindowMs}
-                serverNow={serverNow}
-                voiceEnabled={voiceEnabled}
-                busy={busy || charging || (!!pendingBuzz?.queuedAnswer && !myBuzzConfirmed)}
-                prompt={charging ? 'Charging your answer…' : "What's the answer?"}
-              />
+              {myBuzzConfirmed && current.choices ? (
+                <ChoicePicker
+                  key={`c-${session.qIndex}-${current?.attempts?.length}`}
+                  choices={current.choices}
+                  onPick={submitChoice}
+                  deadline={current.answerDeadline}
+                  total={session.rules.answerWindowMs}
+                  serverNow={serverNow}
+                  busy={busy || charging}
+                  prompt={charging ? 'Charging your answer…' : "What's the answer?"}
+                />
+              ) : !myBuzzConfirmed && session.rules.answerFormat !== 'typed' ? (
+                <p className="bt-narrate" role="status" aria-live="polite">
+                  Buzzed! Your answer choices are on the way…
+                </p>
+              ) : (
+                <AnswerBox
+                  key={`a-${session.qIndex}-${current?.attempts?.length}`}
+                  onSubmit={submitAnswer}
+                  deadline={myBuzzConfirmed ? current.answerDeadline : null}
+                  total={session.rules.answerWindowMs}
+                  serverNow={serverNow}
+                  voiceEnabled={voiceEnabled}
+                  busy={busy || charging || (!!pendingBuzz?.queuedAnswer && !myBuzzConfirmed)}
+                  prompt={charging ? 'Charging your answer…' : "What's the answer?"}
+                />
+              )}
             </div>
           </section>
         ) : (
@@ -695,7 +725,7 @@ function BonusResults({ bonus }) {
   );
 }
 
-function BonusPanel({ session, mySide, serverNow, onAnswer, busy, onSkip, isController, opponentName, voiceEnabled }) {
+function BonusPanel({ session, mySide, serverNow, onAnswer, onChoice, busy, onSkip, isController, opponentName, voiceEnabled }) {
   const b = session.bonus;
   const mine = b.side === mySide;
   const part = b.parts[b.partIndex];
@@ -703,7 +733,7 @@ function BonusPanel({ session, mySide, serverNow, onAnswer, busy, onSkip, isCont
   const open = part && b.results.length === b.partIndex;
   return (
     <section className="bt-box bt-split-box" aria-label="Bonus round">
-      <div className="bt-split">
+      <div className={`bt-split ${open && mine && part?.choices ? 'has-choices' : ''}`}>
         <div className="bt-split-main">
           <div className="row-between">
             <h2 className="bt-say" style={{ margin: 0 }}>
@@ -734,16 +764,29 @@ function BonusPanel({ session, mySide, serverNow, onAnswer, busy, onSkip, isCont
           {open && mine ? (
             <>
               <div className="bt-answer" style={{ gridTemplateColumns: 'minmax(0, 1fr)' }}>
-                <AnswerBox
-                  key={`b-${session.qIndex}-${b.partIndex}`}
-                  onSubmit={onAnswer}
-                  deadline={b.deadline}
-                  total={session.rules.bonusWindowMs}
-                  serverNow={serverNow}
-                  busy={busy}
-                  voiceEnabled={voiceEnabled}
-                  prompt="Your answer"
-                />
+                {part?.choices ? (
+                  <ChoicePicker
+                    key={`bc-${session.qIndex}-${b.partIndex}`}
+                    choices={part.choices}
+                    onPick={onChoice}
+                    deadline={b.deadline}
+                    total={session.rules.bonusWindowMs}
+                    serverNow={serverNow}
+                    busy={busy}
+                    prompt="Your answer"
+                  />
+                ) : (
+                  <AnswerBox
+                    key={`b-${session.qIndex}-${b.partIndex}`}
+                    onSubmit={onAnswer}
+                    deadline={b.deadline}
+                    total={session.rules.bonusWindowMs}
+                    serverNow={serverNow}
+                    busy={busy}
+                    voiceEnabled={voiceEnabled}
+                    prompt="Your answer"
+                  />
+                )}
               </div>
               {isController && session.mode !== 'live_battle' ? (
                 <Button variant="ghost" onClick={onSkip}>

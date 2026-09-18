@@ -419,3 +419,15 @@
 :root[data-reduced-motion='true'] .bt-burst,
 :root[data-reduced-motion='true'] .bt-confetti,
 :root[data-reduced-motion='true'] .bt-fizzle { display: none; }
+
+/* Multiple choice needs room: widen the answer column and drop the mini buzzer. */
+.bt-dock-inner.has-choices { grid-template-columns: minmax(0, 1fr) minmax(360px, 560px); }
+.bt-dock-inner.has-choices .bt-answer { grid-template-columns: minmax(0, 1fr); }
+.bt-dock-inner.has-choices .bt-mini-buzz { display: none; }
+.bt-answer .choice-btn { min-height: 52px; }
+@media (max-width: 900px) {
+  .bt-dock-inner.has-choices { grid-template-columns: minmax(0, 1fr); }
+}
+
+.bt-split.has-choices { grid-template-columns: minmax(0, 1fr) minmax(360px, 520px); }
+@media (max-width: 900px) { .bt-split.has-choices { grid-template-columns: minmax(0, 1fr); } }

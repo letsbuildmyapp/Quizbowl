@@ -21,7 +21,8 @@
 // wins the race.
 
 const catalog = require('../shared/catalog.json');
-const { checkAnswer } = require('./answers');
+const { checkAnswer, normalize } = require('./answers');
+const { streamFor } = require('./rng');
 
 const GRACE_MS = 700; // wait before committing a computer buzz (student buzzes in flight)
 const COMPUTER_THINK_MS = 1500; // pause between computer buzz and its answer
@@ -37,6 +38,25 @@ const TERMINAL = new Set(['COMPLETE', 'TERMINATED']);
 
 function clone(o) {
   return o == null ? o : JSON.parse(JSON.stringify(o));
+}
+
+/**
+ * Multiple choice: the right answer plus the question's approved distractors,
+ * shuffled from the match seed (reproducible). null when a question has fewer
+ * than 2 distractors (typed answers are the fallback).
+ */
+function makeChoices(seed, key, item) {
+  const wrong = (item.approvedDistractors || []).filter((d) => d && normalize(d) !== normalize(item.canonicalAnswer));
+  if (wrong.length < 2) return null;
+  return streamFor(seed, 'choices', key).shuffle([item.canonicalAnswer, ...wrong.slice(0, 3)]);
+}
+
+/** Score a picked choice exactly (no fuzzy matching). */
+function checkChoice(choices, index, item) {
+  const picked = Number.isInteger(index) && choices ? choices[index] : null;
+  if (picked == null) return { result: 'incorrect', normalized: '', picked: null };
+  const ok = normalize(picked) === normalize(item.canonicalAnswer);
+  return { result: ok ? 'correct' : 'incorrect', normalized: normalize(picked), picked };
 }
 
 function clueDurationMs(text, speed) {
@@ -280,11 +300,16 @@ function allSidesLocked(pub) {
   return sidesInPlay(pub).every((s) => pub.current.lockedSides.includes(s));
 }
 
-function scoreTossupAnswer(pub, sec, { actorId, side, text, at, timedOut }, events) {
+function scoreTossupAnswer(pub, sec, { actorId, side, text, choice, at, timedOut }, events) {
   const c = pub.current;
   const q = sec.tossups[pub.qIndex];
   const buzz = c.buzz;
-  const check = timedOut ? { result: 'incorrect', normalized: '' } : checkAnswer(text, q);
+  let check;
+  if (timedOut) check = { result: 'incorrect', normalized: '' };
+  else if (c.choices && Number.isInteger(choice)) {
+    check = checkChoice(c.choices, choice, q);
+    text = check.picked;
+  } else check = checkAnswer(text, q);
   const interrupted = c.readingDoneAt == null || buzz.at < c.readingDoneAt;
   const rules = pub.rules;
   let points = 0;
@@ -307,6 +332,7 @@ function scoreTossupAnswer(pub, sec, { actorId, side, text, at, timedOut }, even
     normalized: check.normalized,
     result: check.result === 'correct' ? 'correct' : 'incorrect',
     flaggedClose: check.result === 'close',
+    choice: Number.isInteger(choice) ? choice : null,
     timedOut: !!timedOut,
     interrupted,
     powered,
@@ -343,8 +369,9 @@ function scoreTossupAnswer(pub, sec, { actorId, side, text, at, timedOut }, even
   }
 }
 
-function registerBuzz(pub, { actorId, side, kind, at, clueIndex, reactionMs }, events) {
+function registerBuzz(pub, { actorId, side, kind, at, clueIndex, reactionMs, choices }, events) {
   const c = pub.current;
+  if (kind !== 'computer') c.choices = choices ?? null;
   c.buzz = { actorId, side, kind, at, clueIndex, reactionMs: reactionMs ?? null };
   c.holdStartedAt = at;
   if (kind === 'computer') {
@@ -372,7 +399,7 @@ function startBonus(pub, sec, side, at, events) {
     side,
     leadin: bonus.promptLeadin || '',
     partIndex: 0,
-    parts: [{ text: bonus.parts[0].text }],
+    parts: [{ text: bonus.parts[0].text, choices: makeChoices(sec.seed, `${pub.qIndex}:bonus:0`, bonus.parts[0]) }],
     results: [],
     deadline: side === cs ? null : isTimed(pub) ? at + pub.rules.bonusWindowMs : null,
     nextComputerAt: side === cs ? at + BONUS_COMPUTER_PART_MS : null
@@ -381,7 +408,7 @@ function startBonus(pub, sec, side, at, events) {
   events.push({ type: 'bonus_shown', at, data: { questionId: bonus.id, side } });
 }
 
-function scoreBonusPart(pub, sec, { actorId, text, at, timedOut, computer }, events) {
+function scoreBonusPart(pub, sec, { actorId, text, choice, at, timedOut, computer }, events) {
   const b = pub.bonus;
   const bonus = sec.bonuses[pub.qIndex];
   const part = bonus.parts[b.partIndex];
@@ -396,6 +423,11 @@ function scoreBonusPart(pub, sec, { actorId, text, at, timedOut, computer }, eve
   } else if (timedOut) {
     result = 'incorrect';
     answer = null;
+  } else if (b.parts[b.partIndex]?.choices && Number.isInteger(choice)) {
+    const check = checkChoice(b.parts[b.partIndex].choices, choice, part);
+    result = check.result;
+    answer = check.picked;
+    normalized = check.normalized;
   } else {
     const check = checkAnswer(text, part);
     result = check.result === 'correct' ? 'correct' : 'incorrect';
@@ -423,7 +455,7 @@ function scoreBonusPart(pub, sec, { actorId, text, at, timedOut, computer }, eve
   });
   b.partIndex += 1;
   if (b.partIndex < bonus.parts.length) {
-    b.parts.push({ text: bonus.parts[b.partIndex].text });
+    b.parts.push({ text: bonus.parts[b.partIndex].text, choices: makeChoices(sec.seed, `${pub.qIndex}:bonus:${b.partIndex}`, bonus.parts[b.partIndex]) });
     if (computer) b.nextComputerAt = at + BONUS_COMPUTER_PART_MS;
     else b.deadline = isTimed(pub) ? at + pub.rules.bonusWindowMs : null;
   } else {
@@ -709,7 +741,9 @@ function handle(pub, sec, cmd, at, now, events) {
       // Rejections keep any computer buzz we just resolved, so the player sees it right away.
       if (pub.status !== 'READING_CLUE') return reject('too-late', 'Someone else buzzed first');
       if (c.lockedSides.includes(side)) return reject('locked-out', 'Your side already answered this one');
-      registerBuzz(pub, { actorId: cmd.actorId, side, kind: 'student', at, clueIndex, reactionMs }, events);
+      const q = sec.tossups[pub.qIndex];
+      const choices = pub.rules.answerFormat === 'typed' ? null : makeChoices(sec.seed, `${pub.qIndex}:${c.attempts.length}`, q);
+      registerBuzz(pub, { actorId: cmd.actorId, side, kind: 'student', at, clueIndex, reactionMs, choices }, events);
       advanceTo(pub, sec, now, { reveals: false }, now, events);
       return;
     }
@@ -720,7 +754,7 @@ function handle(pub, sec, cmd, at, now, events) {
       if (pub.status === 'AWAITING_ANSWER') {
         if (c.buzz.actorId !== cmd.actorId) throw new CommandError('forbidden', 'Only the buzzer can answer');
         if (c.answerDeadline != null && at > c.answerDeadline + ANSWER_GRACE_MS) throw new CommandError('too-late', 'Answer window closed');
-        scoreTossupAnswer(pub, sec, { actorId: cmd.actorId, side: c.buzz.side, text: p.text, at }, events);
+        scoreTossupAnswer(pub, sec, { actorId: cmd.actorId, side: c.buzz.side, text: p.text, choice: p.choice, at }, events);
         advanceTo(pub, sec, now, { reveals: false }, now, events);
         return;
       }
@@ -730,7 +764,7 @@ function handle(pub, sec, cmd, at, now, events) {
         if (side !== b.side) throw new CommandError('forbidden', 'This bonus belongs to the other side');
         if (Number.isInteger(p.part) && p.part !== b.partIndex) throw new CommandError('stale', 'That part was already scored');
         if (b.deadline != null && at > b.deadline + ANSWER_GRACE_MS) throw new CommandError('too-late', 'Answer window closed');
-        scoreBonusPart(pub, sec, { actorId: cmd.actorId, text: p.text, at }, events);
+        scoreBonusPart(pub, sec, { actorId: cmd.actorId, text: p.text, choice: p.choice, at }, events);
         return;
       }
       throw new CommandError('bad-state', `Not allowed while ${pub.status}`);
@@ -841,6 +875,7 @@ module.exports = {
   advanceTo,
   clueDurationMs,
   computerBuzzTime,
+  makeChoices,
   CommandError,
   constants: { GRACE_MS, COMPUTER_THINK_MS, ANSWER_GRACE_MS, STALL_MS, ABANDON_MS, BONUS_COMPUTER_PART_MS }
 };
