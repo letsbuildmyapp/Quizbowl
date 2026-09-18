@@ -75,3 +75,13 @@
 
 .fam-toggle-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; min-height: 44px; }
 .fam-toggle-row input { width: 24px; height: 24px; accent-color: var(--purple); flex: none; margin-top: 2px; }
+
+/* Quiz Hall highlights */
+.fam-hall { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+.fam-hall-bot { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 0 auto; min-width: 160px; }
+.fam-hall-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; }
+.fam-hall-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; text-align: center; }
+.fam-hall-num { font-family: var(--font-display); font-size: 2rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; color: var(--purple); }
+.fam-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.fam-items > li { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius); background: var(--surface-2); border: 1px solid var(--line); }
+.fam-hall-body { flex: 1 1 260px; min-width: 0; }

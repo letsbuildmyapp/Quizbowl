@@ -1,9 +1,12 @@
-// Student detail: progress, strengths, badges, recent sessions, live session control.
+// Student detail: progress, QuizBot + adventure, strengths, badges, reward activity, recent sessions,
+// live session control, and teacher awards.
 // Firestore reads:
 //   students/{studentId}
-//   sessionSummaries where studentId == X orderBy completedAt desc limit 20
+//   schoolThemes/{schoolId}, students/{studentId}/events orderBy at desc limit 15 (components/teacher/rewards-parts.jsx)
+//   sessionSummaries where studentId == X and classroomId == C orderBy completedAt desc limit 20
 //   sessions where participantIds array-contains X and status in [active statuses]
 // Firestore writes:
+//   awardRequests/{auto} via request(): { studentId, itemId, note }
 //   sessions/{sid}/commands/{randomId} set { type: 'terminate', payload: { reason }, at: ts, uid, actorId }
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -16,11 +19,13 @@ import { fmtDateTime, fmtNum, timeAgo } from '../../lib/format.js';
 import { randomId } from '../../lib/requests.js';
 import { Avatar, Button, ButtonLink, Card, Chip, EmptyState, ErrorNote, Field, Loading, Modal, ProgressBar, Stat, StrengthRow, friendlyError, useToast } from '../../components/ui.jsx';
 import { ACTIVE_SESSION_STATUSES, MODE_LABELS, orderedCategories, pctText } from '../../components/teacher/stats.js';
+import { AwardModal, RewardActivityCard, StudentAdventureCard } from '../../components/teacher/rewards-parts.jsx';
 import '../../pages/teacher/teacher.css';
 
 export default function StudentDetail() {
   const { studentId } = useParams();
   const { data: student, loading, error } = useDoc(studentId ? `students/${studentId}` : null);
+  const [awarding, setAwarding] = useState(false);
 
   if (loading) return <div className="page"><Loading label="Loading student…" /></div>;
   if (error) return <div className="page stack"><ErrorNote error={error} /><BackLink /></div>;
@@ -73,6 +78,9 @@ export default function StudentDetail() {
           <Stat value={fmtNum(stats.sessions || 0)} label="Sessions" color="var(--sun-strong)" hint={`${fmtNum(stats.seen || 0)} questions seen`} />
         </div>
       </div>
+
+      <StudentAdventureCard student={student} onAward={() => setAwarding(true)} />
+      {awarding ? <AwardModal open students={[student]} onClose={() => setAwarding(false)} /> : null}
 
       <div className="grid-2">
         <Card className="stack">
@@ -131,7 +139,9 @@ export default function StudentDetail() {
         )}
       </Card>
 
-      <RecentSessions studentId={studentId} />
+      <RewardActivityCard studentId={studentId} />
+
+      <RecentSessions studentId={studentId} classroomId={student.classroomId} />
     </div>
   );
 }
@@ -169,11 +179,17 @@ function CategoryBars({ categories }) {
   );
 }
 
-/** Composite index: sessionSummaries (studentId ASC, completedAt DESC). */
-function RecentSessions({ studentId }) {
+/**
+ * The classroomId filter lets the rules prove teaches(classroomId) for a list query.
+ * Composite index: sessionSummaries (studentId ASC, classroomId ASC, completedAt DESC).
+ */
+function RecentSessions({ studentId, classroomId }) {
   const { data, loading, error } = useQuery(
-    () => query(collection(db, 'sessionSummaries'), where('studentId', '==', studentId), orderBy('completedAt', 'desc'), limit(20)),
-    [studentId]
+    () =>
+      classroomId
+        ? query(collection(db, 'sessionSummaries'), where('studentId', '==', studentId), where('classroomId', '==', classroomId), orderBy('completedAt', 'desc'), limit(20))
+        : null,
+    [studentId, classroomId]
   );
   return (
     <Card className="stack">

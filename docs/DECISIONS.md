@@ -55,3 +55,43 @@ What was decided while building QuizQuest from the scoping document and the conc
 - Trigger latency (roughly 0.3 to 1.5 s) makes clue reveals and opponent buzzes a little less snappy than a callable backend would. If the org policy can get a project-level exception for `allUsers` on this one project, the engine can move behind a callable function with no rule changes.
 - A student's device must stay on the match page for the heartbeat. Switching tabs pauses solo play. A stalled client is treated as a pause, and after 30 minutes the match ends.
 - Firestore charges per heartbeat write (about 1 per second per active match). That's fine for a pilot. For larger scale, move the heartbeat to Cloud Tasks or a callable.
+
+---
+
+# v2 change spec (QuizBot, rewards, island map, Westside Warriors)
+
+## Gap analysis against v1
+
+| v2 area | v1 had | Added |
+|---|---|---|
+| School theme | Nothing | `schools/{id}.theme` + `rewardCatalog`, `schoolThemes` projection, `westside-warriors` preset, Team HQ, school quests with a Warrior Flame progress visual |
+| Interactive map | Static map image + world cards | Island map (`/art/island-map.webp`, the provided artwork) with focusable entrances, stars, chests, paths, lock explanations and a list alternative |
+| QuizBot Garage | Emoji avatar | Code-drawn SVG QuizBot with 8 slots, about 60 cosmetics, preview, equip, presets, school gear |
+| Reward economy | XP, badges, cards | Configurable XP rules, Quest Stars, Crafting Stars, rarity tiers, chests, grants with idempotency keys, duplicate conversion, teacher awards |
+| Reward Vault | Results page listed rewards | Reveal flow per rarity with Skip, recovery of unrevealed grants |
+| Quiz Hall | Nothing | Private showcase, teacher-controlled peer cards |
+| Buzzer | CSS circle | Crystal-dome buzzer with ready/pressed/accepted/late states |
+| Motion | Basic transitions | Motion system with reduced-motion variants and teacher "calm" mode |
+
+## Decisions (defaults from the spec's section 14 unless noted)
+
+| # | Decision | Why |
+|---|---|---|
+| 11 | QuizBot and all cosmetics are drawn in code (SVG), not cut from the reference images. | The references are single composed renders on dark backgrounds; they can't layer per slot. SVG layers cleanly, recolors to any school theme, never sits in a dark box, and respects reduced motion. The references set the style. |
+| 12 | The provided island artwork is the map. | It already has theme-park entrances. Interactive objects are positioned over it in `rewards.json` (percent coordinates). Myth Mountain and Harmony Harbor aren't painted on it, so they appear as small floating islands at the edges. |
+| 13 | Slots: paint (3 starter colors), face (2 starter panels), headgear, back, held buzzer, companion, effect, emote. No school gear is granted automatically. | Spec section 14 defaults. |
+| 14 | School gear comes from the school's weekly quest (school chest) or a teacher award. | Spec default. |
+| 15 | Chest contents are resolved when the grant is created, not when it's opened. | The item exists before the reveal, so skipping or disconnecting never loses it. |
+| 16 | Random chests pick from the published pool with a seeded, rarity-weighted draw and never give an owned item. If everything is owned, the chest converts to Crafting Stars. Teachers can turn randomness off (then the highest-rarity unowned item is chosen). | Spec rules on transparency, duplicate protection and teacher control. |
+| 17 | Crafting Stars buy a specific chosen item (Common 10, Rare 25, Epic 60, Legendary 150). Mythic and school gear can't be crafted. | No random purchases; school gear stays tied to school participation. |
+| 18 | World unlocks became quest-based ("Complete 3 Science Lab quests"). A completed match counts as a quest for its category's world. Mastery = 3 stars + 75% accuracy over at least 20 answers + 5 quests, and grants a one-time Legendary Vault. | Spec 3.3 and 5.4. |
+| 19 | XP moved to `rewards.json` `xpRules` (attempt 2, correct 8, power +5, early +3, bonus part 4, quest complete 10, beat the computer 15, Today's Quest 20, first assignment completion 25). | "Configurable rules, not constants." |
+| 20 | Equip, craft, claim and award are request documents fulfilled by triggers (same pattern as v1). Preview is client-only. | Server-authoritative ownership without callables. |
+| 21 | Quiz Hall peer view is off by default; teachers pick which fields classmates see; students opt in per student. | Spec default. |
+| 22 | The demo school is "Westside Elementary" on the Westside Warriors theme. Nothing Westside-specific is in code. | Spec 2 brand boundary. The W shield is original art, not an official mark. |
+
+## Needs Morgan and Meridian's input (v2)
+
+1. **Official Westside marks.** The W crest is generated from the theme (letter + colors). If the school has an approved logo, it can replace it after they sign off.
+2. **XP tuning.** The spec's XP numbers are placeholders. Levels come about 20% faster than in v1. Watch the pilot and adjust `xpRules`.
+3. **Warrior Weekly Quest target.** The seed uses 100 correct answers per week for the school. Set it to fit the real team's size.

@@ -9,6 +9,7 @@
 //   students/{id} update { displayName, 'nicknameRequest.status': 'approved' } | { 'nicknameRequest.status': 'rejected' }
 //   teams/{auto} create { classroomId, name, emoji, color }; teams/{id} update / delete
 //   parentInvites/{CODE} set { studentId, classroomId, teacherUid, expiresAt, usedBy: null, createdAt: ts }
+//   awardRequests/{auto} via request(): { studentId, itemId, note } (bulk school gear award, one per student)
 //   privacyRequests/{auto} { uid, requesterRole: 'teacher', studentId, classroomId, type, details, status: 'pending', createdAt: ts }
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -28,6 +29,7 @@ import {
   TeamModal,
   credRef
 } from '../../components/teacher/students-parts.jsx';
+import { AwardModal } from '../../components/teacher/rewards-parts.jsx';
 
 export default function Students() {
   const cls = useClassroom();
@@ -103,6 +105,7 @@ function RosterBody({ classroom, roster, onAdd }) {
   const [inviting, setInviting] = useState(null);
   const [privacy, setPrivacy] = useState(null);
   const [teamEdit, setTeamEdit] = useState(null);
+  const [awarding, setAwarding] = useState(false);
 
   if (roster.loading) return <Loading label="Loading students…" />;
   if (roster.error) return <ErrorNote error={roster.error} />;
@@ -120,19 +123,26 @@ function RosterBody({ classroom, roster, onAdd }) {
           <h2>
             Roster <span className="muted tabular">({roster.active.length})</span>
           </h2>
-          {inactiveCount ? (
-            <label className="check">
-              <input type="checkbox" checked={showInactive} onChange={(e) => setShowInactive(e.target.checked)} />
-              Show {inactiveCount} deactivated
-            </label>
-          ) : null}
+          <div className="row">
+            {inactiveCount ? (
+              <label className="check">
+                <input type="checkbox" checked={showInactive} onChange={(e) => setShowInactive(e.target.checked)} />
+                Show {inactiveCount} deactivated
+              </label>
+            ) : null}
+            {roster.active.length ? (
+              <Button onClick={() => setAwarding(true)}>
+                <span aria-hidden>🎁</span> Award school gear
+              </Button>
+            ) : null}
+          </div>
         </div>
         {!roster.data.length ? (
           <EmptyState emoji="🧑‍🎓" title="No students yet" action={<Button variant="primary" onClick={onAdd}>Add students</Button>}>
             Add each student with a nickname or first name and initial. Each one gets an avatar and a PIN.
           </EmptyState>
         ) : (
-          <div className="table-wrap">
+          <div className="table-wrap" style={{ position: 'relative' }}>
             <table className="table">
               <thead>
                 <tr>
@@ -229,6 +239,7 @@ function RosterBody({ classroom, roster, onAdd }) {
         {teams.data.length ? <span className="caption">Pick each student’s team in the roster above.</span> : null}
       </Card>
 
+      {awarding ? <AwardModal open students={roster.active} onClose={() => setAwarding(false)} /> : null}
       <EditStudentModal student={editing} teams={teams.data} onClose={() => setEditing(null)} />
       <ParentInviteModal student={inviting} classroomId={classroom.id} onClose={() => setInviting(null)} />
       <PrivacyModal student={privacy} classroomId={classroom.id} onClose={() => setPrivacy(null)} />

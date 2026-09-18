@@ -2,14 +2,14 @@ import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   Award,
+  Bot,
+  Gift,
   BarChart3,
   BookOpen,
   ClipboardList,
   Flag,
-  Gamepad2,
   Home,
   Inbox,
-  Layers,
   LayoutDashboard,
   Map,
   School,
@@ -23,6 +23,7 @@ import { AppShell, RequireRole, ScrollToTop } from './components/AppShell.jsx';
 import { Loading } from './components/ui.jsx';
 import { useAuth, homeFor } from './hooks/useAuth.jsx';
 import { useAccessibilityPrefs } from './hooks/useAccessibility.js';
+import MusicController from './components/MusicController.jsx';
 
 const p = (loader) => lazy(loader);
 
@@ -50,6 +51,12 @@ const Progress = p(() => import('./pages/student/Progress.jsx'));
 const Leaderboard = p(() => import('./pages/student/Leaderboard.jsx'));
 const StudentSettings = p(() => import('./pages/student/Settings.jsx'));
 const TeamQuest = p(() => import('./pages/student/TeamQuest.jsx'));
+const Adventure = p(() => import('./pages/student/Adventure.jsx'));
+const Garage = p(() => import('./pages/student/Garage.jsx'));
+const Vault = p(() => import('./pages/student/Vault.jsx'));
+const QuizHall = p(() => import('./pages/student/QuizHall.jsx'));
+const QuizDex = p(() => import('./pages/student/QuizDex.jsx'));
+const ArtGallery = p(() => import('./components/bot/Gallery.jsx'));
 
 // Teacher
 const Dashboard = p(() => import('./pages/teacher/Dashboard.jsx'));
@@ -84,13 +91,15 @@ const PrivacyQueue = p(() => import('./pages/admin/PrivacyQueue.jsx'));
 const Pilots = p(() => import('./pages/admin/Pilots.jsx'));
 
 const STUDENT_NAV = [
-  { to: '/play', label: 'Home', icon: Home, end: true },
-  { to: '/play/worlds', label: 'Worlds', icon: Map },
-  { to: '/play/modes', label: 'Play', icon: Gamepad2 },
-  { to: '/play/rewards', label: 'Rewards', icon: Award },
-  { to: '/play/progress', label: 'Progress', icon: BarChart3, short: 'Stats' },
-  { to: '/play/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { to: '/play/review', label: 'Review Deck', icon: Layers },
+  { to: '/play', label: 'Adventure', icon: Map, end: true, short: 'Map' },
+  { to: '/play/garage', label: 'My QuizBot', icon: Bot, short: 'QuizBot' },
+  { to: '/play/vault', label: 'Vault', icon: Gift },
+  { to: '/play/hall', label: 'Quiz Hall', icon: Trophy, short: 'Hall' },
+  { to: '/play/team', label: 'Team HQ', icon: Shield, short: 'Team' },
+  { to: '/play/home', label: 'Quests', icon: Home },
+  { to: '/play/dex', label: 'QuizDex', icon: BookOpen },
+  { to: '/play/progress', label: 'Progress', icon: BarChart3 },
+  { to: '/play/leaderboard', label: 'Leaderboard', icon: Award },
   { to: '/play/settings', label: 'Settings', icon: Settings }
 ];
 
@@ -145,6 +154,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <MusicController />
       <Suspense fallback={<Loading full />}>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -175,7 +185,12 @@ export default function App() {
               </RequireRole>
             }
           >
-            <Route index element={<StudentHome />} />
+            <Route index element={<Adventure />} />
+            <Route path="home" element={<StudentHome />} />
+            <Route path="garage" element={<Garage />} />
+            <Route path="vault" element={<Vault />} />
+            <Route path="hall" element={<QuizHall />} />
+            <Route path="dex" element={<QuizDex />} />
             <Route path="modes" element={<Modes />} />
             <Route path="worlds" element={<Worlds />} />
             <Route path="results/:sessionId" element={<Results />} />
@@ -250,6 +265,7 @@ export default function App() {
             <Route path="pilots" element={<Pilots />} />
           </Route>
 
+          {import.meta.env.DEV ? <Route path="/dev/art" element={<ArtGallery />} /> : null}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

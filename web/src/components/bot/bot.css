@@ -1,0 +1,128 @@
+/* QuizBot art system animations. Every animated root svg carries .qqb-anim. */
+
+.qqb-anim .qqb-float,
+.qqb-anim .qqb-twinkle,
+.qqb-anim .qqb-rise,
+.qqb-anim .qqb-flash,
+.qqb-anim .qqb-flicker,
+.qqb-anim .qqb-pulse,
+.qqb-anim .qqb-blink,
+.qqb-anim .qqb-em-book-pop,
+.qqb-anim .qqb-em-shield { transform-box: fill-box; transform-origin: center; }
+
+/* ---------- ambient loops (idle + emote poses) ---------- */
+.qqb-pose-idle .qqb-bob { animation: qqb-bob 3.6s ease-in-out infinite; }
+.qqb-pose-idle .qqb-blink { animation: qqb-blink 5s infinite; }
+.qqb-pose-idle .qqb-float,
+.qqb-pose-emote .qqb-float { animation: qqb-float 3.2s ease-in-out infinite; }
+.qqb-pose-idle .qqb-pet,
+.qqb-pose-emote .qqb-pet { animation: qqb-float 2.6s ease-in-out infinite; animation-delay: -0.8s; }
+.qqb-pose-idle .qqb-twinkle,
+.qqb-pose-emote .qqb-twinkle,
+.qqb-live .qqb-twinkle { animation: qqb-twinkle 1.8s ease-in-out infinite; }
+.qqb-pose-idle .qqb-rise,
+.qqb-pose-emote .qqb-rise { animation: qqb-rise 3.2s ease-in-out infinite; }
+.qqb-pose-idle .qqb-flash,
+.qqb-pose-emote .qqb-flash { animation: qqb-flash 2.4s steps(1, end) infinite; }
+.qqb-pose-idle .qqb-flicker,
+.qqb-pose-emote .qqb-flicker,
+.qqb-live .qqb-flicker { animation: qqb-flicker 0.45s ease-in-out infinite alternate; }
+.qqb-pose-idle .qqb-spin-slow,
+.qqb-pose-emote .qqb-spin-slow { animation: qqb-spin 16s linear infinite; }
+.qqb-pose-idle .qqb-pulse,
+.qqb-pose-emote .qqb-pulse { animation: qqb-pulse 2.4s ease-in-out infinite; }
+.qqb-pose-idle .qqb-flap-l,
+.qqb-pose-emote .qqb-flap-l { animation: qqb-flap-l 2.6s ease-in-out infinite; }
+.qqb-pose-idle .qqb-flap-r,
+.qqb-pose-emote .qqb-flap-r { animation: qqb-flap-r 2.6s ease-in-out infinite; }
+.qqb-pose-idle .qqb-sway,
+.qqb-pose-emote .qqb-sway { animation: qqb-sway 3s ease-in-out infinite; }
+
+@keyframes qqb-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes qqb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes qqb-blink { 0%, 93%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.12); } 97% { transform: scaleY(1); } }
+@keyframes qqb-twinkle { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(0.55) rotate(20deg); opacity: 0.55; } }
+@keyframes qqb-rise { 0% { transform: translateY(6px); opacity: 0; } 25%, 70% { opacity: 1; } 100% { transform: translateY(-16px); opacity: 0; } }
+@keyframes qqb-flash { 0%, 100% { opacity: 1; } 40% { opacity: 0.25; } 46% { opacity: 1; } 52% { opacity: 0.35; } 58% { opacity: 1; } }
+@keyframes qqb-flicker { 0% { transform: scale(1, 1); } 100% { transform: scale(0.92, 1.14); } }
+@keyframes qqb-spin { to { transform: rotate(360deg); } }
+@keyframes qqb-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes qqb-flap-l { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(7deg); } }
+@keyframes qqb-flap-r { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-7deg); } }
+@keyframes qqb-sway { 0%, 100% { transform: skewX(0deg); } 50% { transform: skewX(-5deg); } }
+
+/* ---------- emotes (play once, ~1.2s) ---------- */
+.qqb-em-wave .qqb-arm-l { animation: qqb-em-wave 1.2s ease-in-out both; }
+.qqb-em-spin .qqb-bodymove { animation: qqb-em-spin 1.2s ease-in-out both; }
+.qqb-em-dance .qqb-bodymove { animation: qqb-em-dance 1.2s ease-in-out both; }
+.qqb-em-dance .qqb-arm-l { animation: qqb-em-dance-arm 1.2s ease-in-out both; }
+.qqb-em-book .qqb-arm-l { animation: qqb-em-book-arm 1.4s ease-in-out both; }
+.qqb-em-book .qqb-em-book-pop { animation: qqb-em-book-pop 1.4s ease-out both; }
+.qqb-em-book .qqb-em-book-cover { animation: qqb-em-book-cover 1.4s ease-in-out both; }
+.qqb-em-rocket .qqb-bodymove { animation: qqb-em-rocket 1.2s ease-in-out both; }
+.qqb-em-rocket .qqb-em-puff { animation: qqb-em-puff 1.2s ease-out both; }
+.qqb-em-salute .qqb-arm-l { animation: qqb-em-salute 1.3s ease-in-out both; }
+.qqb-em-salute .qqb-em-shield { animation: qqb-em-shield 1.3s ease-in-out both; }
+.qqb-em-salute .qqb-em-hide { animation: qqb-em-hide 1.3s ease-in-out both; }
+
+@keyframes qqb-em-wave {
+  0% { transform: rotate(0deg); } 20% { transform: rotate(125deg); } 35% { transform: rotate(155deg); }
+  50% { transform: rotate(120deg); } 65% { transform: rotate(155deg); } 80% { transform: rotate(125deg); } 100% { transform: rotate(0deg); }
+}
+@keyframes qqb-em-spin {
+  0% { transform: translateY(0) scaleX(1); } 25% { transform: translateY(-10px) scaleX(0.1); }
+  50% { transform: translateY(-14px) scaleX(-1); } 75% { transform: translateY(-10px) scaleX(0.1); } 100% { transform: translateY(0) scaleX(1); }
+}
+@keyframes qqb-em-dance {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); } 15% { transform: translate(-8px, -8px) rotate(-6deg); }
+  30% { transform: translate(0, 0) rotate(0deg); } 45% { transform: translate(8px, -8px) rotate(6deg); }
+  60% { transform: translate(0, 0) rotate(0deg); } 75% { transform: translate(-8px, -8px) rotate(-6deg); } 90% { transform: translate(0, 0); }
+}
+@keyframes qqb-em-dance-arm { 0%, 100% { transform: rotate(0deg); } 15%, 45%, 75% { transform: rotate(120deg); } 30%, 60% { transform: rotate(60deg); } }
+@keyframes qqb-em-book-arm { 0% { transform: rotate(0deg); } 15%, 85% { transform: rotate(-52deg); } 100% { transform: rotate(0deg); } }
+@keyframes qqb-em-book-pop { 0%, 8% { transform: scale(0); } 22% { transform: scale(1.15); } 28%, 85% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes qqb-em-book-cover { 0%, 30% { transform: scaleX(1); } 55%, 100% { transform: scaleX(-1); opacity: 0; } 54% { opacity: 1; } }
+@keyframes qqb-em-rocket {
+  0% { transform: translateY(0) scaleY(1); } 22% { transform: translateY(0) scaleY(0.88); }
+  45% { transform: translateY(-28px) scaleY(1.05); } 70% { transform: translateY(-22px) scaleY(1); } 100% { transform: translateY(0) scaleY(1); }
+}
+@keyframes qqb-em-puff { 0%, 30% { opacity: 0; transform: scale(0.4); } 45% { opacity: 1; transform: scale(1); } 90%, 100% { opacity: 0; transform: scale(1.4); } }
+@keyframes qqb-em-salute { 0% { transform: rotate(0deg); } 25%, 80% { transform: rotate(158deg); } 100% { transform: rotate(0deg); } }
+@keyframes qqb-em-shield { 0%, 10% { transform: scale(0); } 28% { transform: scale(1.15); } 34%, 82% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes qqb-em-hide { 0%, 10%, 100% { opacity: 1; } 22%, 86% { opacity: 0; } }
+
+/* ---------- chests ---------- */
+.qqb-chest-ready .qqb-chest-bounce { animation: qqb-chest-bounce 3s ease-in-out infinite; transform-box: view-box; transform-origin: 80px 128px; }
+.qqb-chest-ready .qqb-chest-glow { animation: qqb-pulse 3s ease-in-out infinite; }
+.qqb-chest-opening .qqb-chest-bounce { animation: qqb-chest-shake 0.4s ease-in-out both; transform-box: view-box; transform-origin: 80px 128px; }
+.qqb-chest-opening .qqb-lid-closed { animation: qqb-lid-close-away 0.9s ease-in both; transform-box: view-box; transform-origin: 80px 76px; }
+.qqb-chest-opening .qqb-lid-open { animation: qqb-lid-open-in 0.9s ease-out both; transform-box: view-box; transform-origin: 80px 76px; }
+.qqb-chest-opening .qqb-rays { animation: qqb-rays-in 1.1s ease-out both; transform-box: view-box; transform-origin: 80px 76px; }
+.qqb-chest-open .qqb-rays-spin,
+.qqb-chest-opening .qqb-rays-spin { animation: none; }
+
+@keyframes qqb-chest-bounce { 0%, 70%, 100% { transform: translateY(0) scale(1, 1); } 78% { transform: translateY(0) scale(1.06, 0.94); } 86% { transform: translateY(-9px) scale(0.97, 1.03); } 93% { transform: translateY(0) scale(1.02, 0.98); } }
+@keyframes qqb-chest-shake { 0%, 100% { transform: rotate(0deg); } 12% { transform: rotate(-5deg); } 25% { transform: rotate(5deg); } 37% { transform: rotate(0deg); } 50% { transform: rotate(0deg); } 62% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } 87% { transform: rotate(0deg); } }
+@keyframes qqb-lid-close-away { 0%, 44% { transform: scaleY(1); opacity: 1; } 62%, 100% { transform: scaleY(0); opacity: 0; } }
+@keyframes qqb-lid-open-in { 0%, 60% { transform: scaleY(0); opacity: 0; } 61% { opacity: 1; } 100% { transform: scaleY(1); opacity: 1; } }
+@keyframes qqb-rays-in { 0%, 50% { transform: scale(0.2); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* ---------- buzzer ---------- */
+.qqb-bz-ready .qqb-bz-ring-glow { animation: qqb-shimmer 2.6s ease-in-out infinite; }
+.qqb-bz-pressed .qqb-bz-dome { animation: qqb-bz-press 0.18s ease-out both; transform-box: view-box; transform-origin: 120px 150px; }
+.qqb-bz-pressed .qqb-bz-ripple { animation: qqb-bz-ripple 0.8s ease-out both; transform-box: view-box; transform-origin: 120px 168px; }
+@keyframes qqb-shimmer { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes qqb-bz-press { to { transform: scaleY(0.92); } }
+@keyframes qqb-bz-ripple { 0% { transform: scale(0.85); opacity: 0.9; } 100% { transform: scale(1.35); opacity: 0; } }
+
+/* ---------- islands / progress ---------- */
+.qqb-island-float { animation: qqb-float 4s ease-in-out infinite; }
+
+/* ---------- reduced motion: stop everything ---------- */
+.qqb-rm, .qqb-rm *,
+.qqb-pose-static, .qqb-pose-static * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .qqb-anim, .qqb-anim * { animation: none !important; transition: none !important; }
+}
+:root[data-reduced-motion='true'] .qqb-anim,
+:root[data-reduced-motion='true'] .qqb-anim * { animation: none !important; transition: none !important; }

@@ -3,6 +3,7 @@
 //   sessionSummaries where schoolId == X and completedAt in range,
 //   auditEvents where schoolId == X orderBy at desc limit 50.
 // Firestore writes: schools/{schoolId} update { settings }, schools/{schoolId} update { teacherJoinCode },
+//   schools/{schoolId} update { theme } | { rewardCatalog } (components/teacher/SchoolTheme.jsx),
 //   adminActions/{auto} (via request) { uid, action: 'approveTeacher'|'suspendTeacher', schoolId, teacherUid, status, createdAt }.
 import { useMemo, useState } from 'react';
 import { collection, doc, limit, orderBy, query, updateDoc, where } from 'firebase/firestore';
@@ -14,6 +15,7 @@ import { randomCode, request } from '../../lib/requests.js';
 import { Button, Card, Chip, ConfirmModal, EmptyState, ErrorNote, Field, Loading, PageHeader, Segmented, friendlyError, useToast } from '../../components/ui.jsx';
 import { useSummaries } from '../../components/teacher/TeacherPage.jsx';
 import { DAY_MS, pctText, totals } from '../../components/teacher/stats.js';
+import { RewardCatalogCard, SchoolThemeCard } from '../../components/teacher/SchoolTheme.jsx';
 
 const STATUS_TONE = { approved: 'green', pending: 'sun', suspended: 'coral' };
 const STATUS_LABEL = { approved: 'Approved', pending: 'Waiting for approval', suspended: 'Suspended' };
@@ -195,7 +197,7 @@ function TeachersCard({ schoolId, myUid }) {
       ) : teachers.loading ? (
         <Loading />
       ) : list.length ? (
-        <div className="table-wrap">
+        <div className="table-wrap" style={{ position: 'relative' }}>
           <table className="table">
             <thead>
               <tr>
@@ -406,7 +408,7 @@ export default function School() {
 
   return (
     <div className="page stack-lg">
-      <PageHeader eyebrow="School admin" title={school.data?.name || 'Your school'} subtitle="Settings, teachers, and school-wide data." />
+      <PageHeader eyebrow="School admin" title={school.data?.name || 'Your school'} subtitle="Settings, theme, teachers, and school-wide data." />
       {school.error ? <ErrorNote error={school.error} /> : null}
       {school.loading ? (
         <Loading label="Loading your school…" />
@@ -418,6 +420,8 @@ export default function School() {
             <SettingsCard key={school.data.id} school={school.data} />
             <JoinCodeCard school={school.data} />
           </div>
+          <SchoolThemeCard key={`theme-${school.data.id}`} school={school.data} />
+          <RewardCatalogCard key={`catalog-${school.data.id}`} school={school.data} />
           <TeachersCard schoolId={schoolId} myUid={user?.uid} />
           <ExportCard schoolId={schoolId} />
           <AuditCard schoolId={schoolId} />

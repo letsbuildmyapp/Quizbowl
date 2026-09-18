@@ -99,9 +99,12 @@ async function seedDemo() {
   const schoolId = 'demo-school';
   const teacherUid = await user('teacher@quizquest.test', 'quizquest123', 'Ms. Rivera', { role: 'teacher', schoolId, schoolAdmin: true });
   await db.doc(`schools/${schoolId}`).set({
-    name: 'Maple Grove Elementary',
+    name: 'Westside Elementary',
     adminUids: [teacherUid],
     teacherJoinCode: 'MAPLE2026',
+    // Pilot theme: configuration only (see functions/shared/rewards.json themes).
+    theme: { presetId: 'westside-warriors' },
+    rewardCatalog: null,
     settings: { consentMode: 'school', retentionDays: 365, timezone: 'America/New_York', allowCrossSchoolChallenges: true },
     createdAt: now
   });
@@ -160,6 +163,20 @@ async function seedDemo() {
     });
     await db.doc(`students/${id}/private/credentials`).set({ pin });
   }
+  await db.doc('schoolQuests/demo-warrior-weekly').set({
+    schoolId,
+    title: 'Warrior Weekly Quest',
+    description: 'Answer 100 questions right as a school this week.',
+    category: null,
+    metric: 'correct',
+    target: 100,
+    startsAt: now - 86400000,
+    endsAt: now + 6 * 86400000,
+    progress: 0,
+    contributions: {},
+    createdBy: teacherUid,
+    createdAt: now
+  });
   await db.doc('parentInvites/FAMILY01').set({ studentId: 'demo-student-1', classroomId, teacherUid, expiresAt: now + 30 * 86400000, usedBy: null, createdAt: now });
 
   console.log('\nDemo ready:');
@@ -167,7 +184,7 @@ async function seedDemo() {
   console.log('  Content + platform admin: admin@quizquest.test / quizquest123');
   console.log('  Students: class code QUEST1, pick a name. PINs: Meridian 1111, Emma 2222, Liam 3333, Noah 4444, Ava 5555, Leo 6666');
   console.log('  Family invite code for Meridian: FAMILY01 (sign in with any email link in the Auth emulator)');
-  console.log('  Teacher join code for Maple Grove: MAPLE2026');
+  console.log('  Teacher join code for Westside Elementary: MAPLE2026 (theme: Westside Warriors)');
 }
 
 async function grantAdmin(email) {

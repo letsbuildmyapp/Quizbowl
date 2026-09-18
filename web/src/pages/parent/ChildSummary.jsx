@@ -1,10 +1,11 @@
 // Weekly summary for one linked child. Only this child's own data: no classmates, ranks, or leaderboards.
-// Reads:  students/{studentId}, sessionSummaries (studentId == id, completedAt in selected week)
+// Reads:  students/{studentId} (also feeds Quiz Hall highlights), sessionSummaries (studentId == id, completedAt in selected week)
 // Writes: none
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar, ButtonLink, Card, EmptyState, ErrorNote, Field, Loading, PageHeader, Stat, StrengthRow } from '../../components/ui.jsx';
 import { summarize, useWeekSummaries, weekLabel, weekRange } from '../../components/parent/family.js';
+import HallHighlights from '../../components/parent/HallHighlights.jsx';
 import { useAuth } from '../../hooks/useAuth.jsx';
 import { useDoc } from '../../hooks/useFirestore.js';
 import { badgeById, categoryMeta, titleForLevel } from '../../lib/catalog.js';
@@ -229,6 +230,8 @@ export default function ChildSummary() {
           </div>
         </>
       )}
+
+      <HallHighlights child={child} />
 
       <Card className="stack-lg" aria-labelledby="strengths-title">
         <div className="stack" style={{ gap: 6 }}>

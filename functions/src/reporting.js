@@ -80,7 +80,14 @@ exports.onAssignmentCreated = onDocumentCreated('assignments/{id}', async (event
   }
 });
 
-const ANALYTICS_TYPES = { report_view: 'reportViews', denied: 'deniedAccess', rematch_click: 'rematchClicks' };
+const ANALYTICS_TYPES = {
+  report_view: 'reportViews',
+  denied: 'deniedAccess',
+  rematch_click: 'rematchClicks',
+  map_select: 'mapSelections',
+  cosmetic_preview: 'cosmeticPreviews',
+  motion_pref: 'motionPreferenceChanges'
+};
 
 exports.onAnalyticsEvent = onDocumentCreated('analyticsEvents/{id}', async (event) => {
   const e = event.data.data() || {};

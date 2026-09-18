@@ -1,13 +1,21 @@
 // Post-match results: score, rewards, categories, early-buzz performance,
 // missed clues, recommended next quest, rematch.
-// Reads: sessions/{id}, sessionSummaries/{id}_{studentId}
-// Writes: sessionRequests (rematch / next quest), analyticsEvents (rematch_click)
-import { useState } from 'react';
+// Reads: sessions/{id}, sessionSummaries/{id}_{studentId}, students/{id}/grants/{grantId}
+//        (reward reveal), classrooms/{classroomId} (celebrations setting)
+// Writes: sessionRequests (rematch / next quest), analyticsEvents (rematch_click);
+//         grant acknowledgement happens inside RewardReveal.
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { useAuth } from '../../hooks/useAuth.jsx';
 import { useDoc } from '../../hooks/useFirestore.js';
+import { useSchoolTheme } from '../../hooks/useSchoolTheme.js';
+import { prefersReducedMotion } from '../../hooks/useAccessibility.js';
+import RewardReveal from '../../components/rewards/RewardReveal.jsx';
+import { QuizBot } from '../../components/bot/index.js';
+import { currentLoadout } from '../../lib/rewards.js';
+import '../../components/battle/results.css';
 import { Avatar, Button, ButtonLink, Card, Chip, ErrorNote, Loading, PageHeader, Stat, StrengthRow } from '../../components/ui.jsx';
 import { ClueReview } from '../../components/game/GameParts.jsx';
 import { MODE_LABELS, startSession } from '../../lib/game.js';
@@ -16,13 +24,16 @@ import { pct } from '../../lib/format.js';
 
 export default function Results() {
   const { sessionId } = useParams();
-  const { claims } = useAuth();
+  const { claims, student } = useAuth();
   const navigate = useNavigate();
   const studentId = claims.studentId;
+  const { theme } = useSchoolTheme();
   const { data: session, loading } = useDoc(`sessions/${sessionId}`);
   const { data: summary } = useDoc(studentId ? `sessionSummaries/${sessionId}_${studentId}` : null);
+  const { data: classroom } = useDoc(claims.classroomId ? `classrooms/${claims.classroomId}` : null);
   const [starting, setStarting] = useState(null);
   const [err, setErr] = useState(null);
+  const reveal = useGrantReveal(sessionId, studentId, summary);
 
   if (loading) return <Loading full />;
   if (!session) {
@@ -67,14 +78,37 @@ export default function Results() {
   else if (versus) headline = session.mode === 'live_battle' ? 'Great battle!' : `${opp?.name} wins this time`;
   const oppLine = opp ? (won ? opp.lines?.lose : opp.lines?.win) : null;
 
+  const rival = session.rival;
+  const newInDex = !!(won && rival?.id && student?.dex?.[rival.id]?.wins === 1);
+  const defeatLine = won && session.battle === 'boss' ? rival?.defeat : null;
+
   return (
     <div className="page stack-xl">
-      <PageHeader eyebrow={session.title || MODE_LABELS[session.mode]} title={headline} subtitle={oppLine ? `${opp.avatar} “${oppLine}”` : null} />
+      {rival?.image ? (
+        <VictoryBanner
+          eyebrow={session.title || MODE_LABELS[session.mode]}
+          title={headline}
+          line={defeatLine || oppLine}
+          rival={rival}
+          won={won}
+          tie={tie}
+          newInDex={newInDex}
+          battle={session.battle}
+        />
+      ) : (
+        <PageHeader eyebrow={session.title || MODE_LABELS[session.mode]} title={headline} subtitle={oppLine ? `${opp.avatar} “${oppLine}”` : null} />
+      )}
 
       <Card className="row" style={{ justifyContent: 'space-around', gap: 24 }}>
         {Object.entries(session.sides).map(([k, s]) => (
           <div key={k} className="stack" style={{ alignItems: 'center', gap: 8 }}>
-            <Avatar emoji={s.emoji} size="lg" />
+            {k === mySide && session.mode !== 'live_battle' ? (
+              <QuizBot loadout={currentLoadout(student)} theme={theme} size={96} pose="static" title="Your QuizBot" />
+            ) : k !== mySide && session.rival?.image ? (
+              <img src={session.rival.image} alt={session.rival.name} width="96" height="96" style={{ objectFit: 'contain' }} />
+            ) : (
+              <Avatar emoji={s.emoji} size="lg" />
+            )}
             <strong>{k === mySide && session.mode !== 'live_battle' ? 'You' : s.name}</strong>
             <span className="stat-value" style={{ color: k === mySide ? 'var(--purple)' : undefined }}>
               {s.score}
@@ -88,7 +122,7 @@ export default function Results() {
         <Loading label="Adding up your rewards…" />
       ) : (
         <>
-          <Rewards summary={summary} />
+          <Rewards summary={summary} pendingReveal={reveal.pending} onReveal={reveal.open} />
           <div className="grid-4">
             <Card>
               <Stat value={`${summary.correct}/${summary.seen}`} label="Correct" />
@@ -172,7 +206,85 @@ export default function Results() {
           );
         })}
       </section>
+      {reveal.grants ? (
+        <RewardReveal
+          grants={reveal.grants}
+          studentId={studentId}
+          onDone={reveal.close}
+          theme={theme}
+          reducedMotion={prefersReducedMotion(student?.settings)}
+          calm={classroom?.settings?.rewards?.celebrations === 'calm'}
+        />
+      ) : null}
     </div>
+  );
+}
+
+/**
+ * Grants earned in this match (summary.grants) that haven't been revealed yet.
+ * Opens the reveal automatically once per session on this device.
+ */
+function useGrantReveal(sessionId, studentId, summary) {
+  const [docs, setDocs] = useState(null);
+  const [showing, setShowing] = useState(false);
+  const autoRef = useRef(false);
+  const ids = (summary?.grants || []).map((g) => g.id).filter(Boolean);
+  const key = ids.join(',');
+  useEffect(() => {
+    if (!studentId || !ids.length) return undefined;
+    let cancelled = false;
+    Promise.all(ids.map((id) => getDoc(doc(db, `students/${studentId}/grants/${id}`)).catch(() => null)))
+      .then((snaps) => {
+        if (cancelled) return;
+        const pending = snaps.filter((s) => s?.exists()).map((s) => ({ id: s.id, ...s.data() })).filter((g) => !g.acknowledgedAt);
+        setDocs(pending);
+        const flag = `qq-reveal-${sessionId}`;
+        let seen = false;
+        try {
+          seen = sessionStorage.getItem(flag) === '1';
+          sessionStorage.setItem(flag, '1');
+        } catch {
+          /* storage unavailable */
+        }
+        if (pending.length && !seen && !autoRef.current) {
+          autoRef.current = true;
+          setShowing(true);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId, studentId, key]);
+  return {
+    grants: showing && docs?.length ? docs : null,
+    pending: showing ? 0 : docs?.length || 0,
+    open: () => setShowing(true),
+    close: () => {
+      setShowing(false);
+      setDocs([]);
+    }
+  };
+}
+
+function VictoryBanner({ eyebrow, title, line, rival, won, tie, newInDex, battle }) {
+  return (
+    <section className={`results-banner ${won ? 'won' : tie ? 'tie' : 'lost'}`} aria-labelledby="results-title">
+      <div className="results-banner-art" aria-hidden="true">
+        <img src={rival.image} alt="" width="200" height="200" />
+      </div>
+      <div className="stack" style={{ gap: 6, minWidth: 0 }}>
+        <span className="eyebrow">{eyebrow}</span>
+        <h1 id="results-title">{title}</h1>
+        {line ? <p className="results-banner-line">“{line}”</p> : null}
+        <div className="row">
+          {won ? <Chip tone="sun">🏆 Victory</Chip> : null}
+          {battle === 'boss' && won ? <Chip tone="purple">👑 Boss defeated</Chip> : null}
+          {newInDex ? <Chip tone="teal">📖 New in your QuizDex!</Chip> : null}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -205,7 +317,7 @@ function HistoryClues({ h, session, studentId }) {
   );
 }
 
-function Rewards({ summary }) {
+function Rewards({ summary, pendingReveal, onReveal }) {
   const worlds = (summary.unlockedWorlds || []).map((id) => WORLDS.find((w) => w.id === id)).filter(Boolean);
   const badges = (summary.newBadges || []).map(badgeById).filter(Boolean);
   return (
@@ -251,6 +363,18 @@ function Rewards({ summary }) {
       ) : null}
       {summary.newBests?.length ? <p>🏅 New personal best: {summary.newBests.join(', ')}</p> : null}
       {summary.teamQuestContribution ? <p>🤝 You added {summary.teamQuestContribution} to your team quest.</p> : null}
+      {summary.grants?.length ? (
+        <div className="row-between">
+          <strong>
+            🎁 {summary.grants.length} new {summary.grants.length === 1 ? 'reward' : 'rewards'}
+          </strong>
+          {pendingReveal ? (
+            <Button variant="primary" onClick={onReveal}>
+              Open {pendingReveal === 1 ? 'it' : 'them'}
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
     </Card>
   );
 }

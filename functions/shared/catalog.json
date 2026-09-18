@@ -1,38 +1,137 @@
 {
   "categories": [
-    { "id": "Science", "emoji": "🧪", "color": "#14B8A6" },
-    { "id": "Space", "emoji": "🪐", "color": "#7C5CFA" },
-    { "id": "Geography", "emoji": "🗺️", "color": "#F59E0B" },
-    { "id": "History", "emoji": "🏛️", "color": "#F2555A" },
-    { "id": "Literature", "emoji": "📚", "color": "#22A06B" },
-    { "id": "Mythology", "emoji": "⚡", "color": "#8B5CF6" },
-    { "id": "Fine Arts", "emoji": "🎨", "color": "#EC4899" }
+    {
+      "id": "Science",
+      "emoji": "\ud83e\uddea",
+      "color": "#14B8A6"
+    },
+    {
+      "id": "Space",
+      "emoji": "\ud83e\ude90",
+      "color": "#7C5CFA"
+    },
+    {
+      "id": "Geography",
+      "emoji": "\ud83d\uddfa\ufe0f",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "History",
+      "emoji": "\ud83c\udfdb\ufe0f",
+      "color": "#F2555A"
+    },
+    {
+      "id": "Literature",
+      "emoji": "\ud83d\udcda",
+      "color": "#22A06B"
+    },
+    {
+      "id": "Mythology",
+      "emoji": "\u26a1",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": "Fine Arts",
+      "emoji": "\ud83c\udfa8",
+      "color": "#EC4899"
+    }
   ],
-
   "worlds": [
-    { "id": "science-lab", "name": "Science Lab", "category": "Science", "emoji": "🧪", "blurb": "Bubbling beakers and brainy robots.", "unlockStars": 0 },
-    { "id": "geography-galaxy", "name": "Geography Galaxy", "category": "Geography", "emoji": "🧭", "blurb": "Every map is a treasure map.", "unlockStars": 1 },
-    { "id": "history-kingdom", "name": "History Kingdom", "category": "History", "emoji": "🏰", "blurb": "Knights, pharaohs, and founders.", "unlockStars": 3 },
-    { "id": "literature-forest", "name": "Literature Forest", "category": "Literature", "emoji": "🌳", "blurb": "Stories grow on every branch.", "unlockStars": 5 },
-    { "id": "space-station", "name": "Space Station", "category": "Space", "emoji": "🚀", "blurb": "Blast off past the planets.", "unlockStars": 7 },
-    { "id": "myth-mountain", "name": "Myth Mountain", "category": "Mythology", "emoji": "⛰️", "blurb": "Gods, heroes, and legends.", "unlockStars": 9 },
-    { "id": "harmony-harbor", "name": "Harmony Harbor", "category": "Fine Arts", "emoji": "🎻", "blurb": "Paintings, songs, and masterpieces.", "unlockStars": 11 }
+    {
+      "id": "science-lab",
+      "name": "Science Lab",
+      "category": "Science",
+      "emoji": "\ud83e\uddea",
+      "blurb": "Bubbling beakers and brainy robots.",
+      "unlockStars": 0
+    },
+    {
+      "id": "geography-galaxy",
+      "name": "Geography Galaxy",
+      "category": "Geography",
+      "emoji": "\ud83e\udded",
+      "blurb": "Every map is a treasure map.",
+      "unlockStars": 1
+    },
+    {
+      "id": "history-kingdom",
+      "name": "History Kingdom",
+      "category": "History",
+      "emoji": "\ud83c\udff0",
+      "blurb": "Knights, pharaohs, and founders.",
+      "unlockStars": 3
+    },
+    {
+      "id": "literature-forest",
+      "name": "Literature Forest",
+      "category": "Literature",
+      "emoji": "\ud83c\udf33",
+      "blurb": "Stories grow on every branch.",
+      "unlockStars": 5
+    },
+    {
+      "id": "space-station",
+      "name": "Space Station",
+      "category": "Space",
+      "emoji": "\ud83d\ude80",
+      "blurb": "Blast off past the planets.",
+      "unlockStars": 7
+    },
+    {
+      "id": "myth-mountain",
+      "name": "Myth Mountain",
+      "category": "Mythology",
+      "emoji": "\u26f0\ufe0f",
+      "blurb": "Gods, heroes, and legends.",
+      "unlockStars": 9
+    },
+    {
+      "id": "harmony-harbor",
+      "name": "Harmony Harbor",
+      "category": "Fine Arts",
+      "emoji": "\ud83c\udfbb",
+      "blurb": "Paintings, songs, and masterpieces.",
+      "unlockStars": 11
+    }
   ],
-  "worldStarThresholds": [5, 15, 30],
-
+  "worldStarThresholds": [
+    5,
+    15,
+    30
+  ],
   "levels": {
     "xpFactor": 40,
     "titles": [
-      { "minLevel": 1, "title": "Rookie" },
-      { "minLevel": 3, "title": "Scout" },
-      { "minLevel": 5, "title": "Adventurer" },
-      { "minLevel": 8, "title": "Explorer" },
-      { "minLevel": 12, "title": "Trailblazer" },
-      { "minLevel": 16, "title": "Champion" },
-      { "minLevel": 20, "title": "Legend" }
+      {
+        "minLevel": 1,
+        "title": "Rookie"
+      },
+      {
+        "minLevel": 3,
+        "title": "Scout"
+      },
+      {
+        "minLevel": 5,
+        "title": "Adventurer"
+      },
+      {
+        "minLevel": 8,
+        "title": "Explorer"
+      },
+      {
+        "minLevel": 12,
+        "title": "Trailblazer"
+      },
+      {
+        "minLevel": 16,
+        "title": "Champion"
+      },
+      {
+        "minLevel": 20,
+        "title": "Legend"
+      }
     ]
   },
-
   "xp": {
     "correctTossup": 10,
     "power": 5,
@@ -42,18 +141,23 @@
     "dailyQuest": 25,
     "attempted": 1
   },
-
   "personas": [
     {
       "id": "rookie-robot",
       "name": "Rookie Robot",
-      "avatar": "🤖",
+      "avatar": "\ud83e\udd16",
       "difficulty": "Beginner",
       "tier": 0,
       "intro": "Beep boop! I'm still learning too. Let's have fun!",
       "strengths": "Waits for the easy clues",
-      "accuracy": [0.45, 0.55],
-      "reactionMs": [1800, 2800],
+      "accuracy": [
+        0.45,
+        0.55
+      ],
+      "reactionMs": [
+        1800,
+        2800
+      ],
       "risk": 0.45,
       "skill": 0.5,
       "minClueFraction": 0.5,
@@ -67,13 +171,19 @@
     {
       "id": "questy-owl",
       "name": "Questy the Owl",
-      "avatar": "🦉",
+      "avatar": "\ud83e\udd89",
       "difficulty": "Developing",
       "tier": 1,
       "intro": "Hoo's ready for a quest? I know a little about everything.",
       "strengths": "A balanced all-rounder",
-      "accuracy": [0.6, 0.7],
-      "reactionMs": [1200, 2000],
+      "accuracy": [
+        0.6,
+        0.7
+      ],
+      "reactionMs": [
+        1200,
+        2000
+      ],
       "risk": 0.65,
       "skill": 0.65,
       "minClueFraction": 0.25,
@@ -87,14 +197,23 @@
     {
       "id": "category-captain",
       "name": "Category Captain",
-      "avatar": "🦸",
+      "avatar": "\ud83e\uddb8",
       "difficulty": "Intermediate",
       "tier": 2,
       "intro": "Every captain has a favorite subject. Can you guess mine?",
       "strengths": "Super strong in one subject",
-      "accuracy": [0.55, 0.65],
-      "specialtyAccuracy": [0.75, 0.85],
-      "reactionMs": [900, 1600],
+      "accuracy": [
+        0.55,
+        0.65
+      ],
+      "specialtyAccuracy": [
+        0.75,
+        0.85
+      ],
+      "reactionMs": [
+        900,
+        1600
+      ],
       "risk": 0.75,
       "skill": 0.62,
       "specialtySkill": 0.85,
@@ -109,13 +228,19 @@
     {
       "id": "quiz-master",
       "name": "Quiz Master",
-      "avatar": "🧙",
+      "avatar": "\ud83e\uddd9",
       "difficulty": "Advanced",
       "tier": 3,
       "intro": "I recognize the early clues. Buzz fast if you want to beat me.",
       "strengths": "Buzzes early and takes smart risks",
-      "accuracy": [0.8, 0.9],
-      "reactionMs": [600, 1200],
+      "accuracy": [
+        0.8,
+        0.9
+      ],
+      "reactionMs": [
+        600,
+        1200
+      ],
       "risk": 1.0,
       "skill": 0.9,
       "minClueFraction": 0,
@@ -129,7 +254,7 @@
     {
       "id": "adaptive-rival",
       "name": "Best-Fit Rival",
-      "avatar": "🦊",
+      "avatar": "\ud83e\udd8a",
       "difficulty": "Personalized",
       "tier": -1,
       "intro": "I'm the rival picked just for you. Let's see what you've got!",
@@ -143,25 +268,68 @@
       }
     }
   ],
-
   "adaptiveLadder": {
     "levels": 7,
     "defaultLevel": 2,
-    "window": [10, 20],
-    "winRateTarget": [0.45, 0.6],
-    "from": { "accuracy": [0.45, 0.55], "reactionMs": [1800, 2800], "risk": 0.45, "skill": 0.5, "minClueFraction": 0.5 },
-    "to": { "accuracy": [0.8, 0.9], "reactionMs": [600, 1200], "risk": 1.0, "skill": 0.9, "minClueFraction": 0 }
+    "window": [
+      10,
+      20
+    ],
+    "winRateTarget": [
+      0.45,
+      0.6
+    ],
+    "from": {
+      "accuracy": [
+        0.45,
+        0.55
+      ],
+      "reactionMs": [
+        1800,
+        2800
+      ],
+      "risk": 0.45,
+      "skill": 0.5,
+      "minClueFraction": 0.5
+    },
+    "to": {
+      "accuracy": [
+        0.8,
+        0.9
+      ],
+      "reactionMs": [
+        600,
+        1200
+      ],
+      "risk": 1.0,
+      "skill": 0.9,
+      "minClueFraction": 0
+    }
   },
-
-  "reactionFloorMs": { "0": 1800, "1": 1200, "2": 900, "3": 600 },
-
+  "reactionFloorMs": {
+    "0": 1800,
+    "1": 1200,
+    "2": 900,
+    "3": 600
+  },
   "readingSpeeds": {
-    "slow": { "label": "Slow", "wordsPerSecond": 1.6 },
-    "medium": { "label": "Medium", "wordsPerSecond": 2.2 },
-    "fast": { "label": "Fast", "wordsPerSecond": 3.0 },
-    "manual": { "label": "Tap for next clue", "wordsPerSecond": null }
+    "slow": {
+      "label": "Slow",
+      "wordsPerSecond": 1.6
+    },
+    "medium": {
+      "label": "Medium",
+      "wordsPerSecond": 2.2
+    },
+    "fast": {
+      "label": "Fast",
+      "wordsPerSecond": 3.0
+    },
+    "manual": {
+      "label": "Tap for next clue",
+      "wordsPerSecond": null
+    }
   },
-
   "defaultRules": {
     "matchLength": 10,
     "readingSpeed": "medium",
@@ -176,32 +344,197 @@
     "bonusWindowMs": 10000,
     "deadWindowMs": 5000
   },
-
-  "avatars": ["🦊", "🐼", "🐯", "🦁", "🐸", "🐙", "🦄", "🐧", "🐨", "🐰", "🦉", "🐢", "🐳", "🦖", "🐝", "🐬"],
-
-  "badges": [
-    { "id": "first-buzz", "name": "First Buzz", "emoji": "🔔", "description": "Answer your first question correctly." },
-    { "id": "early-bird", "name": "Early Bird", "emoji": "🐤", "description": "Earn a power by buzzing on an early clue." },
-    { "id": "streak-3", "name": "On a Roll", "emoji": "🔥", "description": "Play 3 days in a row." },
-    { "id": "streak-7", "name": "Week Warrior", "emoji": "📅", "description": "Play 7 days in a row." },
-    { "id": "streak-12", "name": "Unstoppable", "emoji": "🌋", "description": "Play 12 days in a row." },
-    { "id": "perfect-round", "name": "Perfect Round", "emoji": "💎", "description": "Answer every tossup right in a round of 5 or more." },
-    { "id": "robot-beater", "name": "Robot Beater", "emoji": "🤖", "description": "Beat Rookie Robot." },
-    { "id": "owl-outflyer", "name": "Owl Out-Flyer", "emoji": "🦉", "description": "Beat Questy the Owl." },
-    { "id": "captain-crusher", "name": "Captain Crusher", "emoji": "🦸", "description": "Beat Category Captain." },
-    { "id": "master-challenger", "name": "Master Challenger", "emoji": "🧙", "description": "Beat the Quiz Master." },
-    { "id": "team-player", "name": "Team Player", "emoji": "🤝", "description": "Contribute 50 correct answers to team quests." },
-    { "id": "card-collector", "name": "Card Collector", "emoji": "🃏", "description": "Collect 10 different knowledge cards." },
-    { "id": "review-ranger", "name": "Review Ranger", "emoji": "🔁", "description": "Save 10 questions to your Review Deck." },
-    { "id": "explorer-Science", "name": "Science Explorer", "emoji": "🧪", "description": "Answer 10 Science questions correctly." },
-    { "id": "explorer-Space", "name": "Space Explorer", "emoji": "🪐", "description": "Answer 10 Space questions correctly." },
-    { "id": "explorer-Geography", "name": "Geography Explorer", "emoji": "🗺️", "description": "Answer 10 Geography questions correctly." },
-    { "id": "explorer-History", "name": "History Explorer", "emoji": "🏛️", "description": "Answer 10 History questions correctly." },
-    { "id": "explorer-Literature", "name": "Literature Explorer", "emoji": "📚", "description": "Answer 10 Literature questions correctly." },
-    { "id": "explorer-Mythology", "name": "Mythology Explorer", "emoji": "⚡", "description": "Answer 10 Mythology questions correctly." },
-    { "id": "explorer-Fine Arts", "name": "Fine Arts Explorer", "emoji": "🎨", "description": "Answer 10 Fine Arts questions correctly." }
+  "avatars": [
+    "\ud83e\udd8a",
+    "\ud83d\udc3c",
+    "\ud83d\udc2f",
+    "\ud83e\udd81",
+    "\ud83d\udc38",
+    "\ud83d\udc19",
+    "\ud83e\udd84",
+    "\ud83d\udc27",
+    "\ud83d\udc28",
+    "\ud83d\udc30",
+    "\ud83e\udd89",
+    "\ud83d\udc22",
+    "\ud83d\udc33",
+    "\ud83e\udd96",
+    "\ud83d\udc1d",
+    "\ud83d\udc2c"
   ],
-
-  "gradeBands": ["4-5", "6-8"],
-  "contentStatuses": ["draft", "review", "approved", "published", "retired"]
+  "badges": [
+    {
+      "id": "first-buzz",
+      "name": "First Buzz",
+      "emoji": "\ud83d\udd14",
+      "description": "Answer your first question correctly."
+    },
+    {
+      "id": "early-bird",
+      "name": "Early Bird",
+      "emoji": "\ud83d\udc24",
+      "description": "Earn a power by buzzing on an early clue."
+    },
+    {
+      "id": "streak-3",
+      "name": "On a Roll",
+      "emoji": "\ud83d\udd25",
+      "description": "Play 3 days in a row."
+    },
+    {
+      "id": "streak-7",
+      "name": "Week Warrior",
+      "emoji": "\ud83d\udcc5",
+      "description": "Play 7 days in a row."
+    },
+    {
+      "id": "streak-12",
+      "name": "Unstoppable",
+      "emoji": "\ud83c\udf0b",
+      "description": "Play 12 days in a row."
+    },
+    {
+      "id": "perfect-round",
+      "name": "Perfect Round",
+      "emoji": "\ud83d\udc8e",
+      "description": "Answer every tossup right in a round of 5 or more."
+    },
+    {
+      "id": "robot-beater",
+      "name": "Robot Beater",
+      "emoji": "\ud83e\udd16",
+      "description": "Beat Rookie Robot."
+    },
+    {
+      "id": "owl-outflyer",
+      "name": "Owl Out-Flyer",
+      "emoji": "\ud83e\udd89",
+      "description": "Beat Questy the Owl."
+    },
+    {
+      "id": "captain-crusher",
+      "name": "Captain Crusher",
+      "emoji": "\ud83e\uddb8",
+      "description": "Beat Category Captain."
+    },
+    {
+      "id": "master-challenger",
+      "name": "Master Challenger",
+      "emoji": "\ud83e\uddd9",
+      "description": "Beat the Quiz Master."
+    },
+    {
+      "id": "team-player",
+      "name": "Team Player",
+      "emoji": "\ud83e\udd1d",
+      "description": "Contribute 50 correct answers to team quests."
+    },
+    {
+      "id": "card-collector",
+      "name": "Card Collector",
+      "emoji": "\ud83c\udccf",
+      "description": "Collect 10 different knowledge cards."
+    },
+    {
+      "id": "review-ranger",
+      "name": "Review Ranger",
+      "emoji": "\ud83d\udd01",
+      "description": "Save 10 questions to your Review Deck."
+    },
+    {
+      "id": "explorer-Science",
+      "name": "Science Explorer",
+      "emoji": "\ud83e\uddea",
+      "description": "Answer 10 Science questions correctly."
+    },
+    {
+      "id": "explorer-Space",
+      "name": "Space Explorer",
+      "emoji": "\ud83e\ude90",
+      "description": "Answer 10 Space questions correctly."
+    },
+    {
+      "id": "explorer-Geography",
+      "name": "Geography Explorer",
+      "emoji": "\ud83d\uddfa\ufe0f",
+      "description": "Answer 10 Geography questions correctly."
+    },
+    {
+      "id": "explorer-History",
+      "name": "History Explorer",
+      "emoji": "\ud83c\udfdb\ufe0f",
+      "description": "Answer 10 History questions correctly."
+    },
+    {
+      "id": "explorer-Literature",
+      "name": "Literature Explorer",
+      "emoji": "\ud83d\udcda",
+      "description": "Answer 10 Literature questions correctly."
+    },
+    {
+      "id": "explorer-Mythology",
+      "name": "Mythology Explorer",
+      "emoji": "\u26a1",
+      "description": "Answer 10 Mythology questions correctly."
+    },
+    {
+      "id": "explorer-Fine Arts",
+      "name": "Fine Arts Explorer",
+      "emoji": "\ud83c\udfa8",
+      "description": "Answer 10 Fine Arts questions correctly."
+    },
+    {
+      "id": "champion-science-lab",
+      "name": "Science Lab Champion",
+      "emoji": "\ud83e\uddea",
+      "description": "Beat the Science Lab boss."
+    },
+    {
+      "id": "champion-geography-galaxy",
+      "name": "Geography Galaxy Champion",
+      "emoji": "\ud83e\udded",
+      "description": "Beat the Geography Galaxy boss."
+    },
+    {
+      "id": "champion-history-kingdom",
+      "name": "History Kingdom Champion",
+      "emoji": "\ud83c\udff0",
+      "description": "Beat the History Kingdom boss."
+    },
+    {
+      "id": "champion-literature-forest",
+      "name": "Literature Forest Champion",
+      "emoji": "\ud83c\udf33",
+      "description": "Beat the Literature Forest boss."
+    },
+    {
+      "id": "champion-space-station",
+      "name": "Space Station Champion",
+      "emoji": "\ud83d\ude80",
+      "description": "Beat the Space Station boss."
+    },
+    {
+      "id": "champion-myth-mountain",
+      "name": "Myth Mountain Champion",
+      "emoji": "\u26f0\ufe0f",
+      "description": "Beat the Myth Mountain boss."
+    },
+    {
+      "id": "champion-harmony-harbor",
+      "name": "Harmony Harbor Champion",
+      "emoji": "\ud83c\udfbb",
+      "description": "Beat the Harmony Harbor boss."
+    }
+  ],
+  "gradeBands": [
+    "4-5",
+    "6-8"
+  ],
+  "contentStatuses": [
+    "draft",
+    "review",
+    "approved",
+    "published",
+    "retired"
+  ]
 }

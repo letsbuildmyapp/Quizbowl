@@ -1,4 +1,5 @@
-// Competitions: Team Quests (async shared target), Live Team Battles, School Challenges.
+// Competitions: Team Quests (async shared target), school quests (components/teacher/SchoolQuests.jsx),
+//   Live Team Battles, School Challenges.
 // Firestore reads: classrooms (useClassroom), students where classroomId ==, teams where classroomId ==,
 //   teamQuests where classroomId ==,
 //   sessions where classroomId == X, mode == 'live_battle', status in [active statuses],
@@ -24,6 +25,7 @@ import { randomCode, request } from '../../lib/requests.js';
 import { Button, Card, Chip, EmptyState, ErrorNote, Field, Loading, Modal, ProgressBar, Segmented, friendlyError, useToast } from '../../components/ui.jsx';
 import { ClassGate, TeacherHeader, rosterMap, useRoster, useTeams } from '../../components/teacher/TeacherPage.jsx';
 import { ACTIVE_SESSION_STATUSES, DAY_MS } from '../../components/teacher/stats.js';
+import SchoolQuests from '../../components/teacher/SchoolQuests.jsx';
 
 function dateInput(ms) {
   const d = new Date(ms);
@@ -54,6 +56,7 @@ function CompetitionsBody({ classroom }) {
   return (
     <div className="stack-xl">
       <TeamQuests classroom={classroom} roster={roster} teams={teams} />
+      <SchoolQuests />
       <LiveBattles classroom={classroom} roster={roster} teams={teams} />
       <SchoolChallenges classroom={classroom} />
     </div>

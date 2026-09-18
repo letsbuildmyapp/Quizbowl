@@ -1,11 +1,13 @@
 // Platform overview: "Analytics and Success Measures" plus opponent reaction floors.
 // Reads:  metrics/{weekKey} for the last 8 ISO weeks, config/opponents
 // Writes: config/opponents { reactionFloorMs: { '0', '1', '2', '3' } } (setDoc merge)
+//         rulePreviews/{auto} via request() (components/admin/RewardRules.jsx; grants nothing)
 import { useEffect, useState } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { Button, Card, Chip, EmptyState, ErrorNote, Field, Loading, PageHeader, Stat, useToast } from '../../components/ui.jsx';
 import { BarChart, PlatformOnly } from '../../components/admin/common.jsx';
+import RewardRules from '../../components/admin/RewardRules.jsx';
 import { useDoc } from '../../hooks/useFirestore.js';
 import { TIER_LABELS, catalog } from '../../lib/catalog.js';
 import { weekKey } from '../../lib/format.js';
@@ -122,6 +124,52 @@ function TierCard({ weeks }) {
         </div>
       )}
     </Card>
+  );
+}
+
+const ADVENTURE_COUNTERS = [
+  { key: 'mapSelections', label: 'Map selections' },
+  { key: 'cosmeticPreviews', label: 'Gear previews' },
+  { key: 'motionPreferenceChanges', label: 'Motion setting changes' },
+  { key: 'versusStarted', label: 'Versus started' }
+];
+
+function AdventureCounters({ weeks }) {
+  const present = ADVENTURE_COUNTERS.filter((c) => weeks.some((w) => typeof w.data?.[c.key] === 'number'));
+  if (!present.length) return null;
+  return (
+    <section className="stack" aria-labelledby="adv-counters-title">
+      <div className="stack" style={{ gap: 6 }}>
+        <h2 id="adv-counters-title">Adventure and reward counters</h2>
+        <p className="muted prose">Weekly counts only. No student identities.</p>
+      </div>
+      <div className="table-wrap">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Week</th>
+              {present.map((c) => (
+                <th key={c.key} scope="col" className="num">
+                  {c.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[...weeks].reverse().map((w) => (
+              <tr key={w.key}>
+                <th scope="row" className="tabular">{w.key}</th>
+                {present.map((c) => (
+                  <td key={c.key} className="num">
+                    {w.data ? nf(w.data[c.key] ?? 0) : 'No data'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }
 
@@ -265,6 +313,8 @@ function AdminHomeInner() {
 
           <TierCard weeks={metrics.weeks} />
 
+          <AdventureCounters weeks={metrics.weeks} />
+
           <section className="stack" aria-labelledby="table-title">
             <h2 id="table-title">Week by week</h2>
             <div className="table-wrap">
@@ -316,6 +366,8 @@ function AdminHomeInner() {
           </section>
         </>
       ) : null}
+
+      <RewardRules />
 
       <FloorsCard />
     </div>

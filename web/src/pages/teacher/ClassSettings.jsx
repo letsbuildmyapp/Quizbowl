@@ -1,4 +1,5 @@
-// Class settings: leaderboard, computer opponent range, match rules, accessibility, voice answers.
+// Class settings: leaderboard, computer opponent range, match rules, accessibility, voice answers,
+//   rewards and motion (settings.rewards, defaults from rewards.defaultClassRewards).
 // Firestore reads: classrooms (via useClassroom).
 // Firestore writes: classrooms/{id} update { settings }.
 import { useState } from 'react';
@@ -6,6 +7,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { useClassroom } from '../../hooks/useClassroom.js';
 import { DEFAULT_RULES, READING_SPEEDS, TIER_LABELS } from '../../lib/catalog.js';
+import { rewards as rewardConfig } from '../../lib/rewards.js';
 import { Button, Card, ErrorNote, Field, Segmented, friendlyError, useToast } from '../../components/ui.jsx';
 import { ClassGate, TeacherHeader } from '../../components/teacher/TeacherPage.jsx';
 
@@ -19,9 +21,18 @@ function withDefaults(settings = {}) {
     opponentMaxTier: settings.opponentMaxTier ?? 3,
     rules: { ...DEFAULT_RULES, ...(settings.rules || {}) },
     accessibility: { readingSpeed: 'medium', readAloud: false, reducedMotion: false, largeText: false, ...(settings.accessibility || {}) },
-    voiceAnswers: !!settings.voiceAnswers
+    voiceAnswers: !!settings.voiceAnswers,
+    rewards: { ...rewardConfig.defaultClassRewards, ...(settings.rewards || {}) }
   };
 }
+
+const HALL_FIELDS = [
+  { value: 'loadout', label: 'QuizBot and gear' },
+  { value: 'level', label: 'Level' },
+  { value: 'featuredBadge', label: 'Featured badge' },
+  { value: 'featuredItems', label: 'Featured items' },
+  { value: 'worldsMastered', label: 'Worlds mastered' }
+];
 
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
 
@@ -66,7 +77,11 @@ function SettingsForm({ classroom }) {
   const set = (patch) => setDraft((d) => ({ ...d, ...patch }));
   const setRule = (patch) => setDraft((d) => ({ ...d, rules: { ...d.rules, ...patch } }));
   const setA11y = (patch) => setDraft((d) => ({ ...d, accessibility: { ...d.accessibility, ...patch } }));
+  const setRewards = (patch) => setDraft((d) => ({ ...d, rewards: { ...d.rewards, ...patch } }));
+  const toggleHallField = (field, on) =>
+    setRewards({ hallPeerFields: HALL_FIELDS.map((f) => f.value).filter((v) => (v === field ? on : draft.rewards.hallPeerFields.includes(v))) });
   const r = draft.rules;
+  const rw = draft.rewards;
 
   const save = async () => {
     setBusy(true);
@@ -213,6 +228,48 @@ function SettingsForm({ classroom }) {
         <div className="alert alert-info">
           The browser's speech recognition may process audio outside QuizQuest. Leave this off unless your school approves it.
         </div>
+      </Card>
+
+      <Card className="stack">
+        <h2>Rewards and motion</h2>
+        <p className="muted">How chests, streaks, celebrations, and the Quiz Hall work in this class.</p>
+        <Toggle
+          label="Random chest contents"
+          checked={!!rw.randomChests}
+          onChange={(v) => setRewards({ randomChests: v })}
+          hint={rw.randomChests ? 'Chests give a random item the student does not own yet.' : 'Chests give the best item the student does not own yet. No randomness.'}
+        />
+        <Toggle label="Show daily streaks to students" checked={!!rw.showStreaks} onChange={(v) => setRewards({ showStreaks: v })} />
+        <div className="field">
+          <span className="label">Celebrations</span>
+          <Segmented
+            label="Celebration style"
+            value={rw.celebrations}
+            onChange={(v) => setRewards({ celebrations: v })}
+            options={[
+              { value: 'standard', label: 'Standard' },
+              { value: 'calm', label: 'Calm' }
+            ]}
+          />
+          <span className="hint">
+            {rw.celebrations === 'calm' ? 'Fewer particles, no screen shake, and shorter celebrations.' : 'Full reward reveals and celebrations.'}
+          </span>
+        </div>
+        <Toggle
+          label="Let classmates see each other's Quiz Hall"
+          checked={!!rw.hallPeerView}
+          onChange={(v) => setRewards({ hallPeerView: v })}
+          hint="Each student still chooses whether to share. Halls are private by default."
+        />
+        <fieldset className="t-fieldset" disabled={!rw.hallPeerView}>
+          <legend className="label">Classmates can see</legend>
+          {HALL_FIELDS.map((f) => (
+            <label key={f.value} className="check">
+              <input type="checkbox" checked={rw.hallPeerFields.includes(f.value)} onChange={(e) => toggleHallField(f.value, e.target.checked)} />
+              {f.label}
+            </label>
+          ))}
+        </fieldset>
       </Card>
 
       {error ? <ErrorNote>{error}</ErrorNote> : null}

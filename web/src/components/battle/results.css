@@ -1,0 +1,39 @@
+/* Results page victory banner (rival portrait + headline). */
+.results-banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  border: 3px solid #1e1b4b;
+  background: linear-gradient(120deg, #2a2160, #4a2fb8);
+  color: #fff;
+  box-shadow: 0 6px 0 rgb(15 10 40 / 0.35);
+  overflow: hidden;
+}
+.results-banner.won { background: linear-gradient(120deg, #3b2396, #6d4df2 55%, #b98bff); }
+.results-banner.lost { background: linear-gradient(120deg, #2a2160, #3b3470); }
+.results-banner h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); }
+.results-banner .eyebrow { color: #ffe08a; }
+.results-banner-line { font-weight: 700; font-style: italic; color: #e9e3ff; }
+.results-banner-art {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.05) 70%);
+  display: grid;
+  place-items: center;
+}
+.results-banner-art img { width: 150px; height: 150px; object-fit: contain; }
+.results-banner.won .results-banner-art img { animation: rb-hop 1.6s ease-in-out 2; }
+.results-banner.lost .results-banner-art img { animation: rb-hop 1.6s ease-in-out 1; }
+@keyframes rb-hop { 0%, 100% { transform: none; } 30% { transform: translateY(-10px) rotate(-3deg); } 60% { transform: none; } }
+@media (max-width: 560px) {
+  .results-banner { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 18px 16px; }
+  .results-banner .row { justify-content: center; }
+  .results-banner-art { width: 120px; height: 120px; }
+  .results-banner-art img { width: 110px; height: 110px; }
+}
+@media (prefers-reduced-motion: reduce) { .results-banner-art img { animation: none !important; } }
+:root[data-reduced-motion='true'] .results-banner-art img { animation: none !important; }

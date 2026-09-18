@@ -5,8 +5,11 @@
 // Pure: (student doc, finished session) -> updates.
 
 const catalog = require('../shared/catalog.json');
+const rewardsCatalog = require('../shared/rewards.json');
+const { sessionWorld, evaluateRule, isMastered } = require('./rewards');
 
-const XP = catalog.xp;
+// XP values are configuration (rewards.json xpRules), not constants here.
+const XP = rewardsCatalog.xpRules;
 
 function levelForXp(xp) {
   // xp needed to reach level n = factor * n * (n - 1)
@@ -170,13 +173,16 @@ function applySessionRewards(student, sessionPub, ctx) {
   const add = (label, amount) => {
     if (amount > 0) breakdown.push({ label, amount });
   };
-  add('Correct answers', s.correct * XP.correctTossup);
-  add('Power buzzes', s.powers * XP.power);
+  const complete = sessionPub.status === 'COMPLETE';
+  add('Questions tried', Math.min(s.answered * XP.attempt, XP.maxAttemptXpPerSession));
+  add('Correct answers', s.correct * XP.correct);
+  add('Power buzzes', s.powers * XP.powerBonus);
+  add('Early buzzes', Math.max(0, s.early - s.powers) * XP.earlyBonus);
   add('Bonus parts', s.bonusCorrect * XP.bonusPart);
-  add('Questions tried', s.answered * XP.attempted);
-  if (sessionPub.status === 'COMPLETE') add('Quest complete', XP.sessionComplete);
+  if (complete) add('Quest complete', XP.sessionComplete);
   if (s.won && sessionPub.opponent) add(`Beat ${sessionPub.opponent.name}`, XP.beatComputer);
-  if (sessionPub.dailyQuest && sessionPub.status === 'COMPLETE' && student.dailyQuestDay !== today) add("Today's Quest", XP.dailyQuest);
+  if (sessionPub.dailyQuest && complete && student.dailyQuestDay !== today) add("Today's Quest", XP.dailyQuest);
+  if (ctx.assignmentFirst && complete) add('Assignment complete', XP.assignmentFirstComplete);
   const xpEarned = breakdown.reduce((sum, b) => sum + b.amount, 0);
 
   const prevXp = student.xp || 0;
@@ -226,7 +232,11 @@ function applySessionRewards(student, sessionPub, ctx) {
     cards[topic] = { ...cards[topic], count: cards[topic].count + 1 };
   }
 
-  // Worlds: stars per world from category correct counts; unlocks from total stars.
+  // Worlds: a completed session counts as a quest in its world; stars from category
+  // correct counts; unlocks from quest rules (e.g. "Complete 3 Science Lab quests").
+  const worldQuests = { ...(student.worldQuests || {}) };
+  const questWorld = complete ? sessionWorld(sessionPub) : null;
+  if (questWorld) worldQuests[questWorld] = (worldQuests[questWorld] || 0) + 1;
   const worldStars = {};
   let totalStars = 0;
   for (const w of catalog.worlds) {
@@ -234,15 +244,27 @@ function applySessionRewards(student, sessionPub, ctx) {
     worldStars[w.id] = stars;
     totalStars += stars;
   }
-  const unlocked = catalog.worlds.filter((w) => totalStars >= w.unlockStars).map((w) => w.id);
+  const probe = { ...student, worldQuests, claimedMap: student.claimedMap || [], questStars: student.questStars || 0 };
+  const unlocked = catalog.worlds.filter((w) => evaluateRule(rewardsCatalog.worldUnlocks[w.id], probe).met).map((w) => w.id);
   const prevUnlocked = student.unlockedWorlds || [catalog.worlds[0].id];
   const unlockedWorlds = unlocked.filter((id) => !prevUnlocked.includes(id));
+  const masteredWorlds = Array.from(
+    new Set([...(student.masteredWorlds || []), ...catalog.worlds.filter((w) => isMastered(w.id, stats, { ...student, worldQuests })).map((w) => w.id)])
+  );
 
   // Adaptive rival history.
   let recentVersus = (student.recentVersus || []).slice();
   if (sessionPub.opponent && s.won !== null && !s.tie) {
     recentVersus.push(!!s.won);
     recentVersus = recentVersus.slice(-20);
+  }
+  // QuizDex: every rival you've beaten (Pokédex style), and world bosses defeated.
+  const dex = { ...(student.dex || {}) };
+  const bossesDefeated = new Set(student.bossesDefeated || []);
+  if (sessionPub.rival && s.won) {
+    const id = sessionPub.rival.id;
+    dex[id] = { wins: (dex[id]?.wins || 0) + 1, firstAt: dex[id]?.firstAt || ctx.now, world: sessionPub.world || null, kind: sessionPub.rival.kind };
+    if (sessionPub.battle === 'boss' && sessionPub.world) bossesDefeated.add(sessionPub.world);
   }
   const beatenPersonas = new Set(student.beatenPersonas || []);
   if (sessionPub.opponent && s.won) beatenPersonas.add(sessionPub.opponent.personaId);
@@ -280,6 +302,7 @@ function applySessionRewards(student, sessionPub, ctx) {
   if (Object.keys(cards).length >= 10) earn('card-collector');
   if ((student.reviewDeckCount || 0) >= 10) earn('review-ranger');
   for (const c of catalog.categories) if ((stats.categories[c.id]?.correct || 0) >= 10) earn(`explorer-${c.id}`);
+  for (const w of bossesDefeated) earn(`champion-${w}`);
   const newBadges = [...have].filter((b) => !(student.badges || []).includes(b));
 
   const update = {
@@ -291,6 +314,11 @@ function applySessionRewards(student, sessionPub, ctx) {
     cards,
     worldStars,
     totalStars,
+    worldQuests,
+    masteredWorlds,
+    dex,
+    bossesDefeated: [...bossesDefeated],
+    lastWorld: questWorld || student.lastWorld || null,
     unlockedWorlds: [...new Set([...prevUnlocked, ...unlocked])],
     recentVersus,
     beatenPersonas: [...beatenPersonas],
@@ -319,6 +347,7 @@ function applySessionRewards(student, sessionPub, ctx) {
     unlockedWorlds,
     leveledUp: level > prevLevel ? level : null,
     recommendation: recommendNext(stats, sessionPub.history[0]?.category),
+    questWorld,
     dayKey: today,
     weekKey: weekKey(ctx.now, tz)
   };

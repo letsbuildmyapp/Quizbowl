@@ -1,7 +1,8 @@
 // Pure aggregation helpers over sessionSummaries docs (see docs/DATA_MODEL.md).
 // Everything the teacher sees is computed from summaries so totals reconcile
 // with the stored game events.
-import { CATEGORIES, personaById } from '../../lib/catalog.js';
+import { CATEGORIES, WORLDS, personaById } from '../../lib/catalog.js';
+import { rewards } from '../../lib/rewards.js';
 
 export const DAY_MS = 86400000;
 
@@ -78,3 +79,26 @@ export const ACTIVE_SESSION_STATUSES = ['READY', 'READING_CLUE', 'BUZZ_LOCKED', 
 
 /** Percent label without the shared em-dash placeholder: "72%" or "n/a". */
 export const pctText = (n, d) => (d ? `${Math.round((n / d) * 100)}%` : 'n/a');
+
+const FIRST_WORLD = WORLDS[0]?.id;
+export const unlockedSet = (s) => new Set(s.unlockedWorlds?.length ? s.unlockedWorlds : [FIRST_WORLD]);
+
+/**
+ * The locked world the most students are stuck in front of: its prerequisite world is open,
+ * it is still locked, and the student has played at least 3 sessions.
+ */
+export function stuckWorld(activeRoster) {
+  const counts = {};
+  for (const s of activeRoster) {
+    if ((s.stats?.sessions || 0) < 3) continue;
+    const open = unlockedSet(s);
+    for (const w of WORLDS) {
+      const rule = rewards.worldUnlocks[w.id];
+      if (!rule || open.has(w.id) || !open.has(rule.world)) continue;
+      (counts[w.id] ||= []).push(s);
+    }
+  }
+  const [worldId, students] = Object.entries(counts).sort((a, b) => b[1].length - a[1].length)[0] || [];
+  if (!worldId) return null;
+  return { worldId, students, rule: rewards.worldUnlocks[worldId] };
+}

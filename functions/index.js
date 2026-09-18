@@ -14,6 +14,7 @@ const game = require('./src/game');
 const content = require('./src/content');
 const reporting = require('./src/reporting');
 const privacy = require('./src/privacy');
+const rewards = require('./src/rewards');
 
 module.exports = {
   onStudentLogin: identity.onStudentLogin,
@@ -37,6 +38,17 @@ module.exports = {
   onAssignmentCreated: reporting.onAssignmentCreated,
   onAnalyticsEvent: reporting.onAnalyticsEvent,
   onPrivacyRequestCounted: reporting.onPrivacyRequestCounted,
+
+  onMapClaim: rewards.onMapClaim,
+  onLoadoutRequest: rewards.onLoadoutRequest,
+  onCraftRequest: rewards.onCraftRequest,
+  onAwardRequest: rewards.onAwardRequest,
+  onSchoolQuestCompleted: rewards.onSchoolQuestCompleted,
+  onSchoolThemeWritten: rewards.onSchoolThemeWritten,
+  onHallRelevantChange: rewards.onHallRelevantChange,
+  onClassRewardSettings: rewards.onClassRewardSettings,
+  onRulePreview: rewards.onRulePreview,
+  onGrantAcknowledged: rewards.onGrantAcknowledged,
 
   onPrivacyRequest: privacy.onPrivacyRequest,
   onPrivacyDecision: privacy.onPrivacyDecision,

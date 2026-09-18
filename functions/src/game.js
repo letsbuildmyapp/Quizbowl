@@ -9,6 +9,8 @@ const { onDocumentCreated, onDocumentUpdated } = require('firebase-functions/v2/
 const engine = require('../engine');
 const { db, FieldValue, UserError, now, toMillis, claimsOf, fulfil, audit, bumpMetric, hashId, notify, DEFAULT_CLASS_SETTINGS, DEFAULT_SCHOOL_SETTINGS } = require('./common');
 const { pickQuestions } = require('./questions');
+const rewardsSvc = require('./rewards');
+const R = require('../engine/rewards');
 
 const { catalog } = engine;
 const FIXED_PERSONAS = catalog.personas.filter((p) => !p.adaptive);
@@ -114,6 +116,33 @@ async function createStudentSession(sessionId, data, claims) {
     title = a.title;
   }
 
+  // World battles (overworld): wild encounters and world bosses.
+  let world = null;
+  let battle = null;
+  let rival = null;
+  if (opts.world) {
+    const w = catalog.worlds.find((x) => x.id === opts.world);
+    if (!w) throw new UserError('That world was not found.');
+    const ws = R.worldState(w.id, student);
+    if (ws.state === 'locked') throw new UserError(`${w.name} is locked. ${ws.unlock.label} first.`);
+    world = w.id;
+    category = w.category;
+    if (opts.battle === 'wild' || opts.battle === 'boss') {
+      const cfg = R.rewards.battles[opts.battle];
+      battle = opts.battle;
+      mode = 'versus';
+      count = cfg.count;
+      personaId = cfg.persona;
+      const pool = R.rewards.rivals.filter((r) => r.world === w.id && r.kind === battle);
+      if (battle === 'boss' && (student.worldQuests?.[w.id] || 0) < cfg.requiresQuests) {
+        throw new UserError(`Complete ${cfg.requiresQuests} ${w.name} quests to challenge the boss.`);
+      }
+      rival = pool.find((r) => r.id === opts.rivalId) || engine.streamFor(seed, 'rival').pick(pool);
+      if (battle === 'boss') opts.specialty = w.category;
+      title = battle === 'boss' ? `${w.name} Boss: ${rival.name}` : `Wild ${rival.name}`;
+    }
+  }
+
   if (mode === 'daily') {
     mode = 'versus';
     dailyQuest = true;
@@ -165,8 +194,9 @@ async function createStudentSession(sessionId, data, claims) {
     const built = buildOpponent({ personaId, settings, student, seed, specialty: opts.specialty, floors });
     opponent = built.params;
     opponentPlan = planOpponent(opponent, seed, tossups, bonuses);
-    participants.push({ id: 'computer', kind: 'computer', name: opponent.name, avatar: opponent.avatar, side: 'B' });
-    sides.B = { name: opponent.name, emoji: opponent.avatar };
+    const oppName = rival?.name || opponent.name;
+    participants.push({ id: 'computer', kind: 'computer', name: oppName, avatar: opponent.avatar, side: 'B' });
+    sides.B = { name: oppName, emoji: opponent.avatar };
     if (built.adaptiveLevel != null) await studentSnap.ref.update({ adaptiveLevel: built.adaptiveLevel });
   }
 
@@ -193,6 +223,15 @@ async function createStudentSession(sessionId, data, claims) {
   created.pub.teacherUid = classroom.teacherUid;
   created.pub.rematchOf = opts.rematchOf || null;
   created.pub.category = category;
+  created.pub.world = world;
+  created.pub.battle = battle;
+  const personaArt = R.rewards.rivals.find((r) => r.kind === 'persona' && r.id === created.pub.opponent?.personaId);
+  const shown = rival || personaArt || null;
+  created.pub.rival = shown ? { id: shown.id, name: shown.name, image: shown.image, intro: shown.intro || null, defeat: shown.defeat || null, color: shown.color || null, kind: shown.kind } : null;
+  if (rival && created.pub.opponent) {
+    created.pub.opponent.name = rival.name;
+    created.pub.opponent.intro = rival.intro;
+  }
   await studentSnap.ref.update({ recentQuestionIds: [...tossups.map((t) => t.id), ...(student.recentQuestionIds || [])].slice(0, 120) });
   return created;
 }
@@ -345,14 +384,29 @@ async function rewardStudent(sessionId, pub, participant, context) {
   const myQuests = quests.filter((q) => !q.data().teamId || q.data().teamId === studentData.teamId);
   const contributionByQuest = myQuests.map((q) => ({ ref: q.ref, data: q.data(), n: questContribution(q.data(), preview) }));
   const teamQuestContribution = contributionByQuest.reduce((s, q) => s + q.n, 0);
+  const assignmentFirst = pub.assignmentId ? !(await db.doc(`assignments/${pub.assignmentId}/progress/${studentId}`).get()).data()?.completed : false;
 
   const applied = await db.runTransaction(async (tx) => {
     const existing = await tx.get(summaryRef);
     if (existing.exists) return null; // idempotent: already rewarded
     const student = (await tx.get(studentRef)).data();
     if (!student) return null;
-    const out = engine.applySessionRewards(student, pub, { now: t, studentId, timeZone: context.timeZone, teamQuestContribution });
-    tx.update(studentRef, out.update);
+    const out = engine.applySessionRewards(student, pub, { now: t, studentId, timeZone: context.timeZone, teamQuestContribution, assignmentFirst });
+    // Cosmetic rewards: grants are persisted here, before any reveal animation.
+    const grants = rewardsSvc.sessionGrants({
+      before: student,
+      after: { ...student, ...out.update },
+      sessionId,
+      pub,
+      won: out.summary.won,
+      at: t,
+      classroom: context.classroom,
+      schoolCatalog: context.schoolCatalog,
+      world: out.questWorld
+    });
+    const { fresh, patch } = await rewardsSvc.commitGrants(tx, studentRef, { ...student, ...out.update }, grants);
+    out.grants = fresh;
+    tx.update(studentRef, { ...out.update, ...patch });
     const opp = pub.opponent;
     const oppSide = Object.keys(pub.sides).find((k) => k !== participant.side);
     tx.set(summaryRef, {
@@ -394,6 +448,8 @@ async function rewardStudent(sessionId, pub, participant, context) {
       level: out.update.level,
       recommendation: out.recommendation,
       teamQuestContribution,
+      questWorld: out.questWorld || null,
+      grants: out.grants.map((g) => ({ id: g.id, type: g.type, chestId: g.chestId, itemId: g.itemId, rarity: g.rarity, craftingStars: g.craftingStars || 0, duplicate: !!g.duplicate })),
       dayKey: out.dayKey,
       weekKey: out.weekKey,
       completedAt: t,
@@ -403,6 +459,9 @@ async function rewardStudent(sessionId, pub, participant, context) {
   });
   if (!applied) return null;
   const { out, student } = applied;
+
+  for (const g of out.grants) await rewardsSvc.activity(studentRef, 'REWARD_GRANTED', { grantId: g.id, itemId: g.itemId, chestId: g.chestId, rarity: g.rarity, source: g.source?.rule || null });
+  await rewardsSvc.progressSchoolQuests(pub.schoolId, studentId, out.summary, t);
 
   // Team quests
   for (const q of contributionByQuest) {
@@ -561,10 +620,12 @@ exports.onSessionFinished = onDocumentUpdated('sessions/{sessionId}', async (eve
   const timeZone = school?.settings?.timezone || 'America/New_York';
   const sec = (await db.doc(`sessionSecrets/${sessionId}`).get()).data() || {};
   const acceptedById = Object.fromEntries((sec.tossups || []).map((q) => [q.id, q.acceptedAnswers || []]));
+  const classroom = after.classroomId ? (await db.doc(`classrooms/${after.classroomId}`).get()).data() : null;
+  const schoolCatalog = await rewardsSvc.schoolCatalogFor(after.schoolId);
   const results = {};
   for (const p of after.participants.filter((x) => x.kind === 'student')) {
     try {
-      const out = await rewardStudent(sessionId, after, p, { timeZone, acceptedById });
+      const out = await rewardStudent(sessionId, after, p, { timeZone, acceptedById, classroom, schoolCatalog });
       if (out) results[p.id] = { xpEarned: out.xpEarned };
     } catch (err) {
       console.error('reward failed', sessionId, err);

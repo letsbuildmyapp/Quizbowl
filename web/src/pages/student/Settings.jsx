@@ -80,6 +80,13 @@ function SettingsBody({ student }) {
               checked={value('sound', true)}
               onChange={(v) => setPref('sound', v, `Sound ${onOff(v)}`)}
             />
+            <Switch
+              id="pref-music"
+              label="Music"
+              hint="Adventure and battle music. Turns off with sound effects too."
+              checked={value('music', true)}
+              onChange={(v) => setPref('music', v, `Music ${onOff(v)}`)}
+            />
           </div>
         </div>
       </Card>

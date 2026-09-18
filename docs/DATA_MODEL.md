@@ -103,3 +103,41 @@ listens to its own user doc and calls `getIdToken(true)` when that number change
 
 ## Presence (Realtime Database)
 - `presence/{uid}`: `{ online, studentId?, classroomId?, sessionId?, lastSeen }` written by the client with `onDisconnect`.
+
+## v2: QuizBot, rewards, island map, school theme, Quiz Hall
+
+All reward/cosmetic configuration lives in `functions/shared/rewards.json` (import in web as `@shared/rewards.json`): rarities, slots, cosmetics, chests, `xpRules`, `grantRules`, `worldUnlocks`, `worldRules`, `map` (entrances/stars/chests/paths with % positions over `/art/island-map.webp`), `themes`, `defaultClassRewards`. Pure logic: `functions/engine/rewards.js` (unlock rules, world states, chest contents, grants, loadout validation). Cosmetics never change scoring, clue timing, XP, or opponent difficulty.
+
+### Student doc additions (server-written unless noted)
+- `inventory: { [itemId]: { earnedAt, source, grantId, isNew, duplicates } }` (starter items are implicitly owned)
+- `loadout: { paint, face, headgear, back, held, companion, effect, emote }` (null = starter loadout `rewards.starterLoadout`)
+- `presets: { [name]: loadout }` (max 3)
+- `craftingStars`, `questStars`, `claimedMap: [objectId]`, `worldQuests: { [worldId]: n }`, `masteredWorlds: []`, `lastWorld`
+- `hall` (**student-writable**): `{ visibility: 'private'|'class', featuredBadge, featuredItems: [≤6 itemIds], hidden: [ids], showStreak, showTeamRank, featuredPreset, layout }`. Private by default.
+
+### Subcollections
+- `students/{id}/grants/{idempotencyKey}`: `{ id, type: 'item'|'chest', chestId, itemId|null, rarity, chestRarity, craftingStars, duplicate, source: {rule, sessionId?, objectId?}, createdAt, acknowledgedAt|null, skipped?, revealType? }`. Created server-side in the same transaction that updates inventory, so it exists before any reveal. The student acknowledges with `updateDoc(ref, { acknowledgedAt: serverTimestamp(), skipped: bool, revealType })` (only those fields). Unacknowledged grants = "Vault" items waiting to be revealed (recoverable after skip/disconnect).
+- `students/{id}/events/*`: activity log (`REWARD_GRANTED`, `REWARD_REVEALED`, `CHEST_OPENED`, `STAR_COLLECTED`, `COSMETIC_EQUIPPED`, `QUIZ_HALL_UPDATED`), readable by the student and teacher.
+
+### Request collections (client creates, trigger fulfils; use `request()` from `lib/requests.js`)
+- `mapClaims/{studentId}_{objectId}`: `{ objectId }` → result `{ type: 'star'|'chest', grantId, questStars }` or `{ alreadyClaimed: true }`. **Doc id must be `${studentId}_${objectId}`** (pass it as `opts.id`).
+- `loadoutRequests`: `{ action: 'equip'|'savePreset'|'applyPreset'|'deletePreset', loadout?, name? }` → `{ loadout, presets }`
+- `craftRequests`: `{ itemId }` → `{ grantId, itemId }` (costs `rarity.craftCost` Crafting Stars; only chest items; never random)
+- `awardRequests` (teacher): `{ studentId, itemId, note }` → school gear with `unlock.type === 'teacher_award'`
+- `rulePreviews` (admin): `{ scenario: { levelFrom, levelTo, streakFrom, streakTo, masteredWorld, firstWin, randomChests } }` → `{ grants: [] }` without granting anything
+- analytics: `analyticsEvents` types `map_select`, `cosmetic_preview`, `motion_pref` (counters only)
+
+### School theme (organization data, not code branches)
+- `schools/{id}.theme`: `{ presetId: 'quizquest'|'westside-warriors', ...overrides (displayName, mascotName, crestLetter, primaryColor, secondaryColor, accentColor, teamHubLabel, weeklyQuestLabel, progressVisual: 'flame'|'star', progressLabel, modeLabel, seasonLabel) }` (school admin writes)
+- `schools/{id}.rewardCatalog`: `{ approved: [schoolItemIds] } | null` (null = all school items approved)
+- `schoolThemes/{schoolId}`: server projection of the resolved theme + `schoolName` + `rewardCatalog`; readable by anyone whose claims have that `schoolId` (students included). Use this on student screens.
+- `schoolQuests/{id}`: `{ schoolId, title, description, category|null, metric: 'correct'|'answered', target, startsAt, endsAt, progress, contributions: {studentId: n}, completedAt, createdBy }` (teachers of the school create; server updates progress; on completion every contributor gets a `chest-school` grant)
+
+### Class reward settings
+- `classrooms/{id}.settings.rewards`: `{ randomChests, showStreaks, celebrations: 'standard'|'calm', hallPeerView, hallPeerFields: ['loadout','level','featuredBadge','featuredItems','worldsMastered'] }` (defaults in `rewards.defaultClassRewards`)
+
+### Quiz Hall peer cards
+- `hallCards/{studentId}`: server projection with only teacher-approved fields, present only when the class allows peer view AND the student set `hall.visibility = 'class'`. Readable by classmates, the teacher, and linked parents.
+
+### Session summary additions
+- `sessionSummaries/*`: `grants: [{ id, type, chestId, itemId, rarity, craftingStars, duplicate }]`, `questWorld`.

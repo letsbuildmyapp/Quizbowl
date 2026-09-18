@@ -1,0 +1,1406 @@
+{
+  "version": 1,
+  "rarities": [
+    {
+      "id": "common",
+      "name": "Common",
+      "color": "#8a94a6",
+      "craftCost": 10,
+      "duplicateStars": 3
+    },
+    {
+      "id": "rare",
+      "name": "Rare",
+      "color": "#3b82f6",
+      "craftCost": 25,
+      "duplicateStars": 8
+    },
+    {
+      "id": "epic",
+      "name": "Epic",
+      "color": "#a855f7",
+      "craftCost": 60,
+      "duplicateStars": 20
+    },
+    {
+      "id": "legendary",
+      "name": "Legendary",
+      "color": "#f59e0b",
+      "craftCost": 150,
+      "duplicateStars": 50
+    },
+    {
+      "id": "mythic",
+      "name": "Mythic",
+      "color": "#ec4899",
+      "craftCost": null,
+      "duplicateStars": 100
+    }
+  ],
+  "slots": [
+    {
+      "id": "paint",
+      "name": "Paint",
+      "required": true
+    },
+    {
+      "id": "face",
+      "name": "Face panel",
+      "required": true
+    },
+    {
+      "id": "headgear",
+      "name": "Headgear"
+    },
+    {
+      "id": "back",
+      "name": "Back item"
+    },
+    {
+      "id": "held",
+      "name": "Buzzer"
+    },
+    {
+      "id": "companion",
+      "name": "Companion"
+    },
+    {
+      "id": "effect",
+      "name": "Effect"
+    },
+    {
+      "id": "emote",
+      "name": "Emote"
+    }
+  ],
+  "starterLoadout": {
+    "paint": "paint-sky",
+    "face": "face-smile",
+    "headgear": null,
+    "back": null,
+    "held": "buzzer-classic",
+    "companion": null,
+    "effect": null,
+    "emote": "emote-wave"
+  },
+  "maxPresets": 3,
+  "botEvolutions": [
+    {
+      "minLevel": 1,
+      "title": "Rookie Bot"
+    },
+    {
+      "minLevel": 5,
+      "title": "Explorer Bot"
+    },
+    {
+      "minLevel": 10,
+      "title": "Warrior Bot"
+    },
+    {
+      "minLevel": 15,
+      "title": "Champion Bot"
+    },
+    {
+      "minLevel": 20,
+      "title": "Legend Bot"
+    }
+  ],
+  "cosmetics": [
+    {
+      "id": "paint-sky",
+      "name": "Sky Blue",
+      "slot": "paint",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "paint-mint",
+      "name": "Mint",
+      "slot": "paint",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "paint-sunset",
+      "name": "Sunset",
+      "slot": "paint",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "paint-lava",
+      "name": "Lava",
+      "slot": "paint",
+      "rarity": "rare",
+      "unlock": {
+        "type": "level",
+        "value": 4
+      }
+    },
+    {
+      "id": "paint-galaxy",
+      "name": "Galaxy",
+      "slot": "paint",
+      "rarity": "epic",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "paint-gold",
+      "name": "Solid Gold",
+      "slot": "paint",
+      "rarity": "legendary",
+      "unlock": {
+        "type": "level",
+        "value": 20
+      }
+    },
+    {
+      "id": "paint-school",
+      "name": "{mascot} Colors",
+      "slot": "paint",
+      "rarity": "rare",
+      "school": true,
+      "unlock": {
+        "type": "school_quest"
+      }
+    },
+    {
+      "id": "face-smile",
+      "name": "Happy Screen",
+      "slot": "face",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "face-visor",
+      "name": "Cool Visor",
+      "slot": "face",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "face-star",
+      "name": "Star Eyes",
+      "slot": "face",
+      "rarity": "rare",
+      "unlock": {
+        "type": "badge",
+        "value": "early-bird"
+      }
+    },
+    {
+      "id": "face-heart",
+      "name": "Pixel Hearts",
+      "slot": "face",
+      "rarity": "rare",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "face-shades",
+      "name": "Champion Shades",
+      "slot": "face",
+      "rarity": "epic",
+      "unlock": {
+        "type": "badge",
+        "value": "master-challenger"
+      }
+    },
+    {
+      "id": "head-goggles",
+      "name": "Lab Goggles",
+      "slot": "headgear",
+      "rarity": "common",
+      "world": "science-lab",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-explorer",
+      "name": "Explorer Hat",
+      "slot": "headgear",
+      "rarity": "common",
+      "world": "geography-galaxy",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-astronaut",
+      "name": "Astronaut Helmet",
+      "slot": "headgear",
+      "rarity": "rare",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-knight",
+      "name": "Knight Helmet",
+      "slot": "headgear",
+      "rarity": "rare",
+      "world": "history-kingdom",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-wizard",
+      "name": "Wizard Hat",
+      "slot": "headgear",
+      "rarity": "rare",
+      "world": "literature-forest",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-laurel",
+      "name": "Golden Laurel",
+      "slot": "headgear",
+      "rarity": "epic",
+      "world": "myth-mountain",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-beret",
+      "name": "Artist Beret",
+      "slot": "headgear",
+      "rarity": "rare",
+      "world": "harmony-harbor",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "head-crown",
+      "name": "Quiz Crown",
+      "slot": "headgear",
+      "rarity": "legendary",
+      "unlock": {
+        "type": "level",
+        "value": 15
+      }
+    },
+    {
+      "id": "head-school",
+      "name": "{mascot} Helmet",
+      "slot": "headgear",
+      "rarity": "epic",
+      "school": true,
+      "unlock": {
+        "type": "school_quest"
+      }
+    },
+    {
+      "id": "back-explorer",
+      "name": "Explorer Backpack",
+      "slot": "back",
+      "rarity": "common",
+      "world": "geography-galaxy",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-jetpack",
+      "name": "Jetpack",
+      "slot": "back",
+      "rarity": "rare",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-reactor",
+      "name": "Reactor Pack",
+      "slot": "back",
+      "rarity": "rare",
+      "world": "science-lab",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-lightning",
+      "name": "Lightning Cape",
+      "slot": "back",
+      "rarity": "rare",
+      "unlock": {
+        "type": "streak",
+        "value": 7
+      }
+    },
+    {
+      "id": "back-books",
+      "name": "Floating Books",
+      "slot": "back",
+      "rarity": "epic",
+      "world": "literature-forest",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-dragon",
+      "name": "Dragon Wings",
+      "slot": "back",
+      "rarity": "epic",
+      "world": "myth-mountain",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-banner",
+      "name": "Castle Banner",
+      "slot": "back",
+      "rarity": "rare",
+      "world": "history-kingdom",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "back-school",
+      "name": "{mascot} Cape",
+      "slot": "back",
+      "rarity": "rare",
+      "school": true,
+      "unlock": {
+        "type": "teacher_award"
+      }
+    },
+    {
+      "id": "buzzer-classic",
+      "name": "Classic Buzzer",
+      "slot": "held",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "buzzer-dna",
+      "name": "DNA Buzzer",
+      "slot": "held",
+      "rarity": "rare",
+      "world": "science-lab",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "buzzer-galaxy",
+      "name": "Galaxy Buzzer",
+      "slot": "held",
+      "rarity": "rare",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "buzzer-crystal",
+      "name": "Crystal Buzzer",
+      "slot": "held",
+      "rarity": "epic",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "buzzer-scroll",
+      "name": "Scroll Buzzer",
+      "slot": "held",
+      "rarity": "common",
+      "world": "history-kingdom",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "buzzer-note",
+      "name": "Melody Buzzer",
+      "slot": "held",
+      "rarity": "rare",
+      "world": "harmony-harbor",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "buzzer-champion",
+      "name": "Champion Buzzer",
+      "slot": "held",
+      "rarity": "legendary",
+      "unlock": {
+        "type": "badge",
+        "value": "perfect-round"
+      }
+    },
+    {
+      "id": "buzzer-school",
+      "name": "{mascot} Flame Buzzer",
+      "slot": "held",
+      "rarity": "epic",
+      "school": true,
+      "unlock": {
+        "type": "school_quest"
+      }
+    },
+    {
+      "id": "shield-school",
+      "name": "{crest} Shield",
+      "slot": "held",
+      "rarity": "rare",
+      "school": true,
+      "unlock": {
+        "type": "teacher_award"
+      }
+    },
+    {
+      "id": "pet-robot",
+      "name": "Pocket Robot",
+      "slot": "companion",
+      "rarity": "common",
+      "unlock": {
+        "type": "level",
+        "value": 3
+      }
+    },
+    {
+      "id": "pet-questy",
+      "name": "Mini Questy",
+      "slot": "companion",
+      "rarity": "rare",
+      "world": "literature-forest",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-planet",
+      "name": "Planet Pet",
+      "slot": "companion",
+      "rarity": "rare",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-fox",
+      "name": "History Fox",
+      "slot": "companion",
+      "rarity": "rare",
+      "world": "history-kingdom",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-atom",
+      "name": "Atom Buddy",
+      "slot": "companion",
+      "rarity": "rare",
+      "world": "science-lab",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-compass",
+      "name": "Compass Critter",
+      "slot": "companion",
+      "rarity": "common",
+      "world": "geography-galaxy",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-dragon",
+      "name": "Baby Dragon",
+      "slot": "companion",
+      "rarity": "epic",
+      "world": "myth-mountain",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "pet-phoenix",
+      "name": "Phoenix",
+      "slot": "companion",
+      "rarity": "mythic",
+      "unlock": {
+        "type": "all_worlds_mastered"
+      }
+    },
+    {
+      "id": "fx-sparkles",
+      "name": "Sparkles",
+      "slot": "effect",
+      "rarity": "common",
+      "unlock": {
+        "type": "level",
+        "value": 2
+      }
+    },
+    {
+      "id": "fx-hearts",
+      "name": "Hearts",
+      "slot": "effect",
+      "rarity": "common",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "fx-lightning",
+      "name": "Lightning",
+      "slot": "effect",
+      "rarity": "rare",
+      "unlock": {
+        "type": "streak",
+        "value": 3
+      }
+    },
+    {
+      "id": "fx-ink",
+      "name": "Magic Ink",
+      "slot": "effect",
+      "rarity": "rare",
+      "world": "literature-forest",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "fx-constellation",
+      "name": "Constellation Trail",
+      "slot": "effect",
+      "rarity": "epic",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "fx-fire",
+      "name": "Fire Trail",
+      "slot": "effect",
+      "rarity": "epic",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "fx-rainbow",
+      "name": "Rainbow Aura",
+      "slot": "effect",
+      "rarity": "mythic",
+      "unlock": {
+        "type": "level",
+        "value": 30
+      }
+    },
+    {
+      "id": "emote-wave",
+      "name": "Wave",
+      "slot": "emote",
+      "rarity": "common",
+      "unlock": {
+        "type": "starter"
+      }
+    },
+    {
+      "id": "emote-spin",
+      "name": "Victory Spin",
+      "slot": "emote",
+      "rarity": "common",
+      "unlock": {
+        "type": "badge",
+        "value": "first-buzz"
+      }
+    },
+    {
+      "id": "emote-dance",
+      "name": "Victory Dance",
+      "slot": "emote",
+      "rarity": "rare",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "emote-book",
+      "name": "Book Flourish",
+      "slot": "emote",
+      "rarity": "rare",
+      "world": "literature-forest",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "emote-rocket",
+      "name": "Rocket Launch",
+      "slot": "emote",
+      "rarity": "rare",
+      "world": "space-station",
+      "unlock": {
+        "type": "chest"
+      }
+    },
+    {
+      "id": "emote-salute",
+      "name": "Shield Salute",
+      "slot": "emote",
+      "rarity": "rare",
+      "school": true,
+      "unlock": {
+        "type": "school_quest"
+      }
+    }
+  ],
+  "chests": [
+    {
+      "id": "chest-common",
+      "name": "Explorer Chest",
+      "rarity": "common",
+      "maxItemRarity": "common"
+    },
+    {
+      "id": "chest-rare",
+      "name": "Adventure Chest",
+      "rarity": "rare",
+      "maxItemRarity": "rare"
+    },
+    {
+      "id": "chest-epic",
+      "name": "Crystal Chest",
+      "rarity": "epic",
+      "maxItemRarity": "epic"
+    },
+    {
+      "id": "chest-legendary",
+      "name": "Legendary Vault",
+      "rarity": "legendary",
+      "maxItemRarity": "legendary"
+    },
+    {
+      "id": "chest-school",
+      "name": "{mascot} Chest",
+      "rarity": "epic",
+      "maxItemRarity": "epic",
+      "schoolOnly": true
+    }
+  ],
+  "xpRules": {
+    "attempt": 2,
+    "correct": 8,
+    "earlyMax": 5,
+    "powerBonus": 5,
+    "earlyBonus": 3,
+    "bonusPart": 4,
+    "sessionComplete": 10,
+    "beatComputer": 15,
+    "dailyQuest": 20,
+    "assignmentFirstComplete": 25,
+    "maxAttemptXpPerSession": 40
+  },
+  "grantRules": [
+    {
+      "id": "level-chest",
+      "event": "LEVEL_UP",
+      "every": 5,
+      "chest": "chest-rare",
+      "label": "Every 5 levels"
+    },
+    {
+      "id": "streak-3",
+      "event": "STREAK",
+      "value": 3,
+      "chest": "chest-common",
+      "label": "3-day streak"
+    },
+    {
+      "id": "streak-7",
+      "event": "STREAK",
+      "value": 7,
+      "chest": "chest-rare",
+      "label": "7-day streak"
+    },
+    {
+      "id": "world-mastery",
+      "event": "WORLD_MASTERED",
+      "chest": "chest-legendary",
+      "label": "Master a world"
+    },
+    {
+      "id": "school-quest",
+      "event": "SCHOOL_QUEST_COMPLETE",
+      "chest": "chest-school",
+      "label": "Finish the school's weekly quest"
+    },
+    {
+      "id": "first-win",
+      "event": "FIRST_WIN",
+      "chest": "chest-common",
+      "label": "Win your first computer match"
+    },
+    {
+      "id": "boss-defeat",
+      "event": "BOSS_DEFEATED",
+      "chest": "chest-epic",
+      "label": "Beat a world boss"
+    }
+  ],
+  "worldRules": {
+    "masteryAccuracy": 0.75,
+    "masteryMinAnswered": 20,
+    "masteryQuests": 5
+  },
+  "worldUnlocks": {
+    "science-lab": null,
+    "space-station": {
+      "world": "science-lab",
+      "quests": 2
+    },
+    "geography-galaxy": {
+      "world": "science-lab",
+      "quests": 3
+    },
+    "history-kingdom": {
+      "world": "geography-galaxy",
+      "quests": 3
+    },
+    "literature-forest": {
+      "world": "history-kingdom",
+      "quests": 3
+    },
+    "myth-mountain": {
+      "world": "literature-forest",
+      "quests": 3
+    },
+    "harmony-harbor": {
+      "world": "space-station",
+      "quests": 3
+    }
+  },
+  "map": {
+    "image": "/art/island-map.webp",
+    "width": 2000,
+    "height": 501,
+    "entrances": [
+      {
+        "id": "gate-space-station",
+        "world": "space-station",
+        "x": 16.6,
+        "y": 42,
+        "plaque": {
+          "x": 16.5,
+          "y": 20
+        }
+      },
+      {
+        "id": "gate-science-lab",
+        "world": "science-lab",
+        "x": 26.2,
+        "y": 78,
+        "plaque": {
+          "x": 25.5,
+          "y": 66
+        }
+      },
+      {
+        "id": "gate-geography-galaxy",
+        "world": "geography-galaxy",
+        "x": 46.5,
+        "y": 38,
+        "plaque": {
+          "x": 48,
+          "y": 16
+        }
+      },
+      {
+        "id": "gate-history-kingdom",
+        "world": "history-kingdom",
+        "x": 73.8,
+        "y": 38,
+        "plaque": {
+          "x": 74,
+          "y": 17
+        }
+      },
+      {
+        "id": "gate-literature-forest",
+        "world": "literature-forest",
+        "x": 79.6,
+        "y": 80,
+        "plaque": {
+          "x": 79,
+          "y": 64
+        }
+      },
+      {
+        "id": "gate-myth-mountain",
+        "world": "myth-mountain",
+        "x": 93.5,
+        "y": 30,
+        "floating": true
+      },
+      {
+        "id": "gate-harmony-harbor",
+        "world": "harmony-harbor",
+        "x": 5.5,
+        "y": 30,
+        "floating": true
+      }
+    ],
+    "stars": [
+      {
+        "id": "star-science-1",
+        "world": "science-lab",
+        "x": 32.5,
+        "y": 89,
+        "rule": {
+          "world": "science-lab",
+          "quests": 1
+        }
+      },
+      {
+        "id": "star-science-2",
+        "world": "science-lab",
+        "x": 41.5,
+        "y": 63,
+        "rule": {
+          "world": "science-lab",
+          "quests": 2
+        }
+      },
+      {
+        "id": "star-space-1",
+        "world": "space-station",
+        "x": 33,
+        "y": 52,
+        "rule": {
+          "world": "space-station",
+          "quests": 1
+        }
+      },
+      {
+        "id": "star-geo-1",
+        "world": "geography-galaxy",
+        "x": 54.3,
+        "y": 64,
+        "rule": {
+          "world": "geography-galaxy",
+          "quests": 1
+        }
+      },
+      {
+        "id": "star-geo-2",
+        "world": "geography-galaxy",
+        "x": 55.8,
+        "y": 52,
+        "rule": {
+          "world": "geography-galaxy",
+          "quests": 2
+        }
+      },
+      {
+        "id": "star-history-1",
+        "world": "history-kingdom",
+        "x": 72,
+        "y": 50,
+        "rule": {
+          "world": "history-kingdom",
+          "quests": 1
+        }
+      },
+      {
+        "id": "star-lit-1",
+        "world": "literature-forest",
+        "x": 67,
+        "y": 90,
+        "rule": {
+          "world": "literature-forest",
+          "quests": 1
+        }
+      }
+    ],
+    "chests": [
+      {
+        "id": "mapchest-science",
+        "world": "science-lab",
+        "x": 36.5,
+        "y": 83,
+        "chest": "chest-common",
+        "rule": {
+          "world": "science-lab",
+          "questStars": 2
+        }
+      },
+      {
+        "id": "mapchest-crossroads",
+        "world": "geography-galaxy",
+        "x": 62.5,
+        "y": 56,
+        "chest": "chest-rare",
+        "rule": {
+          "questStars": 4
+        }
+      },
+      {
+        "id": "mapchest-forest",
+        "world": "literature-forest",
+        "x": 64,
+        "y": 83,
+        "chest": "chest-epic",
+        "rule": {
+          "questStars": 6
+        }
+      }
+    ],
+    "paths": [
+      {
+        "id": "path-science-space",
+        "from": "science-lab",
+        "to": "space-station"
+      },
+      {
+        "id": "path-science-geo",
+        "from": "science-lab",
+        "to": "geography-galaxy"
+      },
+      {
+        "id": "path-geo-history",
+        "from": "geography-galaxy",
+        "to": "history-kingdom"
+      },
+      {
+        "id": "path-history-lit",
+        "from": "history-kingdom",
+        "to": "literature-forest"
+      },
+      {
+        "id": "path-lit-myth",
+        "from": "literature-forest",
+        "to": "myth-mountain"
+      },
+      {
+        "id": "path-space-harmony",
+        "from": "space-station",
+        "to": "harmony-harbor"
+      }
+    ]
+  },
+  "themes": [
+    {
+      "id": "quizquest",
+      "displayName": "QuizQuest",
+      "mascotName": "Questers",
+      "crestLetter": "Q",
+      "primaryColor": "#6d4df2",
+      "secondaryColor": "#ffffff",
+      "accentColor": "#ffc940",
+      "teamHubLabel": "Team HQ",
+      "weeklyQuestLabel": "Weekly Team Quest",
+      "progressVisual": "star",
+      "progressLabel": "Quest Power",
+      "modeLabel": "QuizQuest"
+    },
+    {
+      "id": "westside-warriors",
+      "displayName": "Westside Warriors",
+      "mascotName": "Warrior",
+      "crestLetter": "W",
+      "primaryColor": "#c8102e",
+      "secondaryColor": "#ffffff",
+      "accentColor": "#1e1b4b",
+      "teamHubLabel": "Westside Team HQ",
+      "weeklyQuestLabel": "Warrior Weekly Quest",
+      "progressVisual": "flame",
+      "progressLabel": "Warrior Flame",
+      "modeLabel": "Westside Warrior Mode"
+    }
+  ],
+  "defaultClassRewards": {
+    "randomChests": true,
+    "showStreaks": true,
+    "celebrations": "standard",
+    "hallPeerView": false,
+    "hallPeerFields": [
+      "loadout",
+      "level",
+      "featuredBadge"
+    ]
+  },
+  "rivals": [
+    {
+      "id": "professor-fizz",
+      "name": "Professor Fizz",
+      "world": "science-lab",
+      "kind": "boss",
+      "image": "/art/rivals/professor-fizz.webp",
+      "intro": "Let us run an experiment on your brain!",
+      "defeat": "A fizzing formula!",
+      "color": "#22c55e"
+    },
+    {
+      "id": "beaker-blob",
+      "name": "Beaker Blob",
+      "world": "science-lab",
+      "kind": "wild",
+      "image": "/art/rivals/beaker-blob.webp",
+      "intro": "Bloop bloop!",
+      "defeat": "It ran back into the wild!",
+      "color": "#a855f7"
+    },
+    {
+      "id": "atom-pup",
+      "name": "Atom Pup",
+      "world": "science-lab",
+      "kind": "wild",
+      "image": "/art/rivals/atom-pup.webp",
+      "intro": "Arf! Arf-tom!",
+      "defeat": "It ran back into the wild!",
+      "color": "#2dd4bf"
+    },
+    {
+      "id": "captain-nova",
+      "name": "Captain Nova",
+      "world": "space-station",
+      "kind": "boss",
+      "image": "/art/rivals/captain-nova.webp",
+      "intro": "Prepare for launch, cadet!",
+      "defeat": "Houston, I have a problem.",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "comet-cub",
+      "name": "Comet Cub",
+      "world": "space-station",
+      "kind": "wild",
+      "image": "/art/rivals/comet-cub.webp",
+      "intro": "Whoosh!",
+      "defeat": "It ran back into the wild!",
+      "color": "#f97316"
+    },
+    {
+      "id": "moon-moth",
+      "name": "Moon Moth",
+      "world": "space-station",
+      "kind": "wild",
+      "image": "/art/rivals/moon-moth.webp",
+      "intro": "Flutter flutter...",
+      "defeat": "It ran back into the wild!",
+      "color": "#c4b5fd"
+    },
+    {
+      "id": "atlas-tortoise",
+      "name": "Atlas the Tortoise",
+      "world": "geography-galaxy",
+      "kind": "boss",
+      "image": "/art/rivals/atlas-tortoise.webp",
+      "intro": "Slow and steady knows the map.",
+      "defeat": "I may need a new map.",
+      "color": "#16a34a"
+    },
+    {
+      "id": "compass-critter",
+      "name": "Compass Critter",
+      "world": "geography-galaxy",
+      "kind": "wild",
+      "image": "/art/rivals/compass-critter.webp",
+      "intro": "Which way? This way!",
+      "defeat": "It ran back into the wild!",
+      "color": "#fb923c"
+    },
+    {
+      "id": "map-bat",
+      "name": "Map Bat",
+      "world": "geography-galaxy",
+      "kind": "wild",
+      "image": "/art/rivals/map-bat.webp",
+      "intro": "X marks the spot!",
+      "defeat": "It ran back into the wild!",
+      "color": "#14b8a6"
+    },
+    {
+      "id": "sir-chronicle",
+      "name": "Sir Chronicle",
+      "world": "history-kingdom",
+      "kind": "boss",
+      "image": "/art/rivals/sir-chronicle.webp",
+      "intro": "Face me, if history is your friend!",
+      "defeat": "A worthy knight. I yield.",
+      "color": "#dc2626"
+    },
+    {
+      "id": "pharaoh-pup",
+      "name": "Pharaoh Pup",
+      "world": "history-kingdom",
+      "kind": "wild",
+      "image": "/art/rivals/pharaoh-pup.webp",
+      "intro": "Woof of the Nile!",
+      "defeat": "It ran back into the wild!",
+      "color": "#eab308"
+    },
+    {
+      "id": "castle-chick",
+      "name": "Castle Chick",
+      "world": "history-kingdom",
+      "kind": "wild",
+      "image": "/art/rivals/castle-chick.webp",
+      "intro": "Peep! En garde!",
+      "defeat": "It ran back into the wild!",
+      "color": "#facc15"
+    },
+    {
+      "id": "madame-inkwell",
+      "name": "Madame Inkwell",
+      "world": "literature-forest",
+      "kind": "boss",
+      "image": "/art/rivals/madame-inkwell.webp",
+      "intro": "Every story has a hero. Is it you?",
+      "defeat": "What a marvelous ending.",
+      "color": "#7c3aed"
+    },
+    {
+      "id": "bookworm",
+      "name": "Bookworm",
+      "world": "literature-forest",
+      "kind": "wild",
+      "image": "/art/rivals/bookworm.webp",
+      "intro": "Nom nom, pages!",
+      "defeat": "It ran back into the wild!",
+      "color": "#84cc16"
+    },
+    {
+      "id": "story-sprite",
+      "name": "Story Sprite",
+      "world": "literature-forest",
+      "kind": "wild",
+      "image": "/art/rivals/story-sprite.webp",
+      "intro": "Once upon a time...",
+      "defeat": "It ran back into the wild!",
+      "color": "#22c55e"
+    },
+    {
+      "id": "thundra",
+      "name": "Thundra",
+      "world": "myth-mountain",
+      "kind": "boss",
+      "image": "/art/rivals/thundra.webp",
+      "intro": "Feel the thunder of the gods!",
+      "defeat": "Legendary... you are.",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "pebble-golem",
+      "name": "Pebble Golem",
+      "world": "myth-mountain",
+      "kind": "wild",
+      "image": "/art/rivals/pebble-golem.webp",
+      "intro": "Rumble rumble.",
+      "defeat": "It ran back into the wild!",
+      "color": "#78716c"
+    },
+    {
+      "id": "cloud-foal",
+      "name": "Cloud Foal",
+      "world": "myth-mountain",
+      "kind": "wild",
+      "image": "/art/rivals/cloud-foal.webp",
+      "intro": "Neigh-bulous!",
+      "defeat": "It ran back into the wild!",
+      "color": "#f0abfc"
+    },
+    {
+      "id": "maestro-octavio",
+      "name": "Maestro Octavio",
+      "world": "harmony-harbor",
+      "kind": "boss",
+      "image": "/art/rivals/maestro-octavio.webp",
+      "intro": "Let the grand performance begin!",
+      "defeat": "Bravo! Encore for you!",
+      "color": "#9333ea"
+    },
+    {
+      "id": "drum-crab",
+      "name": "Drum Crab",
+      "world": "harmony-harbor",
+      "kind": "wild",
+      "image": "/art/rivals/drum-crab.webp",
+      "intro": "Ba-dum-tss!",
+      "defeat": "It ran back into the wild!",
+      "color": "#ef4444"
+    },
+    {
+      "id": "palette-parrot",
+      "name": "Palette Parrot",
+      "world": "harmony-harbor",
+      "kind": "wild",
+      "image": "/art/rivals/palette-parrot.webp",
+      "intro": "Squawk! Masterpiece!",
+      "defeat": "It ran back into the wild!",
+      "color": "#f43f5e"
+    },
+    {
+      "id": "rookie-robot",
+      "name": "Rookie Robot",
+      "world": null,
+      "kind": "persona",
+      "image": "/art/rivals/rookie-robot.webp",
+      "persona": "rookie-robot"
+    },
+    {
+      "id": "category-captain",
+      "name": "Category Captain",
+      "world": null,
+      "kind": "persona",
+      "image": "/art/rivals/category-captain.webp",
+      "persona": "category-captain"
+    },
+    {
+      "id": "quiz-master",
+      "name": "Quiz Master",
+      "world": null,
+      "kind": "persona",
+      "image": "/art/rivals/quiz-master.webp",
+      "persona": "quiz-master"
+    },
+    {
+      "id": "adaptive-rival",
+      "name": "Best-Fit Rival",
+      "world": null,
+      "kind": "persona",
+      "image": "/art/rivals/adaptive-rival.webp",
+      "persona": "adaptive-rival"
+    },
+    {
+      "id": "questy-owl",
+      "name": "Questy the Owl",
+      "world": null,
+      "kind": "persona",
+      "image": "/art/owl.png",
+      "persona": "questy-owl"
+    }
+  ],
+  "arenas": {
+    "science-lab": {
+      "image": "/art/arenas/science.webp",
+      "player": {
+        "x": 29,
+        "y": 74
+      },
+      "rival": {
+        "x": 81,
+        "y": 55
+      }
+    },
+    "space-station": {
+      "image": "/art/arenas/space.webp",
+      "player": {
+        "x": 34,
+        "y": 70
+      },
+      "rival": {
+        "x": 82,
+        "y": 52
+      }
+    },
+    "geography-galaxy": {
+      "image": "/art/arenas/geography.webp",
+      "player": {
+        "x": 33,
+        "y": 79
+      },
+      "rival": {
+        "x": 84,
+        "y": 57
+      }
+    },
+    "history-kingdom": {
+      "image": "/art/arenas/history.webp",
+      "player": {
+        "x": 33,
+        "y": 75
+      },
+      "rival": {
+        "x": 82,
+        "y": 54
+      }
+    },
+    "literature-forest": {
+      "image": "/art/arenas/literature.webp",
+      "player": {
+        "x": 33,
+        "y": 72
+      },
+      "rival": {
+        "x": 77,
+        "y": 55
+      }
+    },
+    "myth-mountain": {
+      "image": "/art/arenas/myth.webp",
+      "player": {
+        "x": 33,
+        "y": 75
+      },
+      "rival": {
+        "x": 81,
+        "y": 46
+      }
+    },
+    "harmony-harbor": {
+      "image": "/art/arenas/harmony.webp",
+      "player": {
+        "x": 36,
+        "y": 75
+      },
+      "rival": {
+        "x": 83,
+        "y": 51
+      }
+    }
+  },
+  "battles": {
+    "wild": {
+      "count": 3,
+      "persona": "adaptive-rival",
+      "label": "Wild encounter"
+    },
+    "boss": {
+      "count": 7,
+      "persona": "category-captain",
+      "label": "Boss battle",
+      "requiresQuests": 2
+    }
+  }
+}

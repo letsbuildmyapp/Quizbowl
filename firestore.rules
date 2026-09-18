@@ -30,6 +30,15 @@ service cloud.firestore {
     function student(sid) { return get(/databases/$(database)/documents/students/$(sid)).data; }
     function teachesStudent(sid) { return isTeacher() && exists(/databases/$(database)/documents/students/$(sid)) && student(sid).teacherUid == uid(); }
 
+    // Quiz Hall: student-controlled showcase settings (private by default).
+    function validHall(h) {
+      return h is map
+        && h.keys().hasOnly(['visibility', 'featuredBadge', 'featuredItems', 'hidden', 'showStreak', 'showTeamRank', 'featuredPreset', 'layout'])
+        && h.get('visibility', 'private') in ['private', 'class']
+        && h.get('featuredItems', []).size() <= 6
+        && h.get('hidden', []).size() <= 80;
+    }
+
     function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
     function onlyChanges(keys) { return changed().hasOnly(keys); }
     function unchanged(key) { return !(key in changed()); }
@@ -52,7 +61,8 @@ service cloud.firestore {
 
     match /schools/{schoolId} {
       allow read: if (signedIn() && tok().get('schoolId', null) == schoolId && (isTeacher() || role() == 'teacher_pending')) || isPlatformAdmin();
-      allow update: if isSchoolAdmin(schoolId) && onlyChanges(['settings', 'teacherJoinCode', 'name'])
+      allow update: if isSchoolAdmin(schoolId) && onlyChanges(['settings', 'teacherJoinCode', 'name', 'theme', 'rewardCatalog'])
+        && (!('theme' in changed()) || request.resource.data.theme.keys().hasOnly(['presetId', 'displayName', 'mascotName', 'crestLetter', 'primaryColor', 'secondaryColor', 'accentColor', 'teamHubLabel', 'weeklyQuestLabel', 'progressVisual', 'progressLabel', 'modeLabel', 'seasonLabel']))
         && (!('settings' in changed()) || request.resource.data.settings.keys().hasOnly(['consentMode', 'retentionDays', 'timezone', 'allowCrossSchoolChallenges']));
 
       match /teachers/{teacherUid} {
@@ -105,7 +115,8 @@ service cloud.firestore {
           && onlyChanges(['displayName', 'avatar', 'teamId', 'active', 'nicknameRequest'])
           && (!('displayName' in changed()) || (request.resource.data.displayName is string && request.resource.data.displayName.size() > 0 && request.resource.data.displayName.size() <= 40)))
         || (myStudentId() == sid
-          && onlyChanges(['settings', 'leaderboardOptOut', 'nicknameRequest', 'avatar', 'reviewDeckCount'])
+          && onlyChanges(['settings', 'leaderboardOptOut', 'nicknameRequest', 'avatar', 'reviewDeckCount', 'hall'])
+          && (!('hall' in changed()) || validHall(request.resource.data.hall))
           && (!('nicknameRequest' in changed()) || request.resource.data.nicknameRequest == null
               || (request.resource.data.nicknameRequest.status == 'pending'
                   && request.resource.data.nicknameRequest.name is string
@@ -114,6 +125,18 @@ service cloud.firestore {
       match /private/{docId} {
         allow read, write: if docId == 'credentials' && teachesStudent(sid)
           && (request.method == 'get' || request.method == 'delete' || request.resource.data.keys().hasOnly(['pin']) && request.resource.data.pin.matches('^[0-9]{4}$'));
+      }
+
+      // Reward grants: server-created; the student only acknowledges the reveal.
+      match /grants/{grantId} {
+        allow read: if myStudentId() == sid || teachesStudent(sid) || isParentOf(sid);
+        allow update: if myStudentId() == sid && resource.data.acknowledgedAt == null
+          && onlyChanges(['acknowledgedAt', 'skipped', 'revealType'])
+          && request.resource.data.acknowledgedAt == request.time;
+      }
+
+      match /events/{eventId} {
+        allow read: if myStudentId() == sid || teachesStudent(sid);
       }
 
       match /reviewDeck/{questionId} {
@@ -309,6 +332,60 @@ service cloud.firestore {
       allow read: if isPlatformAdmin();
     }
 
+    // ---------- rewards, theme, quiz hall ----------
+    match /mapClaims/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      // Retry allowed only after an error (e.g. claimed too early); a done claim is final.
+      allow create, update: if isNewRequest() && isStudent()
+        && (resource == null || resource.data.status == 'error')
+        && id == myStudentId() + '_' + request.resource.data.objectId
+        && request.resource.data.keys().hasOnly(['objectId', 'uid', 'status', 'createdAt']);
+    }
+
+    match /loadoutRequests/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && isStudent()
+        && request.resource.data.action in ['equip', 'savePreset', 'applyPreset', 'deletePreset']
+        && request.resource.data.keys().hasOnly(['action', 'loadout', 'name', 'uid', 'status', 'createdAt']);
+    }
+
+    match /craftRequests/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && isStudent() && request.resource.data.keys().hasOnly(['itemId', 'uid', 'status', 'createdAt']);
+    }
+
+    match /awardRequests/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && isTeacher() && request.resource.data.keys().hasOnly(['studentId', 'itemId', 'note', 'uid', 'status', 'createdAt']);
+    }
+
+    match /rulePreviews/{id} {
+      allow get: if signedIn() && resource.data.uid == uid();
+      allow create: if isNewRequest() && isContentAdmin();
+    }
+
+    match /schoolThemes/{schoolId} {
+      // Theme data is non-sensitive (names, colors, labels); linked families may read it too.
+      allow read: if (signedIn() && tok().get('schoolId', null) == schoolId) || isParent() || isPlatformAdmin();
+    }
+
+    match /schoolQuests/{qid} {
+      allow read: if (signedIn() && tok().get('schoolId', null) == resource.data.schoolId) || isPlatformAdmin();
+      allow create: if isTeacher() && request.resource.data.schoolId == tok().schoolId
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.get('progress', 0) == 0
+        && request.resource.data.get('contributions', {}) == {}
+        && request.resource.data.target is number && request.resource.data.target > 0;
+      allow update: if isTeacher() && resource.data.schoolId == tok().schoolId
+        && (resource.data.createdBy == uid() || isSchoolAdmin(resource.data.schoolId))
+        && unchanged('schoolId') && unchanged('progress') && unchanged('contributions') && unchanged('completedAt');
+      allow delete: if isTeacher() && (resource.data.createdBy == uid() || isSchoolAdmin(resource.data.schoolId));
+    }
+
+    match /hallCards/{sid} {
+      allow read: if myStudentId() == sid || inMyClass(resource.data.classroomId) || teaches(resource.data.classroomId) || isParentOf(sid) || isPlatformAdmin();
+    }
+
     // Public "request a pilot" form: strict shape, no reads.
     match /pilotRequests/{id} {
       allow create: if request.resource.data.keys().hasOnly(['name', 'role', 'school', 'email', 'students', 'message', 'createdAt'])
@@ -323,7 +400,7 @@ service cloud.firestore {
     match /analyticsEvents/{id} {
       allow create: if signedIn()
         && request.resource.data.keys().hasOnly(['type', 'createdAt'])
-        && request.resource.data.type in ['report_view', 'denied', 'rematch_click'];
+        && request.resource.data.type in ['report_view', 'denied', 'rematch_click', 'map_select', 'cosmetic_preview', 'motion_pref'];
     }
 
     // ---------- content ----------

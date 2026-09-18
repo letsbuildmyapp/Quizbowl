@@ -16,12 +16,13 @@ import { equalTo, onValue, orderByChild, query as rtQuery, ref as rtRef } from '
 import { db, rtdb } from '../../firebase.js';
 import { useClassroom } from '../../hooks/useClassroom.js';
 import { useQuery } from '../../hooks/useFirestore.js';
-import { categoryMeta } from '../../lib/catalog.js';
+import { WORLDS, categoryMeta } from '../../lib/catalog.js';
+import { evaluateRule, worldName } from '../../lib/rewards.js';
 import { fmtNum, pct, timeAgo, weekKey } from '../../lib/format.js';
 import { Avatar, ButtonLink, Button, Card, Chip, EmptyState, ErrorNote, Loading, StrengthRow, useToast, friendlyError } from '../../components/ui.jsx';
 import { ClassGate, TeacherHeader, rosterMap, useRoster, useSummaries } from '../../components/teacher/TeacherPage.jsx';
 import { AssignmentCompletion, useAssignments } from '../../components/teacher/assignments.jsx';
-import { DAY_MS, MODE_LABELS, categoryTotals, orderedCategories, pctText, personaResults, totals } from '../../components/teacher/stats.js';
+import { DAY_MS, MODE_LABELS, categoryTotals, orderedCategories, pctText, personaResults, stuckWorld, totals, unlockedSet } from '../../components/teacher/stats.js';
 
 export default function Dashboard() {
   const cls = useClassroom();
@@ -105,6 +106,20 @@ function buildSuggestions({ summaries, activeRoster, pendingReviews }) {
     if (rate <= 0.3) out.push({ key: `lower-tier:${week}`, title: 'Lower the computer difficulty range.', why, actionLabel: 'Open class settings', to: '/teach/settings' });
   }
 
+  const stuck = stuckWorld(activeRoster);
+  if (stuck && stuck.students.length >= 3 && stuck.students.length >= activeRoster.length * 0.4) {
+    const prereq = WORLDS.find((w) => w.id === stuck.rule.world);
+    const n = stuck.students.length;
+    const label = evaluateRule(stuck.rule, {}).label;
+    out.push({
+      key: `stuck-world:${stuck.worldId}:${week}`,
+      title: `${n} students still have ${worldName(stuck.worldId)} locked.`,
+      why: `It opens when they ${label.charAt(0).toLowerCase()}${label.slice(1)}. A ${prereq?.category || ''} practice assignment counts toward it.`,
+      actionLabel: `Assign ${prereq?.category || 'a'} practice`,
+      to: `/teach/assignments?${new URLSearchParams({ mode: 'practice', category: prereq?.category || '', count: '10', title: `${worldName(stuck.rule.world)} Quest`, students: stuck.students.map((s) => s.id).join(',') })}`
+    });
+  }
+
   if (pendingReviews > 0) {
     out.push({
       key: `reviews:${pendingReviews}:${week}`,
@@ -144,10 +159,11 @@ function DashboardBody({ classroom }) {
   const pendingReviews = reviewsQ.data.length;
 
   const dismissed = classroom.dismissedSuggestions || [];
+  const adventureKey = activeRoster.map((s) => `${s.id}:${(s.unlockedWorlds || []).length}:${s.stats?.sessions || 0}`).join('|');
   const suggestions = useMemo(
     () => (summariesQ.loading || roster.loading ? [] : buildSuggestions({ summaries, activeRoster, pendingReviews }).filter((s) => !dismissed.includes(s.key))),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [summaries, activeRoster.length, pendingReviews, dismissed.join('|'), summariesQ.loading, roster.loading]
+    [summaries, adventureKey, pendingReviews, dismissed.join('|'), summariesQ.loading, roster.loading]
   );
 
   const dismiss = async (key) => {
@@ -282,6 +298,8 @@ function DashboardBody({ classroom }) {
         </Card>
       </div>
 
+      <AdventureCard roster={activeRoster} loading={roster.loading} />
+
       <div className="grid-2" style={{ alignItems: 'start' }}>
         <Card className="stack" aria-labelledby="recent-title">
           <h2 id="recent-title">Recent activity</h2>
@@ -357,6 +375,56 @@ function DashboardBody({ classroom }) {
         </Card>
       </div>
     </div>
+  );
+}
+
+function AdventureCard({ roster, loading }) {
+  const rows = WORLDS.map((w) => ({
+    ...w,
+    unlocked: roster.filter((s) => unlockedSet(s).has(w.id)).length,
+    bosses: roster.filter((s) => (s.bossesDefeated || []).includes(w.id)).length,
+    mastered: roster.filter((s) => (s.masteredWorlds || []).includes(w.id)).length
+  }));
+  return (
+    <Card className="stack" aria-labelledby="adventure-title">
+      <div className="stack" style={{ gap: 4 }}>
+        <h2 id="adventure-title">Adventure</h2>
+        <p className="muted">How many students have opened each world and beaten its boss.</p>
+      </div>
+      {loading ? (
+        <Loading />
+      ) : !roster.length ? (
+        <p className="muted">Add students to see their adventure progress.</p>
+      ) : (
+        <div className="table-wrap">
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">World</th>
+                <th scope="col" className="num">Unlocked</th>
+                <th scope="col" className="num">Boss beaten</th>
+                <th scope="col" className="num">Mastered</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((w) => (
+                <tr key={w.id}>
+                  <td style={{ whiteSpace: 'nowrap' }}>
+                    <span aria-hidden>{w.emoji} </span>
+                    {w.name}
+                  </td>
+                  <td className="num">
+                    {w.unlocked} of {roster.length}
+                  </td>
+                  <td className="num">{w.bosses}</td>
+                  <td className="num">{w.mastered}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </Card>
   );
 }
 

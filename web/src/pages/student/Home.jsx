@@ -64,6 +64,15 @@ export default function Home() {
 
   return (
     <div className="page stack-xl">
+      <div className="row-between">
+        <div className="stack" style={{ gap: 2 }}>
+          <span className="eyebrow">Quests</span>
+          <span className="muted">Today's quest, teacher assignments, and team goals.</span>
+        </div>
+        <ButtonLink to="/play" variant="ghost">
+          🗺️ Back to the map
+        </ButtonLink>
+      </div>
       {student.consent === 'pending' || student.consent === 'revoked' ? (
         <Card tone="sun">
           <strong>Almost ready!</strong> A grown-up in your family needs to say yes to QuizQuest before you can play. Your teacher can help.
@@ -119,7 +128,7 @@ export default function Home() {
 
         <div className="stack">
           {newWorld ? (
-            <Card tone="sun" className="row card-link" as={Link} to="/play/worlds">
+            <Card tone="sun" className="row card-link" as={Link} to="/play">
               <span style={{ fontSize: 40 }} aria-hidden>
                 {newWorld.emoji}
               </span>
@@ -160,8 +169,8 @@ export default function Home() {
               <ButtonLink to="/play/modes" size="lg">
                 🎮 All modes
               </ButtonLink>
-              <ButtonLink to="/play/worlds" size="lg">
-                🗺️ Worlds
+              <ButtonLink to="/play" size="lg">
+                🗺️ Map
               </ButtonLink>
             </div>
           </Card>
