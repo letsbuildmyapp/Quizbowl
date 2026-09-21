@@ -383,6 +383,19 @@
 .pin-dots span { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--purple); background: transparent; }
 .pin-dots span.filled { background: var(--purple); }
 .pin-dots.shake { animation: shake 0.4s ease; }
+/* New students see the PIN they're choosing, so they can remember it. */
+.pin-chosen { display: flex; justify-content: center; gap: 12px; }
+.pin-chosen span {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 62px;
+  border-radius: 14px;
+  border: 3px solid var(--purple);
+  background: var(--surface);
+  font: 700 2rem var(--font-display);
+  color: var(--purple-strong);
+}
 @keyframes shake {
   20%, 60% { transform: translateX(-8px); }
   40%, 80% { transform: translateX(8px); }

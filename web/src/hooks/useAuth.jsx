@@ -70,8 +70,10 @@ export function AuthProvider({ children }) {
     );
   }, [user]);
 
-  // Students: live profile doc.
+  // Students: live profile doc. A listener opened in the moment the student
+  // claim lands can be denied once, so refresh the token and resubscribe.
   const studentId = claims.role === 'student' ? claims.studentId : null;
+  const [studentRetry, setStudentRetry] = useState(0);
   useEffect(() => {
     if (!studentId) {
       setStudent(null);
@@ -80,9 +82,14 @@ export function AuthProvider({ children }) {
     return onSnapshot(
       doc(db, 'students', studentId),
       (snap) => setStudent(snap.exists() ? { id: snap.id, ...snap.data() } : null),
-      () => setStudent(null)
+      async () => {
+        setStudent(null);
+        if (studentRetry >= 3) return;
+        await auth.currentUser?.getIdToken(true).catch(() => {});
+        setStudentRetry((n) => n + 1);
+      }
     );
-  }, [studentId]);
+  }, [studentId, studentRetry]);
 
   // Presence (Realtime Database) so teachers can see who's online.
   useEffect(() => {
@@ -113,6 +120,17 @@ export function AuthProvider({ children }) {
     [refreshClaims]
   );
 
+  /** Self-join: the class code plus a nickname and PIN the kid picks. */
+  const studentJoin = useCallback(
+    async ({ code, name, pin }) => {
+      if (!auth.currentUser) await signInAnonymously(auth);
+      const uid = auth.currentUser.uid;
+      await request('joinRequests', { code: code.toUpperCase(), name, pin }, { id: uid });
+      return refreshClaims();
+    },
+    [refreshClaims]
+  );
+
   const value = useMemo(
     () => ({
       user,
@@ -129,6 +147,7 @@ export function AuthProvider({ children }) {
       loading,
       refreshClaims,
       studentSignIn,
+      studentJoin,
       ensureAnonymous: async () => {
         if (!auth.currentUser) await signInAnonymously(auth);
         return auth.currentUser;
@@ -155,7 +174,7 @@ export function AuthProvider({ children }) {
       },
       signOut: () => fbSignOut(auth)
     }),
-    [user, claims, profile, student, loading, refreshClaims, studentSignIn]
+    [user, claims, profile, student, loading, refreshClaims, studentSignIn, studentJoin]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

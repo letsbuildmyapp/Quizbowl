@@ -104,3 +104,12 @@ What was decided while building QuizQuest from the scoping document and the conc
 | 24 | Picks are sent as an index and scored exactly on the server (no fuzzy matching). Typed answers remain only as a fallback for a question with fewer than 2 distractors, or if a class sets `rules.answerFormat: 'typed'`. | Server-authoritative scoring stays intact; close-answer reviews become rare. |
 | 25 | Publishing now requires 3 wrong answer choices per tossup and per bonus part (server check + editor/import validation). | Every published question must work as multiple choice. |
 | 26 | Default answer window is 8 seconds (was 5). | Kids need time to read four options. |
+
+## Students join with the class code (2026-09-21)
+
+| # | Decision | Why |
+|---|---|---|
+| 27 | A kid with the class code can add themselves: type the code, pick a name and a 4-digit PIN, and start playing. The teacher renames or removes anyone afterwards, and self-joined students carry `joinedWithCode: true`. | Requested by Alex. Typing 30 names before a class can play is the thing that stops a teacher trying it at all. |
+| 28 | Self-join is a per-class switch (`classrooms/{id}.settings.selfJoin`, on by default) projected onto `classCodes/{CODE}.selfJoin` so the sign-in screen knows whether to offer it. | A teacher who wants a fixed roster turns it off; the sign-in screen reads only the code doc. |
+| 29 | Guards: 60 students per class, 12 joins per code per 10 minutes (`joinThrottle/{CODE}`), a blocked-word nickname filter, and duplicate names numbered rather than merged. | A code written on a whiteboard leaks. None of these slow down a kid who belongs there. |
+| 30 | A new student sees the PIN they are choosing (existing students still see dots) and it does not auto-submit on the fourth digit. | They have to remember it tomorrow. |

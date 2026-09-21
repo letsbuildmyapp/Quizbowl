@@ -58,6 +58,7 @@ listens to its own user doc and calls `getIdToken(true)` when that number change
 
 ### Request collections (client creates, trigger fulfils)
 - `studentLogins/{uid}`: `{ code, studentId, pin }` -> claims set; result `{ studentId, classroomId }`
+- `joinRequests/{uid}`: `{ code, name, pin }` -> self-join: creates the student (`joinedWithCode: true`), stores the PIN, sets claims; result `{ studentId, classroomId, displayName }`
 - `teacherRequests/{uid}`: `{ displayName, schoolName? , schoolJoinCode? }` -> creates school or pending membership
 - `parentRequests/{id}`: `{ uid, type: 'link', code }` | `{ type: 'consent', studentId, grant: bool }`
 - `sessionRequests/{id}`: `{ uid, studentId, mode, options }` -> creates `sessions/{id}` with the same id (see below)

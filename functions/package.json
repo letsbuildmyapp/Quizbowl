@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test test/engine.test.js test/rewards.test.js",
-    "test:integration": "node --test --test-concurrency=1 test/integration/rules.test.js test/integration/teacher.test.js test/integration/versus.test.js test/integration/live.test.js test/integration/privacy.test.js test/integration/content.test.js test/integration/rewards.test.js",
+    "test:integration": "node --test --test-concurrency=1 test/integration/rules.test.js test/integration/teacher.test.js test/integration/join.test.js test/integration/versus.test.js test/integration/live.test.js test/integration/privacy.test.js test/integration/content.test.js test/integration/rewards.test.js",
     "serve": "firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",

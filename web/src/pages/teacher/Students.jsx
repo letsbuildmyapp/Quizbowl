@@ -118,6 +118,8 @@ function RosterBody({ classroom, roster, onAdd }) {
     <>
       {pendingNicknames.length ? <NicknameRequests students={pendingNicknames} /> : null}
 
+      <JoinCard classroom={classroom} />
+
       <Card className="stack">
         <div className="row-between">
           <h2>
@@ -165,6 +167,7 @@ function RosterBody({ classroom, roster, onAdd }) {
                           <Link to={`/teach/students/${s.id}`}>{s.displayName}</Link>
                           {s.active === false ? <Chip tone="gray">Deactivated</Chip> : null}
                           {s.consent === 'pending' || s.consent === 'revoked' ? <Chip tone="sun">Needs family consent</Chip> : null}
+                          {s.joinedWithCode ? <Chip tone="gray">Joined with the code</Chip> : null}
                         </div>
                       </div>
                     </td>
@@ -250,6 +253,58 @@ function RosterBody({ classroom, roster, onAdd }) {
         onClose={() => setTeamEdit(null)}
       />
     </>
+  );
+}
+
+/** The class code, and whether students can add themselves with it. */
+function JoinCard({ classroom }) {
+  const toast = useToast();
+  const [busy, setBusy] = useState(false);
+  const selfJoin = classroom.settings?.selfJoin !== false;
+
+  const toggle = async (value) => {
+    setBusy(true);
+    try {
+      await updateDoc(doc(db, 'classrooms', classroom.id), { 'settings.selfJoin': value });
+      toast(value ? 'Students can join with the code' : 'Only you can add students now');
+    } catch (err) {
+      toast(friendlyError(err), { emoji: '\u26a0\ufe0f' });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <Card className="stack">
+      <div className="row-between" style={{ gap: 16, flexWrap: 'wrap' }}>
+        <div className="stack" style={{ gap: 4 }}>
+          <h2>Class code</h2>
+          <span className="caption">Write it on the board. Students go to quizquest and type it in.</span>
+        </div>
+        <div className="row" style={{ gap: 12 }}>
+          <span className="t-code" aria-label={`Class code ${classroom.joinCode?.split('').join(' ')}`}>
+            {classroom.joinCode || '\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7'}
+          </span>
+          <Button
+            onClick={() => {
+              navigator.clipboard?.writeText(classroom.joinCode);
+              toast('Class code copied');
+            }}
+          >
+            Copy
+          </Button>
+        </div>
+      </div>
+      <label className="check">
+        <input type="checkbox" checked={selfJoin} disabled={busy} onChange={(e) => toggle(e.target.checked)} />
+        Let students join with the code
+      </label>
+      <span className="caption">
+        {selfJoin
+          ? 'A student types the code, picks a name and a PIN, and starts playing. You can rename or remove anyone here.'
+          : 'Students can only sign in if you add them to the roster.'}
+      </span>
+    </Card>
   );
 }
 

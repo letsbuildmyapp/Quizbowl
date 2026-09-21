@@ -9,6 +9,7 @@ const { setGlobalOptions } = require('firebase-functions/v2');
 setGlobalOptions({ region: 'us-central1', maxInstances: 20 });
 
 const identity = require('./src/identity');
+const join = require('./src/join');
 const roster = require('./src/roster');
 const game = require('./src/game');
 const content = require('./src/content');
@@ -21,6 +22,7 @@ module.exports = {
   onTeacherRequest: identity.onTeacherRequest,
   onParentRequest: identity.onParentRequest,
   onAdminAction: identity.onAdminAction,
+  onJoinRequest: join.onJoinRequest,
 
   onClassroomWritten: roster.onClassroomWritten,
   onStudentWritten: roster.onStudentWritten,

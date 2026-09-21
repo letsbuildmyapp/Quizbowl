@@ -106,6 +106,7 @@ async function notify({ toUid = null, toStudentId = null, kind, title, body, lin
 
 const DEFAULT_CLASS_SETTINGS = {
   leaderboard: 'class',
+  selfJoin: true,
   opponentMinTier: 0,
   opponentMaxTier: 3,
   rules: {},

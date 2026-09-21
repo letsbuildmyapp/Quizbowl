@@ -24,7 +24,14 @@ async function syncClassCode(classroomId) {
     .filter((s) => s.active !== false)
     .map((s) => ({ id: s.id, displayName: s.displayName, avatar: s.avatar || '🙂' }))
     .sort((a, b) => a.displayName.localeCompare(b.displayName));
-  await codeRef.set({ classroomId, className: classroom.name || 'Class', expiresAt: classroom.joinCodeExpiresAt || null, roster, updatedAt: now() });
+  await codeRef.set({
+    classroomId,
+    className: classroom.name || 'Class',
+    expiresAt: classroom.joinCodeExpiresAt || null,
+    selfJoin: classroom.settings?.selfJoin !== false,
+    roster,
+    updatedAt: now()
+  });
 }
 
 exports.onClassroomWritten = onDocumentWritten('classrooms/{classroomId}', async (event) => {
@@ -37,7 +44,13 @@ exports.onClassroomWritten = onDocumentWritten('classrooms/{classroomId}', async
     if (oldData?.classroomId === classroomId) await old.delete();
   }
   if (!after) return;
-  if (!before || before.joinCode !== after.joinCode || before.joinCodeExpiresAt !== after.joinCodeExpiresAt || before.name !== after.name) {
+  if (
+    !before ||
+    before.joinCode !== after.joinCode ||
+    before.joinCodeExpiresAt !== after.joinCodeExpiresAt ||
+    before.name !== after.name ||
+    before.settings?.selfJoin !== after.settings?.selfJoin
+  ) {
     await syncClassCode(classroomId);
   }
   if (before && JSON.stringify(before.settings) !== JSON.stringify(after.settings)) {
