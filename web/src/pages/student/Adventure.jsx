@@ -14,8 +14,9 @@ import { useDoc, useQuery } from '../../hooks/useFirestore.js';
 import { useSchoolTheme } from '../../hooks/useSchoolTheme.js';
 import { usePendingGrants } from '../../hooks/usePendingGrants.js';
 import { prefersReducedMotion } from '../../hooks/useAccessibility.js';
-import { Loading, friendlyError } from '../../components/ui.jsx';
+import { friendlyError } from '../../components/ui.jsx';
 import RewardReveal from '../../components/rewards/RewardReveal.jsx';
+import { StudentLoading } from '../../components/student/common.jsx';
 import { startSession } from '../../lib/game.js';
 import { request } from '../../lib/requests.js';
 import { currentLoadout } from '../../lib/rewards.js';
@@ -69,7 +70,7 @@ function useMedia(q) {
 
 export default function Adventure() {
   const { student, claims } = useAuth();
-  if (!student) return <Loading full label="Loading your adventure..." />;
+  if (!student) return <StudentLoading />;
   return <AdventureHub student={student} sid={claims.studentId} cid={claims.classroomId} />;
 }
 

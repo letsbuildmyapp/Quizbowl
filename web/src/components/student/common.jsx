@@ -6,7 +6,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { catalog, categoryMeta } from '../../lib/catalog.js';
 import { startSession } from '../../lib/game.js';
-import { ErrorNote, friendlyError, Loading, useToast } from '../ui.jsx';
+import { Button, EmptyState, ErrorNote, friendlyError, Loading, useToast } from '../ui.jsx';
 import { useAuth } from '../../hooks/useAuth.jsx';
 import { useDoc } from '../../hooks/useFirestore.js';
 
@@ -94,13 +94,51 @@ export function Switch({ checked, onChange, label, hint, disabled, id }) {
   );
 }
 
+/**
+ * The spinner every student screen shows while the profile loads, plus a way
+ * out when it is never going to arrive (removed from the class, or a read that
+ * kept failing). Without this a kid just watches the spinner forever.
+ */
+export function StudentLoading({ label = 'Loading your adventure…', full = true }) {
+  const { claims, studentStatus, signOut } = useAuth();
+  if (studentStatus === 'missing') {
+    return (
+      <div className="page page-narrow">
+        <EmptyState emoji="🔎" title="We can't find you in this class" action={<Button variant="primary" size="lg" onClick={signOut}>Sign in again</Button>}>
+          Your teacher may have taken you off the roster. Ask your teacher, then sign in again.
+        </EmptyState>
+      </div>
+    );
+  }
+  if (studentStatus === 'error') {
+    return (
+      <div className="page page-narrow">
+        <EmptyState
+          emoji="📡"
+          title="We couldn't load your stuff"
+          action={
+            <div className="row" style={{ justifyContent: 'center' }}>
+              <Button variant="primary" size="lg" onClick={() => window.location.reload()}>
+                Try again
+              </Button>
+              <Button size="lg" onClick={signOut}>
+                Sign in again
+              </Button>
+            </div>
+          }
+        >
+          Check that you're connected to the internet, then try again.
+        </EmptyState>
+      </div>
+    );
+  }
+  return <Loading full={full} label={claims?.studentId ? label : 'Signing you in…'} />;
+}
+
 /** Render children only once the signed-in student's doc is loaded. */
 export function StudentGate({ children }) {
-  const { student, claims } = useAuth();
-  if (!student) {
-    if (claims?.studentId) return <Loading label="Loading your profile…" />;
-    return <Loading label="Signing you in…" />;
-  }
+  const { student } = useAuth();
+  if (!student) return <StudentLoading label="Loading your profile…" full={false} />;
   return children(student);
 }
 

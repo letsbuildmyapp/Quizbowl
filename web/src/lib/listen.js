@@ -7,6 +7,7 @@
 // live read in the app goes through here instead: refresh the token, resubscribe,
 // and only give up after a few tries.
 import { onSnapshot } from 'firebase/firestore';
+import { onValue, off } from 'firebase/database';
 import { auth } from '../firebase.js';
 
 const RETRY_CODES = new Set(['permission-denied', 'unauthenticated', 'unavailable', 'internal', 'cancelled', 'aborted']);
@@ -43,5 +44,44 @@ export function listen(target, onNext, onError) {
   return () => {
     stopped = true;
     unsub();
+  };
+}
+
+/**
+ * The same idea for Realtime Database presence. A denied listener there is
+ * quieter but just as sticky: the teacher sees an empty room for the rest of
+ * the session and nothing ever corrects it.
+ */
+export function listenValue(target, onNext, onError) {
+  let stopped = false;
+  let current = null;
+  let attempt = 0;
+
+  const start = () => {
+    if (stopped) return;
+    current = onValue(
+      target,
+      (snap) => {
+        attempt = 0;
+        onNext(snap);
+      },
+      async (err) => {
+        if (stopped) return;
+        if (attempt >= MAX_RETRIES) {
+          onError?.(err);
+          return;
+        }
+        const wait = 250 * 2 ** attempt;
+        attempt += 1;
+        await auth.currentUser?.getIdToken(true).catch(() => {});
+        setTimeout(start, wait);
+      }
+    );
+  };
+
+  start();
+  return () => {
+    stopped = true;
+    if (current) off(target, 'value', current);
   };
 }

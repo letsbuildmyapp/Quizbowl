@@ -4,8 +4,9 @@
 // Writes: sessions/{id}/commands/* (start, advance, pause, resume, terminate, sync)
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { equalTo, onValue, orderByChild, query as rtQuery, ref as rtRef } from 'firebase/database';
+import { equalTo, orderByChild, query as rtQuery, ref as rtRef } from 'firebase/database';
 import { rtdb } from '../../firebase.js';
+import { listenValue } from '../../lib/listen.js';
 import { useGameSession } from '../../hooks/useGameSession.js';
 import { Avatar, Button, ButtonLink, Card, Chip, ConfirmModal, Field, Loading } from '../../components/ui.jsx';
 import { ClueReview, ClueStage, Countdown, Scoreboard } from '../../components/game/GameParts.jsx';
@@ -16,7 +17,7 @@ function useOnline(classroomId) {
   useEffect(() => {
     if (!rtdb || !classroomId) return undefined;
     const q = rtQuery(rtRef(rtdb, 'presence'), orderByChild('classroomId'), equalTo(classroomId));
-    return onValue(
+    return listenValue(
       q,
       (snap) => {
         const map = {};

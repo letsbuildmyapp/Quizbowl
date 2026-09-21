@@ -30,6 +30,8 @@ export function AuthProvider({ children }) {
   const [claims, setClaims] = useState({});
   const [profile, setProfile] = useState(null);
   const [student, setStudent] = useState(null);
+  // 'idle' | 'loading' | 'ready' | 'missing' (no doc) | 'error' (gave up)
+  const [studentStatus, setStudentStatus] = useState('idle');
   const [loading, setLoading] = useState(true);
   const claimsVersion = useRef(null);
 
@@ -71,17 +73,26 @@ export function AuthProvider({ children }) {
     );
   }, [user]);
 
-  // Students: live profile doc.
+  // Students: live profile doc. studentStatus lets the UI tell "still loading"
+  // apart from "this profile is gone", so a kid never sits on a spinner forever.
   const studentId = claims.role === 'student' ? claims.studentId : null;
   useEffect(() => {
     if (!studentId) {
       setStudent(null);
+      setStudentStatus('idle');
       return undefined;
     }
+    setStudentStatus('loading');
     return listen(
       doc(db, 'students', studentId),
-      (snap) => setStudent(snap.exists() ? { id: snap.id, ...snap.data() } : null),
-      () => setStudent(null)
+      (snap) => {
+        setStudent(snap.exists() ? { id: snap.id, ...snap.data() } : null);
+        setStudentStatus(snap.exists() ? 'ready' : 'missing');
+      },
+      () => {
+        setStudent(null);
+        setStudentStatus('error');
+      }
     );
   }, [studentId]);
 
@@ -138,6 +149,7 @@ export function AuthProvider({ children }) {
       isPlatformAdmin: !!claims.platformAdmin,
       profile,
       student,
+      studentStatus,
       loading,
       refreshClaims,
       studentSignIn,
@@ -168,7 +180,7 @@ export function AuthProvider({ children }) {
       },
       signOut: () => fbSignOut(auth)
     }),
-    [user, claims, profile, student, loading, refreshClaims, studentSignIn, studentJoin]
+    [user, claims, profile, student, studentStatus, loading, refreshClaims, studentSignIn, studentJoin]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

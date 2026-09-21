@@ -9,7 +9,8 @@ import { collection, doc, limit, orderBy, query, updateDoc, where } from 'fireba
 import { db } from '../../firebase.js';
 import { useAuth } from '../../hooks/useAuth.jsx';
 import { useDoc, useQuery } from '../../hooks/useFirestore.js';
-import { Avatar, Button, ButtonLink, Card, Chip, ErrorNote, Loading, ProgressBar } from '../../components/ui.jsx';
+import { Avatar, Button, ButtonLink, Card, Chip, ErrorNote, ProgressBar } from '../../components/ui.jsx';
+import { StudentLoading } from '../../components/student/common.jsx';
 import { MODE_LABELS, startSession } from '../../lib/game.js';
 import { BADGES, WORLDS, badgeById, categoryMeta, levelProgress } from '../../lib/catalog.js';
 import { dayKey, fmtDate, toMillis } from '../../lib/format.js';
@@ -31,7 +32,7 @@ export default function Home() {
   const { data: notes } = useQuery(() => (sid ? query(collection(db, 'notifications'), where('toStudentId', '==', sid), orderBy('createdAt', 'desc'), limit(5)) : null), [sid]);
   const { data: team } = useDoc(student?.teamId ? `teams/${student.teamId}` : null);
 
-  if (!student) return <Loading full label="Loading your adventure…" />;
+  if (!student) return <StudentLoading />;
 
   const go = async (key, mode, options = {}) => {
     setStarting(key);

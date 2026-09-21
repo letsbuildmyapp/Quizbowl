@@ -12,8 +12,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { arrayUnion, collection, doc, query, updateDoc, where } from 'firebase/firestore';
-import { equalTo, onValue, orderByChild, query as rtQuery, ref as rtRef } from 'firebase/database';
+import { equalTo, orderByChild, query as rtQuery, ref as rtRef } from 'firebase/database';
 import { db, rtdb } from '../../firebase.js';
+import { listenValue } from '../../lib/listen.js';
 import { useClassroom } from '../../hooks/useClassroom.js';
 import { useQuery } from '../../hooks/useFirestore.js';
 import { WORLDS, categoryMeta } from '../../lib/catalog.js';
@@ -47,7 +48,7 @@ function useOnlineCount(classroomId) {
       return undefined;
     }
     const q = rtQuery(rtRef(rtdb, 'presence'), orderByChild('classroomId'), equalTo(classroomId));
-    return onValue(
+    return listenValue(
       q,
       (snap) => {
         let n = 0;
