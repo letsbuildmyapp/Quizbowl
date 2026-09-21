@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Chip, Field, Modal, useToast } from '../ui.jsx';
-import { categoryMeta } from '../../lib/catalog.js';
+import { READING_SPEEDS, categoryMeta } from '../../lib/catalog.js';
 import { flagQuestion } from '../../lib/game.js';
 import './game.css';
 
@@ -41,7 +41,61 @@ export function Scoreboard({ session, mySide }) {
   );
 }
 
-export function ClueStage({ current, large }) {
+// The server reads a clue over a fixed window before the next one lands, so the
+// typing is derived from that schedule (revealedAt -> nextRevealAt) rather than
+// run off a local timer. Switching tabs, a late update or a slow Chromebook
+// can't desync it: every frame recomputes where the reading should be by now.
+const TYPE_TICK_MS = 40;
+const CLUE_GAP_MS = 700; // the server's beat between clues; stop typing before it
+
+/** Words per second the server uses, for the modes with no scheduled next clue. */
+function estimateMs(text, readingSpeed) {
+  const wps = READING_SPEEDS[readingSpeed]?.wordsPerSecond || READING_SPEEDS.medium.wordsPerSecond;
+  const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(2200, Math.round((words / wps) * 1000));
+}
+
+/**
+ * A clue appearing at the pace it is being "read", the way a moderator says it.
+ * The untyped words stay in the layout (hidden, not absent) so the box never
+ * reflows and the buzzer never shifts under a kid's thumb mid-sentence.
+ */
+export function TypedClue({ text, from, to, frozenAt, serverNow, readingSpeed, instant }) {
+  const [, bump] = useState(0);
+  const scheduled = from != null && to != null ? to - from - CLUE_GAP_MS : 0;
+  const span = scheduled > 0 ? scheduled : from != null ? estimateMs(text, readingSpeed) : 0;
+  const live = !instant && span > 0 && frozenAt == null;
+
+  useEffect(() => {
+    if (!live) return undefined;
+    const id = setInterval(() => {
+      bump((n) => n + 1);
+      if (serverNow() - from >= span) clearInterval(id);
+    }, TYPE_TICK_MS);
+    return () => clearInterval(id);
+  }, [live, text, from, span, serverNow]);
+
+  let cut = text.length;
+  if (!instant && span > 0 && from != null) {
+    const at = frozenAt ?? serverNow();
+    const progress = Math.max(0, Math.min(1, (at - from) / span));
+    cut = Math.round(text.length * progress);
+  }
+  const typing = cut < text.length;
+
+  return (
+    <>
+      {/* Screen readers get the whole clue once; they should not hear it letter by letter. */}
+      <span className="sr-only">{text}</span>
+      <span className={`typed ${typing ? 'is-typing' : ''}`} aria-hidden="true">
+        <span className="typed-shown">{text.slice(0, cut)}</span>
+        <span className="typed-rest">{text.slice(cut)}</span>
+      </span>
+    </>
+  );
+}
+
+export function ClueStage({ current, large, serverNow, readingSpeed, instant }) {
   const latestRef = useRef(null);
   if (!current) return null;
   return (
@@ -58,11 +112,26 @@ export function ClueStage({ current, large }) {
       </div>
       {current.leadin ? <p className="leadin">{current.leadin}</p> : null}
       <div aria-live="polite" aria-atomic="false" className="stack" style={{ gap: 10 }}>
-        {current.clues.map((c, i) => (
-          <p key={i} ref={i === current.clues.length - 1 ? latestRef : null} className={`clue ${i === current.clues.length - 1 ? 'latest' : ''}`}>
-            {c}
-          </p>
-        ))}
+        {current.clues.map((c, i) => {
+          const latest = i === current.clues.length - 1;
+          return (
+            <p key={i} ref={latest ? latestRef : null} className={`clue ${latest ? 'latest' : ''}`}>
+              {latest && serverNow ? (
+                <TypedClue
+                  text={c}
+                  from={current.revealedAt?.[i]}
+                  to={current.nextRevealAt ?? current.readingDoneAt}
+                  frozenAt={current.holdStartedAt}
+                  serverNow={serverNow}
+                  readingSpeed={readingSpeed}
+                  instant={instant}
+                />
+              ) : (
+                c
+              )}
+            </p>
+          );
+        })}
       </div>
     </section>
   );

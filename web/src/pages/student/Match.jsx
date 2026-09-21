@@ -10,7 +10,8 @@ import { useDoc } from '../../hooks/useFirestore.js';
 import { useGameSession } from '../../hooks/useGameSession.js';
 import { useSchoolTheme } from '../../hooks/useSchoolTheme.js';
 import { Button, ButtonLink, Chip, ConfirmModal, Loading, useToast } from '../../components/ui.jsx';
-import { AnswerBox, ChoicePicker, ClueReview, Countdown, ReportQuestion } from '../../components/game/GameParts.jsx';
+import { AnswerBox, ChoicePicker, ClueReview, Countdown, ReportQuestion, TypedClue } from '../../components/game/GameParts.jsx';
+import { prefersReducedMotion } from '../../hooks/useAccessibility.js';
 import { BuzzerArt } from '../../components/bot/index.js';
 import BattleScene from '../../components/battle/BattleScene.jsx';
 import { arenaWorld, foeView } from '../../components/battle/battleModel.js';
@@ -35,6 +36,7 @@ export default function Match() {
   const prefs = { ...(classroom?.settings?.accessibility || {}), ...(auth.student?.settings || {}) };
   const soundOn = SOUND_ENABLED && prefs.sound !== false;
   const voiceEnabled = !!classroom?.settings?.voiceAnswers;
+  const reducedMotion = prefersReducedMotion(prefs);
   const calm = classroom?.settings?.rewards?.celebrations === 'calm';
 
   const [pendingBuzz, setPendingBuzz] = useState(null); // { qIndex, queuedAnswer }
@@ -386,11 +388,26 @@ export default function Match() {
           <div className="bt-clues">
             {current.leadin ? <p className="leadin">{current.leadin}</p> : null}
             <div aria-live="polite" aria-atomic="false" className="bt-clues">
-              {current.clues.map((c, i) => (
-                <p key={i} className={`bt-clue ${i === current.clues.length - 1 ? 'latest' : 'old'}`}>
-                  {c}
-                </p>
-              ))}
+              {current.clues.map((c, i) => {
+                const latest = i === current.clues.length - 1;
+                return (
+                  <p key={i} className={`bt-clue ${latest ? 'latest' : 'old'}`}>
+                    {latest ? (
+                      <TypedClue
+                        text={c}
+                        from={current.revealedAt?.[i]}
+                        to={current.nextRevealAt ?? current.readingDoneAt}
+                        frozenAt={current.holdStartedAt}
+                        serverNow={serverNow}
+                        readingSpeed={session.rules.readingSpeed}
+                        instant={reducedMotion}
+                      />
+                    ) : (
+                      c
+                    )}
+                  </p>
+                );
+              })}
             </div>
           </div>
         </section>

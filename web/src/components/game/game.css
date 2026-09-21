@@ -221,3 +221,25 @@
 }
 .choice-text { overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .choice-btn { transition: none; } }
+
+/* Clue typing. The untyped rest of the sentence keeps its space so the box
+   never reflows and the buzzer never jumps under a kid's thumb. */
+.typed, .typed-shown { display: inline; }
+.typed-rest { visibility: hidden; }
+/* The caret belongs where the words stop, not after the space held for the rest. */
+.typed.is-typing .typed-shown::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.16em;
+  background: var(--purple);
+  border-radius: 2px;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .typed.is-typing .typed-shown::after { animation: none; }
+}
+:root[data-reduced-motion='true'] .typed.is-typing .typed-shown::after { animation: none; }

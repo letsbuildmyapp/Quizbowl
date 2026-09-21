@@ -141,7 +141,7 @@ export default function LiveHost() {
                 Already answered: {current.lockedSides.map((s) => session.sides[s]?.name).join(', ')}
               </p>
             ) : null}
-            <ClueStage current={current} large />
+            <ClueStage current={current} large serverNow={serverNow} readingSpeed={session.rules.readingSpeed} />
           </>
         ) : null}
 

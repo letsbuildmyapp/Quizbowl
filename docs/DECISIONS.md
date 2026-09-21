@@ -113,3 +113,13 @@ What was decided while building QuizQuest from the scoping document and the conc
 | 28 | Self-join is a per-class switch (`classrooms/{id}.settings.selfJoin`, on by default) projected onto `classCodes/{CODE}.selfJoin` so the sign-in screen knows whether to offer it. | A teacher who wants a fixed roster turns it off; the sign-in screen reads only the code doc. |
 | 29 | Guards: 60 students per class, 12 joins per code per 10 minutes (`joinThrottle/{CODE}`), a blocked-word nickname filter, and duplicate names numbered rather than merged. | A code written on a whiteboard leaks. None of these slow down a kid who belongs there. |
 | 30 | A new student sees the PIN they are choosing (existing students still see dots) and it does not auto-submit on the fourth digit. | They have to remember it tomorrow. |
+
+## Clues type themselves out (2026-09-21)
+
+| # | Decision | Why |
+|---|---|---|
+| 31 | The newest clue appears word by word instead of all at once, at the pace the server is already reading it. | Requested by Alex. It also matches the sport: a moderator reads a clue, and buzzing early is the skill. A clue that lands as a block hides that. |
+| 32 | The typing position is derived from the schedule (`revealedAt[i]` to `nextRevealAt`), recomputed every frame, never from a local timer that counts characters. | A backgrounded tab, a late update or a slow Chromebook would drift out of sync with the buzz window. Derived state cannot drift, and catching up is automatic. |
+| 33 | The untyped rest of the clue keeps its space in the layout (hidden, not absent). | The answer box and buzzer must not move under a kid's thumb mid-sentence. |
+| 34 | Typing freezes at `holdStartedAt` while someone is answering, and resumes when reading resumes. | The engine already pauses reading on a buzz; the text now shows that instead of running on. |
+| 35 | Screen readers get the whole clue at once from an `sr-only` copy, and the animated copy is `aria-hidden`. Reduced motion (setting or OS) shows the clue complete. | Nobody should hear a clue announced letter by letter, and the animation is decorative. |
