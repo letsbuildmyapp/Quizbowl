@@ -173,6 +173,33 @@ function computerSide(pub) {
   return pub.participants.find((p) => p.kind === 'computer')?.side ?? null;
 }
 
+// A quiz bowl tossup is four clues read in order, hardest first. Kids playing on
+// their own get the last one instead: it is the clue written as a plain question
+// ("For 10 points, name this Dutch painter..."), which stands on its own. The
+// other clues are not part of the question at all, so they are kept aside and
+// shown after the answer as things worth knowing. Live team battles, where a
+// teacher is running real quiz bowl practice, keep all four clues.
+const GIVEAWAY_PREFIX = /^for (10|ten) points,?\s*/i;
+
+function asQuestion(text) {
+  const stripped = String(text || '').replace(GIVEAWAY_PREFIX, '').trim();
+  if (!stripped) return String(text || '');
+  return stripped[0].toUpperCase() + stripped.slice(1);
+}
+
+/** Collapse a tossup to the single question kids answer, keeping the rest as facts. */
+function toSingleQuestion(q) {
+  const clues = q.clues || [];
+  if (clues.length < 2) return q;
+  const last = clues[clues.length - 1];
+  return {
+    ...q,
+    clues: [{ ...last, text: asQuestion(last.text) }],
+    extraFacts: clues.slice(0, -1).map((c) => c.text),
+    powerClueIndex: 0
+  };
+}
+
 /** The absolute time the computer will buzz on the current tossup, if it can. */
 function computerBuzzTime(pub, sec) {
   const cs = computerSide(pub);
@@ -181,6 +208,12 @@ function computerBuzzTime(pub, sec) {
   if (c.lockedSides.includes(cs) || c.computerBuzzed) return null;
   const plan = sec.plan.tossups[pub.qIndex];
   if (!plan || plan.buzzClue == null) return null;
+  // One question on screen: the rival reads its way through the sentence first.
+  if (plan.readFraction != null && c.clueCount === 1) {
+    const start = c.revealedAt[0];
+    if (start == null || c.readingDoneAt == null) return null;
+    return start + Math.round((c.readingDoneAt - start) * plan.readFraction) + plan.delayMs;
+  }
   if (plan.afterReading) {
     return c.readingDoneAt != null && c.revealedAt.length === c.clueCount ? c.readingDoneAt + plan.delayMs : null;
   }
@@ -251,6 +284,7 @@ function endQuestion(pub, sec, winnerSide, at, events) {
     explanation: q.explanation || '',
     pronunciationNotes: q.pronunciationNotes || null,
     allClues: q.clues.map((cl) => cl.text),
+    extraFacts: q.extraFacts || [],
     powerClueIndex: q.powerClueIndex ?? null,
     // After the question is over it is safe to show what the computer had planned.
     computerPlan: plan ? { buzzClue: plan.buzzClue, afterReading: plan.afterReading } : null
@@ -315,7 +349,7 @@ function scoreTossupAnswer(pub, sec, { actorId, side, text, choice, at, timedOut
   let points = 0;
   let powered = false;
   if (check.result === 'correct') {
-    powered = !!(rules.powerEnabled && q.powerClueIndex != null && buzz.clueIndex <= q.powerClueIndex);
+    powered = !!(rules.powerEnabled && interrupted && q.powerClueIndex != null && buzz.clueIndex <= q.powerClueIndex);
     points = powered ? rules.powerPoints : rules.tossupPoints;
   } else if (rules.negEnabled && interrupted && pub.mode !== 'practice') {
     points = rules.negPoints;
@@ -563,7 +597,7 @@ function scoreComputerAnswer(pub, sec, plan, at, events) {
   let points = 0;
   let powered = false;
   if (plan.correct) {
-    powered = !!(pub.rules.powerEnabled && q.powerClueIndex != null && c.buzz.clueIndex <= q.powerClueIndex);
+    powered = !!(pub.rules.powerEnabled && interrupted && q.powerClueIndex != null && c.buzz.clueIndex <= q.powerClueIndex);
     points = powered ? pub.rules.powerPoints : pub.rules.tossupPoints;
   } else if (pub.rules.negEnabled && interrupted) {
     points = pub.rules.negPoints;
@@ -872,6 +906,7 @@ function handle(pub, sec, cmd, at, now, events) {
 module.exports = {
   createSession,
   applyCommand,
+  toSingleQuestion,
   advanceTo,
   clueDurationMs,
   computerBuzzTime,

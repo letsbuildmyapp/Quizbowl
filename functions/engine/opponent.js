@@ -165,6 +165,12 @@ function planTossup(question, params, matchAccuracy, seed, questionIndex) {
   const rawDelay = rng.range(params.reactionMs[0], params.reactionMs[1]);
   const delayMs = Math.round(Math.max(params.reactionFloorMs, rawDelay, 1));
 
+  // A single-question match has no later clue to wait for, so the rival has to
+  // read the question like a kid does before it can answer. Skill decides how
+  // far through the sentence it recognises the answer; reaction time is added on
+  // top. Without this the rival buzzes a second in, before anyone can read it.
+  const readFraction = n === 1 ? Number(clamp(1.15 - 0.6 * skill, 0.5, 1.15).toFixed(3)) : null;
+
   const ambiguity = clamp(question.ambiguity ?? 0, 0, 1);
   const pCorrect = clamp(accuracy * (0.9 + 0.2 * recognition) * (1 - 0.3 * ambiguity), 0.05, accuracyCeiling);
   const correctDraw = rng.next();
@@ -179,7 +185,7 @@ function planTossup(question, params, matchAccuracy, seed, questionIndex) {
         ? distractors[Math.floor(wrongPick * distractors.length)]
         : null;
 
-  return { buzzClue, afterReading, delayMs, correct, answerText, recognition: Number(recognition.toFixed(3)), pCorrect: Number(pCorrect.toFixed(3)) };
+  return { buzzClue, afterReading, delayMs, readFraction, correct, answerText, recognition: Number(recognition.toFixed(3)), pCorrect: Number(pCorrect.toFixed(3)) };
 }
 
 /** Precompute computer answers for bonus parts it earns. */

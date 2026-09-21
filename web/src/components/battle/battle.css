@@ -431,3 +431,16 @@
 
 .bt-split.has-choices { grid-template-columns: minmax(0, 1fr) minmax(360px, 520px); }
 @media (max-width: 900px) { .bt-split.has-choices { grid-template-columns: minmax(0, 1fr); } }
+
+/* Things worth knowing, shown after the answer. Not part of the question. */
+.bt-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.bt-facts ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.bt-facts li { line-height: 1.5; color: var(--ink-2); }

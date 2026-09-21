@@ -2,6 +2,12 @@ export const pct = (n, d) => (d ? Math.round((n / d) * 100) : 0);
 export const fmtPct = (n, d) => (d ? `${pct(n, d)}%` : 'n/a');
 export const fmtNum = (n) => (n ?? 0).toLocaleString('en-US');
 
+/** Answers are stored lowercase ("octopus"); show them as a sentence would. */
+export const answerCase = (s) => {
+  const t = String(s ?? '').trim();
+  return t ? t[0].toUpperCase() + t.slice(1) : t;
+};
+
 export function toMillis(v) {
   if (v == null) return null;
   if (typeof v === 'number') return v;

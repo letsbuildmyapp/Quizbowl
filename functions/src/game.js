@@ -169,10 +169,8 @@ async function createStudentSession(sessionId, data, claims) {
     ruleOverrides.answerWindowMs = 15000;
     count = count || 8;
   }
-  if (mode === 'score_attack') {
-    ruleOverrides.bonusesEnabled = false;
-    count = count || 10;
-  }
+  if (mode === 'score_attack') count = count || 10;
+  ruleOverrides.bonusesEnabled = false;
   if (mode === 'versus') count = count || settings.rules.matchLength || catalog.defaultRules.matchLength;
   if (opts.readingSpeed && opts.readingSpeed !== 'manual') ruleOverrides.readingSpeed = opts.readingSpeed;
   const rules = buildRules(settings, ruleOverrides);
@@ -182,7 +180,12 @@ async function createStudentSession(sessionId, data, claims) {
     const prev = (await db.doc(`sessionSecrets/${opts.rematchOf}`).get()).data();
     if (prev) avoidIds = [...avoidIds, ...prev.tossups.map((t) => t.id)];
   }
-  const { tossups, bonuses } = await pickQuestions(seed, { category, difficulty, setId, ids, count, avoidIds });
+  const picked = await pickQuestions(seed, { category, difficulty, setId, ids, count, avoidIds });
+  // Playing solo is one question with one answer; the other clues become the
+  // facts shown afterwards. Bonus rounds are quiz bowl scaffolding and only run
+  // in teacher-hosted live battles.
+  const tossups = picked.tossups.map(engine.toSingleQuestion);
+  const bonuses = picked.bonuses;
   if (!tossups.length) throw new UserError("There aren't any questions ready for that choice yet. Try another category.");
 
   const participants = [{ id: studentId, kind: 'student', name: student.displayName, avatar: student.avatar || '🙂', side: 'A' }];

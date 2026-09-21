@@ -12,6 +12,7 @@ import { useSchoolTheme } from '../../hooks/useSchoolTheme.js';
 import { Button, ButtonLink, Chip, ConfirmModal, Loading, useToast } from '../../components/ui.jsx';
 import { AnswerBox, ChoicePicker, ClueReview, Countdown, ReportQuestion, TypedClue } from '../../components/game/GameParts.jsx';
 import { prefersReducedMotion } from '../../hooks/useAccessibility.js';
+import { answerCase } from '../../lib/format.js';
 import { BuzzerArt } from '../../components/bot/index.js';
 import BattleScene from '../../components/battle/BattleScene.jsx';
 import { arenaWorld, foeView } from '../../components/battle/battleModel.js';
@@ -54,6 +55,7 @@ export default function Match() {
   const opponentName = session?.opponent?.name || 'Opponent';
   const myBuzzConfirmed = status === 'AWAITING_ANSWER' && current?.buzz?.actorId === actorId;
   const mySideLocked = !!(mySide && current?.lockedSides?.includes(mySide));
+  const oneQuestion = current?.clueCount === 1;
   const canBuzz = status === 'READING_CLUE' && !mySideLocked && !pendingBuzz;
   const answering = myBuzzConfirmed || (pendingBuzz && pendingBuzz.qIndex === session?.qIndex && status !== 'SCORED');
   const attemptKey = status === 'BONUS' ? `b${session?.qIndex}-${session?.bonus?.results?.length}` : `t${session?.qIndex}-${current?.attempts?.length || 0}`;
@@ -231,11 +233,14 @@ export default function Match() {
       const who = last.kind === 'computer' ? opponentName : last.actorId === actorId ? 'You' : session.sides[last.side]?.name;
       const said = last.answer ? ` said “${last.answer}”` : " didn't answer";
       const quip = last.kind === 'computer' && session.opponent?.lines?.wrong ? ` “${session.opponent.lines.wrong}”` : '';
-      return { alert: false, text: `${who}${said}. Not quite!${quip} ${mySideLocked ? 'Keep listening.' : 'You can still buzz!'}` };
+      const after = mySideLocked ? (oneQuestion ? `${opponentName} can still answer.` : 'Keep listening.') : 'You can still buzz!';
+      return { alert: false, text: `${who}${said}. Not quite!${quip} ${after}` };
     }
-    if (status === 'READING_CLUE' && mySideLocked) return { alert: false, text: 'Your team already answered. Keep listening.' };
+    if (status === 'READING_CLUE' && mySideLocked) {
+      return { alert: false, text: oneQuestion ? `Waiting on ${opponentName}…` : 'Your team already answered. Keep listening.' };
+    }
     if (status === 'READING_CLUE' && session.opponent) return { alert: false, text: `${opponentName} is listening…` };
-    if (status === 'READING_CLUE') return { alert: false, text: 'Listen to the clues. Buzz when you know it!' };
+    if (status === 'READING_CLUE') return { alert: false, text: oneQuestion ? 'Buzz as soon as you know it!' : 'Listen to the clues. Buzz when you know it!' };
     return null;
   }, [session, current, status, actorId, opponentName, mySideLocked, answering]);
 
@@ -366,20 +371,22 @@ export default function Match() {
     if (status === 'BUZZ_LOCKED') caption = `${opponentName} is answering…`;
     else if (status === 'AWAITING_ANSWER') caption = 'Someone is answering…';
     else if (late) caption = 'Just missed it!';
-    else if (mySideLocked) caption = 'Keep listening…';
+    else if (mySideLocked) caption = oneQuestion ? `${opponentName}'s turn…` : 'Keep listening…';
     dock = (
       <div className={`bt-dock-inner ${myBuzzConfirmed && current?.choices ? 'has-choices' : ''}`}>
         <section className="bt-box bt-textbox" ref={textRef} aria-label="Battle dialog">
-          <div className="bt-cluehead">
-            <div className="clue-dots" aria-hidden="true">
-              {Array.from({ length: current.clueCount }, (_, i) => (
-                <span key={i} className={i < current.clues.length ? 'on' : ''} />
-              ))}
+          {current.clueCount > 1 ? (
+            <div className="bt-cluehead">
+              <div className="clue-dots" aria-hidden="true">
+                {Array.from({ length: current.clueCount }, (_, i) => (
+                  <span key={i} className={i < current.clues.length ? 'on' : ''} />
+                ))}
+              </div>
+              <span className="caption tabular">
+                Clue {current.clues.length} of {current.clueCount}
+              </span>
             </div>
-            <span className="caption tabular">
-              Clue {current.clues.length} of {current.clueCount}
-            </span>
-          </div>
+          ) : null}
           {narration ? (
             <p className={`bt-narrate ${narration.alert ? 'alert' : ''}`} role="status" aria-live={narration.alert ? 'assertive' : 'polite'}>
               {narration.text}
@@ -686,7 +693,8 @@ function Outcome({ session, mySide, actorId, opponentName, foe, isController, on
           </div>
           {myAttempt ? (
             <p>
-              You said <strong>“{myAttempt.answer || '(no answer)'}”</strong> {myAttempt.result === 'correct' ? '✓ correct' : '✗ not quite'}
+              You said <strong>“{myAttempt.answer ? answerCase(myAttempt.answer) : '(no answer)'}”</strong>{' '}
+              {myAttempt.result === 'correct' ? '✓ correct' : '✗ not quite'}
               {myAttempt.flaggedClose ? '. That was close, so your teacher will take a look.' : ''}
             </p>
           ) : null}
@@ -694,28 +702,36 @@ function Outcome({ session, mySide, actorId, opponentName, foe, isController, on
             .filter((a) => a.kind === 'computer')
             .map((a) => (
               <p key={a.buzzAt} className="muted">
-                {opponentName} said “{a.answer || '…'}” {a.result === 'correct' ? '✓' : '✗'}
+                {opponentName} said “{a.answer ? answerCase(a.answer) : '…'}” {a.result === 'correct' ? '✓' : '✗'}
                 {a.result !== 'correct' && session.opponent?.lines?.wrong ? ` “${session.opponent.lines.wrong}”` : ''}
               </p>
             ))}
           <div className="bt-answer-card">
             <span className="label">The answer</span>
-            <span className="answer-reveal">{o.canonicalAnswer}</span>
+            <span className="answer-reveal">{answerCase(o.canonicalAnswer)}</span>
             {o.acceptedAnswers?.length ? <span className="caption">Also accepted: {o.acceptedAnswers.join(', ')}</span> : null}
             {o.pronunciationNotes ? <span className="caption">Say it: {o.pronunciationNotes}</span> : null}
           </div>
-          {o.explanation ? (
-            <p className="bt-why">
-              <strong>Why: </strong>
-              {o.explanation}
-            </p>
-          ) : null}
-          <details>
-            <summary style={{ cursor: 'pointer', fontWeight: 800, minHeight: 44, display: 'flex', alignItems: 'center' }}>See every clue</summary>
-            <div style={{ marginTop: 8 }}>
-              <ClueReview outcome={o} attempts={current.attempts} sides={session.sides} opponentName={opponentName} myActorId={actorId} />
+          {o.extraFacts?.length || o.explanation ? (
+            <div className="bt-facts">
+              <span className="label">Cool things to know</span>
+              <ul>
+                {(o.extraFacts || []).map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+                {o.explanation ? <li>{o.explanation}</li> : null}
+              </ul>
             </div>
-          </details>
+          ) : null}
+          {/* Four clues only exist in teacher-hosted battles; solo play asks one question. */}
+          {o.allClues?.length > 1 ? (
+            <details>
+              <summary style={{ cursor: 'pointer', fontWeight: 800, minHeight: 44, display: 'flex', alignItems: 'center' }}>See every clue</summary>
+              <div style={{ marginTop: 8 }}>
+                <ClueReview outcome={o} attempts={current.attempts} sides={session.sides} opponentName={opponentName} myActorId={actorId} />
+              </div>
+            </details>
+          ) : null}
         </div>
         <div className="bt-split-side">
           {isController ? (

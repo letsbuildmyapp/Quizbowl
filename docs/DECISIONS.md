@@ -123,3 +123,15 @@ What was decided while building QuizQuest from the scoping document and the conc
 | 33 | The untyped rest of the clue keeps its space in the layout (hidden, not absent). | The answer box and buzzer must not move under a kid's thumb mid-sentence. |
 | 34 | Typing freezes at `holdStartedAt` while someone is answering, and resumes when reading resumes. | The engine already pauses reading on a buzz; the text now shows that instead of running on. |
 | 35 | Screen readers get the whole clue at once from an `sr-only` copy, and the animated copy is `aria-hidden`. Reduced motion (setting or OS) shows the clue complete. | Nobody should hear a clue announced letter by letter, and the animation is decorative. |
+
+## One question, one answer (2026-09-21)
+
+| # | Decision | Why |
+|---|---|---|
+| 36 | Playing solo, a tossup is asked as a single question: the giveaway clue with "For 10 points," stripped. The other clues are not asked at all. | Requested by Alex: the battle was hard to follow. Four clues read in order is quiz bowl convention, and it reads as four separate questions to anyone who doesn't know the format. |
+| 37 | The unused clues plus the explanation become "Cool things to know", shown under the answer after the question is scored. | They are genuinely interesting, they just aren't the question. |
+| 38 | Teacher-hosted live battles keep all four clues and the bonus round. | That is real quiz bowl practice, which is what the app was for first. Solo play is the learning game. |
+| 39 | The conversion happens once, when the session is built (`toSingleQuestion`), so the engine, the opponent model and scoring all run unchanged on a one-clue question. | No mode branching through the engine, and no content rewrite: all 84 published tossups already end with a "For 10 points," giveaway. |
+| 40 | Bonus rounds are off in every solo mode, so the button after a question always reads "Next question". | Alex didn't know what the bonus round was. It is quiz bowl scaffolding, not a kid-facing feature. |
+| 41 | Power (15 instead of 10) now requires buzzing before the reading finishes, not just an early clue index. | With one clue, every buzz is "clue 0", which would have made every answer a power. Unchanged for four-clue questions, where an early buzz always beats the reading. |
+| 42 | On a single question the rival reads before it buzzes: it waits a skill-based fraction of the reading time, then its reaction delay. | Its old pacing fired about a second in, before a kid could read the sentence. Skill decides how far through it recognises the answer. |

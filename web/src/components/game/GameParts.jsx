@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Chip, Field, Modal, useToast } from '../ui.jsx';
 import { READING_SPEEDS, categoryMeta } from '../../lib/catalog.js';
+import { answerCase } from '../../lib/format.js';
 import { flagQuestion } from '../../lib/game.js';
 import './game.css';
 
@@ -384,7 +385,7 @@ export function ChoicePicker({ choices, onPick, deadline, total, serverNow, busy
             <span className="choice-key" aria-hidden>
               {LETTERS[i]}
             </span>
-            <span className="choice-text">{c}</span>
+            <span className="choice-text">{answerCase(c)}</span>
           </button>
         ))}
       </div>

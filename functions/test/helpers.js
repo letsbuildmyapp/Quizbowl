@@ -16,8 +16,8 @@ function bonusesFor(tus) {
 }
 
 /** Build a versus (or practice) session the same way the server does. */
-function buildSession({ mode = 'versus', personaId = 'questy-owl', seedStr = 'seed-1', n = 10, rules = {}, now = 0, specialty } = {}) {
-  const tus = pickQuestions(n, seedStr);
+function buildSession({ mode = 'versus', personaId = 'questy-owl', seedStr = 'seed-1', n = 10, rules = {}, now = 0, specialty, single = false } = {}) {
+  const tus = pickQuestions(n, seedStr).map((q) => (single ? engine.toSingleQuestion(q) : q));
   const bos = bonusesFor(tus);
   let opponent = null;
   let opponentPlan = null;

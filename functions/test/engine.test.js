@@ -568,3 +568,103 @@ test('weekKey is ISO week', () => {
   assert.equal(engine.weekKey(Date.UTC(2026, 8, 17, 17), 'UTC'), '2026-W38');
   assert.equal(engine.weekKey(Date.UTC(2027, 0, 1, 17), 'UTC'), '2026-W53');
 });
+
+// --- one question, one answer (how kids play on their own) -------------------
+
+test('toSingleQuestion keeps the giveaway clue as a plain question and sets the rest aside', () => {
+  const q = tossups.find((t) => (t.clues || []).length > 2);
+  const single = engine.toSingleQuestion(q);
+  assert.equal(single.clues.length, 1, 'one clue is asked');
+  assert.equal(single.extraFacts.length, q.clues.length - 1, 'the rest become facts');
+  assert.deepEqual(single.extraFacts, q.clues.slice(0, -1).map((c) => c.text));
+  assert.doesNotMatch(single.clues[0].text, /^for (10|ten) points/i, '"For 10 points," is stripped');
+  assert.match(single.clues[0].text, /^[A-Z]/, 'starts as a sentence');
+  // Everything else about the question is untouched.
+  assert.equal(single.canonicalAnswer, q.canonicalAnswer);
+  assert.deepEqual(single.approvedDistractors, q.approvedDistractors);
+});
+
+test('toSingleQuestion leaves a one-clue question alone', () => {
+  const q = { id: 'x', clues: [{ text: 'Name this thing.' }], canonicalAnswer: 'thing' };
+  assert.deepEqual(engine.toSingleQuestion(q), q);
+});
+
+test('a single-question match reads one clue, scores it, and never offers a bonus', () => {
+  const d = new Driver(buildSession({ mode: 'versus', n: 3, single: true, rules: { bonusesEnabled: false } }));
+  d.cmd('start', 1000);
+  const c = d.pub.current;
+  assert.equal(c.clueCount, 1, 'one clue in play');
+  assert.equal(c.clues.length, 1, 'and it is shown right away');
+  assert.equal(c.nextRevealAt, null, 'nothing else to reveal');
+  assert.ok(c.readingDoneAt > c.revealedAt[0], 'reading still takes time');
+  assert.doesNotMatch(c.clues[0], /^for (10|ten) points/i);
+
+  const buzzAt = c.revealedAt[0] + 300;
+  d.cmd('buzz', buzzAt, { seenClueIndex: 0 });
+  assert.equal(d.pub.status, 'AWAITING_ANSWER');
+  assert.equal(d.pub.current.choices.length, 4, 'four choices to pick from');
+
+  const answer = d.sec.tossups[0].canonicalAnswer;
+  d.cmd('answer', buzzAt + 800, { choice: d.pub.current.choices.indexOf(answer) });
+  assert.equal(d.pub.status, 'SCORED');
+  assert.equal(d.pub.current.outcome.winnerSide, 'A');
+  assert.ok(d.pub.current.outcome.extraFacts.length > 0, 'the facts ride along for the result screen');
+  assert.equal(d.pub.current.outcome.allClues.length, 1, 'there is no clue list to review');
+
+  // Next stop is the following question, not a bonus round.
+  d.cmd('advance', buzzAt + 2000);
+  assert.equal(d.pub.status, 'READING_CLUE');
+  assert.equal(d.pub.qIndex, 1);
+  assert.equal(d.pub.bonus, null);
+});
+
+test('power needs a buzz that beats the reading, not just an early clue index', () => {
+  const d = new Driver(buildSession({ mode: 'versus', n: 3, single: true, rules: { powerEnabled: true } }));
+  d.cmd('start', 1000);
+  const c = d.pub.current;
+  const answer = d.sec.tossups[0].canonicalAnswer;
+
+  // Buzzing while the question is still being read is a power.
+  d.cmd('buzz', c.revealedAt[0] + 150, { seenClueIndex: 0 });
+  assert.equal(d.pub.status, 'AWAITING_ANSWER', 'student got there first');
+  d.cmd('answer', d.pub.current.buzz.at + 500, { choice: d.pub.current.choices.indexOf(answer) });
+  assert.equal(d.pub.current.attempts[0].powered, true);
+  assert.equal(d.pub.sides.A.score, d.pub.rules.powerPoints);
+});
+
+test('waiting until the reading finishes scores the normal points, not a power', () => {
+  const d = new Driver(buildSession({ mode: 'practice', n: 3, single: true, rules: { powerEnabled: true } }));
+  d.cmd('start', 1000);
+  const c = d.pub.current;
+  const answer = d.sec.tossups[0].canonicalAnswer;
+
+  d.cmd('buzz', c.readingDoneAt + 100, { seenClueIndex: 0 });
+  assert.equal(d.pub.status, 'AWAITING_ANSWER');
+  d.cmd('answer', d.pub.current.buzz.at + 500, { choice: d.pub.current.choices.indexOf(answer) });
+  const mine = d.pub.current.attempts.find((a) => a.kind === 'student');
+  assert.equal(mine.powered, false, 'no power once the question has been read out');
+  assert.equal(d.pub.sides.A.score, d.pub.rules.tossupPoints);
+});
+
+test('the rival reads a single question before buzzing, instead of firing on reaction time alone', () => {
+  const d = new Driver(buildSession({ mode: 'versus', personaId: 'quiz-master', n: 3, single: true }));
+  d.cmd('start', 1000);
+  const c = d.pub.current;
+  const readingMs = c.readingDoneAt - c.revealedAt[0];
+  const plan = d.sec.plan.tossups[0];
+  assert.ok(plan.readFraction >= 0.5, 'it hears at least half the question');
+
+  const buzzAt = engine.computerBuzzTime(d.pub, d.sec);
+  assert.ok(buzzAt != null, 'the strongest rival does buzz');
+  const into = buzzAt - c.revealedAt[0];
+  assert.ok(into >= readingMs * 0.5, `buzzed ${into}ms in, at least half of ${readingMs}ms of reading`);
+
+  // And it still cannot buzz before the question is on screen.
+  assert.ok(into > 0);
+});
+
+test('a weaker rival waits longer on a single question than the strongest one', () => {
+  const strong = buildSession({ mode: 'versus', personaId: 'quiz-master', n: 3, single: true });
+  const weak = buildSession({ mode: 'versus', personaId: 'rookie-robot', n: 3, single: true });
+  assert.ok(weak.sec.plan.tossups[0].readFraction > strong.sec.plan.tossups[0].readFraction);
+});
