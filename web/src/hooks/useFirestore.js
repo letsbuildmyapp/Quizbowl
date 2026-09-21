@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { db } from '../firebase.js';
+import { listen } from '../lib/listen.js';
 
 /** Live document. path: string like 'students/abc' or null to skip. */
 export function useDoc(path) {
@@ -11,7 +12,7 @@ export function useDoc(path) {
       return undefined;
     }
     setState((s) => ({ ...s, loading: true }));
-    return onSnapshot(
+    return listen(
       doc(db, path),
       (snap) => setState({ data: snap.exists() ? { id: snap.id, ...snap.data() } : null, exists: snap.exists(), loading: false, error: null }),
       (error) => setState({ data: null, exists: false, loading: false, error })
@@ -32,7 +33,7 @@ export function useQuery(makeQuery, deps) {
       return undefined;
     }
     setState((s) => ({ ...s, loading: true }));
-    return onSnapshot(
+    return listen(
       q,
       (snap) => setState({ data: snap.docs.map((d) => ({ id: d.id, ...d.data() })), loading: false, error: null }),
       (error) => setState({ data: [], loading: false, error })

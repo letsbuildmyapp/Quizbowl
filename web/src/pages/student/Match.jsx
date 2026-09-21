@@ -16,11 +16,13 @@ import BattleScene from '../../components/battle/BattleScene.jsx';
 import { arenaWorld, foeView } from '../../components/battle/battleModel.js';
 import { sfx } from '../../components/battle/sfx.js';
 import { MODE_LABELS, saveToReviewDeck } from '../../lib/game.js';
-import { SPEECH_RATE, sounds, speak, stopSpeaking } from '../../lib/sound.js';
+import { SOUND_ENABLED, SPEECH_RATE, sounds, speak, stopSpeaking } from '../../lib/sound.js';
 import { READING_SPEEDS, categoryMeta, levelProgress } from '../../lib/catalog.js';
 import { currentLoadout } from '../../lib/rewards.js';
 
 const RESULTS_DELAY_MS = 2000;
+// How long to wait for the server to confirm a buzz before giving the buzzer back.
+const BUZZ_CONFIRM_MS = 6000;
 
 export default function Match() {
   const { sessionId } = useParams();
@@ -31,7 +33,7 @@ export default function Match() {
   const { session, loading, error, send, serverNow, isController, actorId, mySide, lastRejection, clearRejection } = useGameSession(sessionId);
   const { data: classroom } = useDoc(auth.claims.classroomId ? `classrooms/${auth.claims.classroomId}` : null);
   const prefs = { ...(classroom?.settings?.accessibility || {}), ...(auth.student?.settings || {}) };
-  const soundOn = prefs.sound !== false;
+  const soundOn = SOUND_ENABLED && prefs.sound !== false;
   const voiceEnabled = !!classroom?.settings?.voiceAnswers;
   const calm = classroom?.settings?.rewards?.celebrations === 'calm';
 
@@ -98,6 +100,18 @@ export default function Match() {
       setPendingBuzz(null);
     }
   }, [pendingBuzz, myBuzzConfirmed, status, send]);
+
+  // Safety net: if the confirmation never arrives (a dropped update, a command
+  // that went nowhere), don't strand the kid on "choices are on the way". Ask the
+  // server where we are and hand the buzzer back.
+  useEffect(() => {
+    if (!pendingBuzz || myBuzzConfirmed) return undefined;
+    const t = setTimeout(() => {
+      setPendingBuzz(null);
+      send('sync').catch(() => {});
+    }, BUZZ_CONFIRM_MS);
+    return () => clearTimeout(t);
+  }, [pendingBuzz, myBuzzConfirmed, send]);
 
   // Sounds + read-aloud as clues appear.
   const clueCount = current?.clues?.length || 0;

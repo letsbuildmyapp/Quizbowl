@@ -2,7 +2,8 @@
 // Reads: guardianLinks (parentUid == uid, status == 'active'), students/{id},
 //        sessionSummaries (studentId == id, completedAt in [start, end)).
 import { useEffect, useMemo, useState } from 'react';
-import { collection, doc, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import { collection, doc, orderBy, query, where } from 'firebase/firestore';
+import { listen } from '../../lib/listen.js';
 import { db } from '../../firebase.js';
 import { useQuery } from '../../hooks/useFirestore.js';
 
@@ -44,7 +45,7 @@ export function useFamily(uid) {
   useEffect(() => {
     const ids = idKey ? idKey.split(',') : [];
     const unsubs = ids.map((id) =>
-      onSnapshot(
+      listen(
         doc(db, 'students', id),
         (snap) => setStudents((prev) => ({ ...prev, [id]: snap.exists() ? { id, ...snap.data() } : { id, missing: true } })),
         (error) => setStudents((prev) => ({ ...prev, [id]: { id, error } }))

@@ -12,9 +12,10 @@ import {
   signOut as fbSignOut,
   updateProfile
 } from 'firebase/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { ref as rtRef, onDisconnect, set as rtSet, serverTimestamp as rtNow } from 'firebase/database';
 import { auth, db, rtdb } from '../firebase.js';
+import { listen } from '../lib/listen.js';
 import { request } from '../lib/requests.js';
 
 const AuthContext = createContext(null);
@@ -54,7 +55,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!user) return undefined;
     claimsVersion.current = null;
-    return onSnapshot(
+    return listen(
       doc(db, 'users', user.uid),
       async (snap) => {
         const data = snap.data() || null;
@@ -70,26 +71,19 @@ export function AuthProvider({ children }) {
     );
   }, [user]);
 
-  // Students: live profile doc. A listener opened in the moment the student
-  // claim lands can be denied once, so refresh the token and resubscribe.
+  // Students: live profile doc.
   const studentId = claims.role === 'student' ? claims.studentId : null;
-  const [studentRetry, setStudentRetry] = useState(0);
   useEffect(() => {
     if (!studentId) {
       setStudent(null);
       return undefined;
     }
-    return onSnapshot(
+    return listen(
       doc(db, 'students', studentId),
       (snap) => setStudent(snap.exists() ? { id: snap.id, ...snap.data() } : null),
-      async () => {
-        setStudent(null);
-        if (studentRetry >= 3) return;
-        await auth.currentUser?.getIdToken(true).catch(() => {});
-        setStudentRetry((n) => n + 1);
-      }
+      () => setStudent(null)
     );
-  }, [studentId, studentRetry]);
+  }, [studentId]);
 
   // Presence (Realtime Database) so teachers can see who's online.
   useEffect(() => {

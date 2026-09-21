@@ -1,7 +1,8 @@
 // Privileged actions go through "request documents": the client creates a doc,
 // a Firestore trigger does the work and writes status/result back.
 // See docs/DATA_MODEL.md for why (no callable functions in this GCP org).
-import { addDoc, collection, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { listen } from './listen.js';
 import { auth, db } from '../firebase.js';
 
 export async function submitRequest(collectionName, payload, id) {
@@ -21,7 +22,7 @@ export function waitForResult(collectionName, id, { timeoutMs = 30000 } = {}) {
       unsub();
       reject(new Error('This is taking longer than usual. Check your connection and try again.'));
     }, timeoutMs);
-    unsub = onSnapshot(
+    unsub = listen(
       doc(db, collectionName, id),
       (snap) => {
         const d = snap.data();

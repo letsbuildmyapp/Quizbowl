@@ -3,8 +3,9 @@
 // stamped by Firestore), and keeps a heartbeat so scheduled events (clue
 // reveals, computer buzzes, answer timeouts) are processed on time.
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { collection, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
+import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase.js';
+import { listen } from '../lib/listen.js';
 import { useAuth } from './useAuth.jsx';
 
 const ACTIVE = new Set(['READING_CLUE', 'BUZZ_LOCKED', 'AWAITING_ANSWER', 'BONUS']);
@@ -25,7 +26,7 @@ export function useGameSession(sessionId, { controller: controllerOverride } = {
   useEffect(() => {
     if (!sessionId) return undefined;
     setLoading(true);
-    return onSnapshot(
+    return listen(
       doc(db, 'sessions', sessionId),
       (snap) => {
         const d = snap.exists() ? { id: snap.id, ...snap.data() } : null;
@@ -55,7 +56,7 @@ export function useGameSession(sessionId, { controller: controllerOverride } = {
       await setDoc(ref, { type, payload, at: serverTimestamp(), uid: auth.currentUser.uid, actorId, role });
       if (watch) {
         // Surface rejections (e.g. "someone else buzzed first").
-        const unsub = onSnapshot(
+        const unsub = listen(
           ref,
           (s) => {
             const d = s.data();

@@ -1,4 +1,9 @@
 // Tiny synthesized sound effects (no audio files, nothing leaves the device).
+
+// Master switch. Off for now: Alex asked for a silent app until the audio is
+// worth shipping. Flip to true to bring back effects, music and the settings
+// toggles. Read-aloud is accessibility and is not covered by this.
+export const SOUND_ENABLED = false;
 let ctx = null;
 
 function tone(freqs, { duration = 0.12, type = 'sine', gain = 0.12, gap = 0.02 } = {}) {

@@ -17,6 +17,7 @@ import { ChestArt, ItemArt, itemDisplayName } from '../bot/index.js';
 import { friendlyError } from '../ui.jsx';
 import { RarityChip, SLOT_LABEL, StarBurstArt, chestName, lessMotion, grantSourceLabel } from '../collection/parts.jsx';
 import { rewardSfx } from './sfx.js';
+import { SOUND_ENABLED } from '../../lib/sound.js';
 import './reveal.css';
 
 // Reveal timing per rarity (ms). Chest phase runs first for chest grants and for
@@ -49,7 +50,7 @@ export default function RewardReveal({ grants, studentId, onDone, theme: themePr
   const theme = themeProp || schoolTheme;
   const sid = studentId || claims?.studentId || student?.id;
   const quiet = !!(reducedMotion || calm || lessMotion(student));
-  const soundOn = student?.settings?.sound !== false;
+  const soundOn = SOUND_ENABLED && student?.settings?.sound !== false;
 
   // Snapshot the grants so a live list (acknowledged grants leave the Vault query)
   // never shrinks mid-sequence; new grants that arrive later are appended.

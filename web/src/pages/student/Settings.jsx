@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { AVATARS, READING_SPEEDS } from '../../lib/catalog.js';
+import { SOUND_ENABLED } from '../../lib/sound.js';
 import { Avatar, Button, Card, ErrorNote, Field, PageHeader, Segmented, friendlyError, useToast } from '../../components/ui.jsx';
 import { LeaderboardToggle, StudentGate, Switch, useMyClassroom } from '../../components/student/common.jsx';
 import './student.css';
@@ -73,20 +74,24 @@ function SettingsBody({ student }) {
               checked={value('readAloud', false)}
               onChange={(v) => setPref('readAloud', v, `Read aloud ${onOff(v)}`)}
             />
-            <Switch
-              id="pref-sound"
-              label="Sound effects"
-              hint="Buzzer and celebration sounds."
-              checked={value('sound', true)}
-              onChange={(v) => setPref('sound', v, `Sound ${onOff(v)}`)}
-            />
-            <Switch
-              id="pref-music"
-              label="Music"
-              hint="Adventure and battle music. Turns off with sound effects too."
-              checked={value('music', true)}
-              onChange={(v) => setPref('music', v, `Music ${onOff(v)}`)}
-            />
+            {SOUND_ENABLED ? (
+              <>
+                <Switch
+                  id="pref-sound"
+                  label="Sound effects"
+                  hint="Buzzer and celebration sounds."
+                  checked={value('sound', true)}
+                  onChange={(v) => setPref('sound', v, `Sound ${onOff(v)}`)}
+                />
+                <Switch
+                  id="pref-music"
+                  label="Music"
+                  hint="Adventure and battle music. Turns off with sound effects too."
+                  checked={value('music', true)}
+                  onChange={(v) => setPref('music', v, `Music ${onOff(v)}`)}
+                />
+              </>
+            ) : null}
           </div>
         </div>
       </Card>
